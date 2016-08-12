@@ -69,8 +69,8 @@ with Sinfo;                           use Sinfo;
 with Sinput;                          use Sinput;
 with SPARK_Definition;                use SPARK_Definition;
 with SPARK_Frame_Conditions;          use SPARK_Frame_Conditions;
-with SPARK_Rewrite;                   use SPARK_Rewrite;
 with SPARK_Register;                  use SPARK_Register;
+with SPARK_Rewrite;                   use SPARK_Rewrite;
 with SPARK_Util;                      use SPARK_Util;
 with SPARK_Util.External_Axioms;      use SPARK_Util.External_Axioms;
 with SPARK_Util.Subprograms;          use SPARK_Util.Subprograms;
@@ -399,9 +399,6 @@ package body Gnat2Why.Driver is
       procedure Register_All_Entities is new Sem.Walk_Library_Items
         (Action => Register_Compilation_Unit);
 
-      procedure Mark_All_Compilation_Units is new Sem.Walk_Library_Items
-        (Action => Mark_Compilation_Unit);
-
       --  this Boolean indicates whether proof have been attempted
       --  anywhere in the unit
       Proof_Done : Boolean := False;
@@ -448,7 +445,10 @@ package body Gnat2Why.Driver is
       --  are not included, except for the main unit itself, which always
       --  comes last.
 
-      Mark_All_Compilation_Units;
+      if Nkind (Unit (GNAT_Root)) = N_Package_Body then
+         Mark_Compilation_Unit (Unit (Library_Unit (GNAT_Root)));
+      end if;
+      Mark_Compilation_Unit (Unit (GNAT_Root));
       Timing_Phase_Completed (Timing, "marking");
 
       --  Set up the flow tree utility package.

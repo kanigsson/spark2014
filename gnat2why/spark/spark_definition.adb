@@ -42,6 +42,7 @@ with Nmake;                           use Nmake;
 with Opt;                             use Opt;
 with Restrict;                        use Restrict;
 with Rident;                          use Rident;
+with Rtsfind;                         use Rtsfind;
 with Sem_Aux;                         use Sem_Aux;
 with Sem_Disp;                        use Sem_Disp;
 with Sem_Prag;                        use Sem_Prag;
@@ -1893,6 +1894,8 @@ package body SPARK_Definition is
               and then Nkind (Original_Node (N)) = N_Attribute_Reference
             then
                Mark_Attribute_Reference (Original_Node (N));
+            else
+               Mark_Entity (Etype (N));
             end if;
 
          --  Object renamings are rewritten by expansion, but they are kept in
@@ -3615,6 +3618,14 @@ package body SPARK_Definition is
                Mark_Violation (E, From => Retysp (Etype (E)));
             end if;
          end if;
+
+         declare
+            Anc_Subt : constant Entity_Id := Ancestor_Subtype (E);
+         begin
+            if Anc_Subt /= Empty then
+               Mark_Entity (Anc_Subt);
+            end if;
+         end;
 
          --  Type declarations may refer to private types whose full view has
          --  not been declared yet. However, it is this full view which may
@@ -5494,6 +5505,9 @@ package body SPARK_Definition is
       Insert_All_And_SPARK (Standard_Integer_16);
       Insert_All_And_SPARK (Standard_Integer_32);
       Insert_All_And_SPARK (Standard_Integer_64);
+
+      --  Mark other needed stuff
+      Mark (Expression (Parent (RTE (RE_Default_Priority))));
    end Mark_Standard_Package;
 
    ----------------------------
