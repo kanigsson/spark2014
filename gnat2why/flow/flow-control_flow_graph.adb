@@ -40,6 +40,7 @@ with Common_Iterators;                   use Common_Iterators;
 with Hashing;                            use Hashing;
 with SPARK_Definition;                   use SPARK_Definition;
 with SPARK_Util;                         use SPARK_Util;
+with SPARK_Util.External_Axioms;         use SPARK_Util.External_Axioms;
 with SPARK_Util.Subprograms;             use SPARK_Util.Subprograms;
 with SPARK_Util.Types;                   use SPARK_Util.Types;
 
@@ -6121,7 +6122,13 @@ package body Flow.Control_Flow_Graph is
                Private_Decls : constant List_Id :=
                  Private_Declarations (Spec_N);
 
+               Def_Unit_Id : Entity_Id :=
+                 Defining_Unit_Name (Spec_N);
+
             begin
+               if Nkind (Def_Unit_Id) = N_Defining_Program_Unit_Name then
+                  Def_Unit_Id := Defining_Identifier (Def_Unit_Id);
+               end if;
                if Present (Visible_Decls) then
                   Process_Statement_List (Visible_Decls,
                                           FA, Connection_Map, The_Context);
@@ -6135,7 +6142,9 @@ package body Flow.Control_Flow_Graph is
                --  of the hard work we've done so far.
                FA.Visible_Vars := FA.All_Vars or Package_Writes;
 
-               if Present (Private_Decls) then
+               if Present (Private_Decls) and then
+                 not Entity_In_Ext_Axioms (Def_Unit_Id)
+               then
                   Process_Statement_List (Private_Decls,
                                           FA, Connection_Map, The_Context);
                   Nodes.Append (Union_Id (Private_Decls));
