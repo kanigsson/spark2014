@@ -5521,6 +5521,8 @@ package body SPARK_Definition is
 
       --  Mark other needed stuff
       Mark (Expression (Parent (RTE (RE_Default_Priority))));
+      Mark_Entity (RTE (RE_Interrupt_Priority));
+      Mark_Entity (RTE (RE_Priority));
    end Mark_Standard_Package;
 
    ----------------------------
