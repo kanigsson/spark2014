@@ -6110,12 +6110,24 @@ package body SPARK_Definition is
 
    function SPARK_Pragma_Of_Entity (E : Entity_Id) return Node_Id is
 
+      function Lexical_Scope (E : Entity_Id) return Entity_Id;
+
+      -------------------
+      -- Lexical_Scope --
+      -------------------
+
       function Lexical_Scope (E : Entity_Id) return Entity_Id is
-        (Defining_Entity
-           (Enclosing_Declaration
-              (Parent
-                 (Enclosing_Declaration
-                    (E)))));
+      begin
+         if Ekind (E) in E_Named_Integer | E_Named_Real then
+            return Defining_Entity (Parent (Parent (E)));
+         end if;
+         return
+           Defining_Entity
+             (Enclosing_Declaration
+                (Parent
+                   (Enclosing_Declaration
+                        (E))));
+      end Lexical_Scope;
       --  Version of Einfo.Scope that returns the lexical scope instead of the
       --  semantic scope for an entity. For example, it returns the package
       --  body entity for an entity declared directly in the body of a
