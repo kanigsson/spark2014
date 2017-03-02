@@ -159,8 +159,7 @@ package body SPARK_Definition is
    --  are attached to the entity itself, which is directly added to the lists
    --  for translation after marking.
 
-   function SPARK_Pragma_Of_Entity (E : Entity_Id) return Node_Id with
-     Pre => Is_Type (E);
+   function SPARK_Pragma_Of_Entity (E : Entity_Id) return Node_Id;
    --  Return SPARK_Pragma that applies to entity E
    --
    --  SPARK_Pragma cannot be directly specified for types nor declare blocks
@@ -4444,7 +4443,7 @@ package body SPARK_Definition is
          Actions_Entity_Set.Insert (E);
       end if;
 
-      Current_SPARK_Pragma := SPARK_Pragma (E);
+      Current_SPARK_Pragma := SPARK_Pragma_Of_Entity (E);
 
       --  Include entity E in the set of marked entities
 
@@ -6143,15 +6142,22 @@ package body SPARK_Definition is
 
       subtype SPARK_Pragma_Scope_With_Type_Decl is Entity_Kind
         with Static_Predicate =>
-               SPARK_Pragma_Scope_With_Type_Decl in
-                  E_Entry           |
-                  E_Entry_Family    |
-                  E_Function        |
-                  E_Package         |
-                  E_Package_Body    |
-                  E_Procedure       |
-                  E_Subprogram_Body |
-                  E_Task_Body;
+          SPARK_Pragma_Scope_With_Type_Decl in
+            E_Protected_Body |
+            E_Protected_Type |
+            E_Task_Body |
+            E_Task_Type |
+            E_Entry |
+            E_Entry_Family |
+            E_Function |
+            E_Generic_Function |
+            E_Generic_Procedure |
+            E_Operator |
+            E_Procedure |
+            E_Subprogram_Body |
+            E_Generic_Package |
+            E_Package |
+            E_Package_Body;
 
    begin
       if Ekind (E) in SPARK_Pragma_Scope_With_Type_Decl then
