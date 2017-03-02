@@ -1,3 +1,9 @@
+display_velocities.adb:42:45: "Dkfloat" is not allowed in SPARK (due to extended precision floating point type)
+display_velocities.adb:42:45: violation of aspect SPARK_Mode at line 11
+display_velocities.adb:42:95: "Dkfloat" is not allowed in SPARK (due to extended precision floating point type)
+display_velocities.adb:42:95: violation of aspect SPARK_Mode at line 11
+display_velocities.adb:50:95: "Dkfloat" is not allowed in SPARK (due to extended precision floating point type)
+display_velocities.adb:50:95: violation of aspect SPARK_Mode at line 11
 known_satellites.adb:10:04: "SatelliteArray" is not allowed in SPARK (due to extended precision floating point type)
 known_satellites.adb:10:04: violation of aspect SPARK_Mode at line 5
 known_satellites.adb:23:07: "SatelliteArray" is not allowed in SPARK (due to extended precision floating point type)
@@ -8,8 +14,108 @@ known_satellites.adb:46:16: "SatelliteArray" is not allowed in SPARK (due to ext
 known_satellites.adb:46:16: violation of aspect SPARK_Mode at line 5
 known_satellites.adb:53:08: "SatelliteArray" is not allowed in SPARK (due to extended precision floating point type)
 known_satellites.adb:53:08: violation of aspect SPARK_Mode at line 5
-spacecraft.ads:6:04: extended precision floating point type is not yet supported
-spacecraft.ads:6:04: extended precision floating point type is not yet supported
-spacecraft.ads:6:04: extended precision floating point type is not yet supported
-spacecraft.ads:6:04: extended precision floating point type is not yet supported
+spacecraft-ctors.ads:10:08: "Dkfloat" is not allowed in SPARK (due to extended precision floating point type)
+spacecraft-ctors.ads:10:08: "Dkfloat" is not allowed in SPARK (due to extended precision floating point type)
+spacecraft-ctors.ads:10:08: "Dkfloat" is not allowed in SPARK (due to extended precision floating point type)
+spacecraft-ctors.ads:10:08: violation of aspect SPARK_Mode at line 2
+spacecraft-ctors.ads:10:08: violation of aspect SPARK_Mode at line 2
+spacecraft-ctors.ads:10:08: violation of aspect SPARK_Mode at line 2
+spacecraft-ctors.ads:10:22: "Dkfloat" is not allowed in SPARK (due to extended precision floating point type)
+spacecraft-ctors.ads:10:22: "Dkfloat" is not allowed in SPARK (due to extended precision floating point type)
+spacecraft-ctors.ads:10:22: "Dkfloat" is not allowed in SPARK (due to extended precision floating point type)
+spacecraft-ctors.ads:10:22: violation of aspect SPARK_Mode at line 2
+spacecraft-ctors.ads:10:22: violation of aspect SPARK_Mode at line 2
+spacecraft-ctors.ads:10:22: violation of aspect SPARK_Mode at line 2
+spacecraft-ctors.ads:10:28: "Dkfloat" is not allowed in SPARK (due to extended precision floating point type)
+spacecraft-ctors.ads:10:28: "Dkfloat" is not allowed in SPARK (due to extended precision floating point type)
+spacecraft-ctors.ads:10:28: "Dkfloat" is not allowed in SPARK (due to extended precision floating point type)
+spacecraft-ctors.ads:10:28: violation of aspect SPARK_Mode at line 2
+spacecraft-ctors.ads:10:28: violation of aspect SPARK_Mode at line 2
+spacecraft-ctors.ads:10:28: violation of aspect SPARK_Mode at line 2
+spacecraft-ctors.ads:10:44: "Dkfloat" is not allowed in SPARK (due to extended precision floating point type)
+spacecraft-ctors.ads:10:44: "Dkfloat" is not allowed in SPARK (due to extended precision floating point type)
+spacecraft-ctors.ads:10:44: "Dkfloat" is not allowed in SPARK (due to extended precision floating point type)
+spacecraft-ctors.ads:10:44: violation of aspect SPARK_Mode at line 2
+spacecraft-ctors.ads:10:44: violation of aspect SPARK_Mode at line 2
+spacecraft-ctors.ads:10:44: violation of aspect SPARK_Mode at line 2
+spacecraft-ctors.ads:10:67: "Dkfloat" is not allowed in SPARK (due to extended precision floating point type)
+spacecraft-ctors.ads:10:67: "Dkfloat" is not allowed in SPARK (due to extended precision floating point type)
+spacecraft-ctors.ads:10:67: "Dkfloat" is not allowed in SPARK (due to extended precision floating point type)
+spacecraft-ctors.ads:10:67: violation of aspect SPARK_Mode at line 2
+spacecraft-ctors.ads:10:67: violation of aspect SPARK_Mode at line 2
+spacecraft-ctors.ads:10:67: violation of aspect SPARK_Mode at line 2
+spacecraft-ctors.ads:10:81: "Dkfloat" is not allowed in SPARK (due to extended precision floating point type)
+spacecraft-ctors.ads:10:81: "Dkfloat" is not allowed in SPARK (due to extended precision floating point type)
+spacecraft-ctors.ads:10:81: "Dkfloat" is not allowed in SPARK (due to extended precision floating point type)
+spacecraft-ctors.ads:10:81: violation of aspect SPARK_Mode at line 2
+spacecraft-ctors.ads:10:81: violation of aspect SPARK_Mode at line 2
+spacecraft-ctors.ads:10:81: violation of aspect SPARK_Mode at line 2
+spacecraft-ctors.ads:10:87: "Dkfloat" is not allowed in SPARK (due to extended precision floating point type)
+spacecraft-ctors.ads:10:87: "Dkfloat" is not allowed in SPARK (due to extended precision floating point type)
+spacecraft-ctors.ads:10:87: "Dkfloat" is not allowed in SPARK (due to extended precision floating point type)
+spacecraft-ctors.ads:10:87: violation of aspect SPARK_Mode at line 2
+spacecraft-ctors.ads:10:87: violation of aspect SPARK_Mode at line 2
+spacecraft-ctors.ads:10:87: violation of aspect SPARK_Mode at line 2
+spacecraft-ctors.ads:10:111: "Dkfloat" is not allowed in SPARK (due to extended precision floating point type)
+spacecraft-ctors.ads:10:111: "Dkfloat" is not allowed in SPARK (due to extended precision floating point type)
+spacecraft-ctors.ads:10:111: "Dkfloat" is not allowed in SPARK (due to extended precision floating point type)
+spacecraft-ctors.ads:10:111: violation of aspect SPARK_Mode at line 2
+spacecraft-ctors.ads:10:111: violation of aspect SPARK_Mode at line 2
+spacecraft-ctors.ads:10:111: violation of aspect SPARK_Mode at line 2
+spacecraft.adb:11:34: "Dkfloat" is not allowed in SPARK (due to extended precision floating point type)
+spacecraft.adb:11:34: violation of aspect SPARK_Mode at line 4
+spacecraft.adb:11:61: "Dkfloat" is not allowed in SPARK (due to extended precision floating point type)
+spacecraft.adb:11:61: violation of aspect SPARK_Mode at line 4
+spacecraft.adb:11:67: "Dkfloat" is not allowed in SPARK (due to extended precision floating point type)
+spacecraft.adb:11:67: violation of aspect SPARK_Mode at line 4
+spacecraft.adb:12:14: "Dkfloat" is not allowed in SPARK (due to extended precision floating point type)
+spacecraft.adb:12:14: violation of aspect SPARK_Mode at line 4
+spacecraft.ads:6:09: "Dkfloat" is not allowed in SPARK (due to extended precision floating point type)
+spacecraft.ads:6:09: "Dkfloat" is not allowed in SPARK (due to extended precision floating point type)
+spacecraft.ads:6:09: "Dkfloat" is not allowed in SPARK (due to extended precision floating point type)
+spacecraft.ads:6:09: "Dkfloat" is not allowed in SPARK (due to extended precision floating point type)
+spacecraft.ads:6:09: violation of aspect SPARK_Mode at line 4
+spacecraft.ads:6:09: violation of aspect SPARK_Mode at line 4
+spacecraft.ads:6:09: violation of aspect SPARK_Mode at line 4
+spacecraft.ads:6:09: violation of aspect SPARK_Mode at line 4
+spacecraft.ads:9:12: "Dkfloat" is not allowed in SPARK (due to extended precision floating point type)
+spacecraft.ads:9:12: "Dkfloat" is not allowed in SPARK (due to extended precision floating point type)
+spacecraft.ads:9:12: "Dkfloat" is not allowed in SPARK (due to extended precision floating point type)
+spacecraft.ads:9:12: "Dkfloat" is not allowed in SPARK (due to extended precision floating point type)
+spacecraft.ads:9:12: violation of aspect SPARK_Mode at line 4
+spacecraft.ads:9:12: violation of aspect SPARK_Mode at line 4
+spacecraft.ads:9:12: violation of aspect SPARK_Mode at line 4
+spacecraft.ads:9:12: violation of aspect SPARK_Mode at line 4
+spacecraft.ads:24:31: "Dkfloat" is not allowed in SPARK (due to extended precision floating point type)
+spacecraft.ads:24:31: "Dkfloat" is not allowed in SPARK (due to extended precision floating point type)
+spacecraft.ads:24:31: "Dkfloat" is not allowed in SPARK (due to extended precision floating point type)
+spacecraft.ads:24:31: "Dkfloat" is not allowed in SPARK (due to extended precision floating point type)
+spacecraft.ads:24:31: violation of aspect SPARK_Mode at line 4
+spacecraft.ads:24:31: violation of aspect SPARK_Mode at line 4
+spacecraft.ads:24:31: violation of aspect SPARK_Mode at line 4
+spacecraft.ads:24:31: violation of aspect SPARK_Mode at line 4
+spacecraft.ads:24:55: "Dkfloat" is not allowed in SPARK (due to extended precision floating point type)
+spacecraft.ads:24:55: "Dkfloat" is not allowed in SPARK (due to extended precision floating point type)
+spacecraft.ads:24:55: "Dkfloat" is not allowed in SPARK (due to extended precision floating point type)
+spacecraft.ads:24:55: "Dkfloat" is not allowed in SPARK (due to extended precision floating point type)
+spacecraft.ads:24:55: violation of aspect SPARK_Mode at line 4
+spacecraft.ads:24:55: violation of aspect SPARK_Mode at line 4
+spacecraft.ads:24:55: violation of aspect SPARK_Mode at line 4
+spacecraft.ads:24:55: violation of aspect SPARK_Mode at line 4
+spacecraft.ads:24:61: "Dkfloat" is not allowed in SPARK (due to extended precision floating point type)
+spacecraft.ads:24:61: "Dkfloat" is not allowed in SPARK (due to extended precision floating point type)
+spacecraft.ads:24:61: "Dkfloat" is not allowed in SPARK (due to extended precision floating point type)
+spacecraft.ads:24:61: "Dkfloat" is not allowed in SPARK (due to extended precision floating point type)
+spacecraft.ads:24:61: violation of aspect SPARK_Mode at line 4
+spacecraft.ads:24:61: violation of aspect SPARK_Mode at line 4
+spacecraft.ads:24:61: violation of aspect SPARK_Mode at line 4
+spacecraft.ads:24:61: violation of aspect SPARK_Mode at line 4
+spacecraft.ads:24:87: "Dkfloat" is not allowed in SPARK (due to extended precision floating point type)
+spacecraft.ads:24:87: "Dkfloat" is not allowed in SPARK (due to extended precision floating point type)
+spacecraft.ads:24:87: "Dkfloat" is not allowed in SPARK (due to extended precision floating point type)
+spacecraft.ads:24:87: "Dkfloat" is not allowed in SPARK (due to extended precision floating point type)
+spacecraft.ads:24:87: violation of aspect SPARK_Mode at line 4
+spacecraft.ads:24:87: violation of aspect SPARK_Mode at line 4
+spacecraft.ads:24:87: violation of aspect SPARK_Mode at line 4
+spacecraft.ads:24:87: violation of aspect SPARK_Mode at line 4
 gnatprove: error during flow analysis and proof

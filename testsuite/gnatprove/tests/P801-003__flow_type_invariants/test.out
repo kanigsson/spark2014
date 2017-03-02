@@ -13,8 +13,10 @@ test_04.ads:9:09: invariant cannot depend on variable input "C" (SPARK RM 4.4(2)
 gnatprove: error during flow analysis and proof
 
 === test_05.adb ===
-test_05.adb:13:10: type invariant not immediately in a compilation unit is not yet supported
-test_05.adb:30:10: type invariant not immediately in a compilation unit is not yet supported
+test_05.adb:13:15: "t" is not allowed in SPARK (due to type invariant not immediately in a compilation unit)
+test_05.adb:13:15: violation of pragma SPARK_Mode at test.adc:1
+test_05.adb:30:15: "t" is not allowed in SPARK (due to type invariant not immediately in a compilation unit)
+test_05.adb:30:15: violation of pragma SPARK_Mode at test.adc:1
 gnatprove: error during flow analysis and proof
 
 === test_06.adb ===
