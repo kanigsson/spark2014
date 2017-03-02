@@ -1765,6 +1765,19 @@ package body SPARK_Definition is
                if Is_Itype (BT) then
                   Mark_Entity (BT);
                end if;
+
+               if Nkind (N) in N_Full_Type_Declaration | N_Subtype_Declaration
+               then
+                  declare
+                     Par : constant Entity_Id :=
+                       Get_Parent_Type_If_Check_Needed (N);
+                  begin
+                     if Present (Par) then
+                        Mark_Entity (Par);
+                     end if;
+                  end;
+               end if;
+
             end;
 
          when N_Task_Type_Declaration

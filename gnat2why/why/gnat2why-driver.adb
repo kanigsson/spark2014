@@ -423,14 +423,14 @@ package body Gnat2Why.Driver is
          return;
       end if;
 
-      Mark_Standard_Package;
-
       --  Allow the generation of new nodes and lists
 
       Atree.Unlock;
       Nlists.Unlock;
       Sem.Scope_Stack.Locked := False;
       Lib.Unlock;
+
+      Mark_Standard_Package;
 
       --  Before any analysis takes place, perform some rewritings of the tree
       --  that facilitates analysis.
@@ -440,15 +440,21 @@ package body Gnat2Why.Driver is
       --  Then register mappings from entity names to entity ids
       Register_All_Entities;
 
-      --  Mark all compilation units as "in SPARK / not in SPARK", in
-      --  the same order that they were processed by the frontend. Bodies
-      --  are not included, except for the main unit itself, which always
-      --  comes last.
+      --  Mark the current compilation unit as "in SPARK / not in SPARK".
 
-      if Nkind (Unit (GNAT_Root)) = N_Package_Body then
-         Mark_Compilation_Unit (Unit (Library_Unit (GNAT_Root)));
-      end if;
-      Mark_Compilation_Unit (Unit (GNAT_Root));
+      declare
+         Lib_Unit : constant Node_Id := Library_Unit (GNAT_Root);
+      begin
+         --  If both spec and body of the current compilation unit are present
+         --  then traverse spec first.
+         if Present (Lib_Unit) and then Lib_Unit /= GNAT_Root then
+            Mark_Compilation_Unit (Unit (Lib_Unit));
+         end if;
+
+         --  Then traverse body (or spec if no body is present)
+         Mark_Compilation_Unit (Unit (GNAT_Root));
+      end;
+
       Timing_Phase_Completed (Timing, "marking");
 
       --  Set up the flow tree utility package.
