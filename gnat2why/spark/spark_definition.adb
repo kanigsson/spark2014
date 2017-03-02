@@ -1734,32 +1734,6 @@ package body SPARK_Definition is
                   Set_Partial_View (Full_View (E), E);
                end if;
 
-               --  Fill in the map between classwide types and their
-               --  corresponding specific type, in the case of the implicitly
-               --  declared classwide type T'Class. Also fill in the map
-               --  between primitive operations and their corresponding
-               --  tagged type.
-
-               if Ekind (E) in E_Record_Type | E_Record_Subtype
-                 and then Is_Tagged_Type (E)
-                 and then (if Ekind (E) = E_Record_Subtype then
-                               not (Present (Cloned_Subtype (E))))
-                 and then not Is_Class_Wide_Type (E)
-                 and then not Is_Itype (E)
-               then
-                  Set_Specific_Tagged (Class_Wide_Type (E), E);
-
-                  --  Only mark the classwide type associated to a record type
-                  --  if the record type isn't constrained. Otherwise, the
-                  --  classwide type is not in SPARK and should not be used.
-
-                  if not Has_Discriminants (E)
-                    or else not Is_Constrained (E)
-                  then
-                     Mark_Entity (Class_Wide_Type (E));
-                  end if;
-               end if;
-
                Mark_Entity (E);
 
                if Is_Itype (BT) then
@@ -3630,6 +3604,22 @@ package body SPARK_Definition is
             if not Retysp_In_SPARK (Etype (E)) then
                Mark_Violation (E, From => Retysp (Etype (E)));
             end if;
+         end if;
+
+         --  Fill in the map between classwide types and their
+         --  corresponding specific type, in the case of the implicitly
+         --  declared classwide type T'Class. Also fill in the map
+         --  between primitive operations and their corresponding
+         --  tagged type.
+
+         if Ekind (E) in E_Record_Type | E_Record_Subtype
+           and then Is_Tagged_Type (E)
+           and then (if Ekind (E) = E_Record_Subtype then
+                         not (Present (Cloned_Subtype (E))))
+           and then not Is_Class_Wide_Type (E)
+           and then not Is_Itype (E)
+         then
+            Set_Specific_Tagged (Class_Wide_Type (E), E);
          end if;
 
          declare
