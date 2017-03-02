@@ -6150,9 +6150,15 @@ package body SPARK_Definition is
             E_Package |
             E_Package_Body;
 
+      Result : Node_Id;
+
    begin
+
       if Ekind (E) in SPARK_Pragma_Scope_With_Type_Decl then
-         return SPARK_Pragma (E);
+         Result := SPARK_Pragma (E);
+         if Present (Result) then
+            return Result;
+         end if;
       end if;
       if Scope (E) = Standard_Standard
         or else Is_Itype (E)
@@ -6167,8 +6173,14 @@ package body SPARK_Definition is
          Def_Scop := Lexical_Scope (Def_Scop);
       end loop;
 
+      --  fix up Def Node
+      if Ekind (Def) in E_Function | E_Procedure then
+         Def := Parent (Def);
+      end if;
+
       case Ekind (Def_Scop) is
          when E_Package =>
+            --  ??? doesn't work for function specifications
             if List_Containing (Parent (Def)) =
               Private_Declarations (Package_Specification (Def_Scop))
             then
