@@ -1170,7 +1170,8 @@ package body SPARK_Definition is
 
          when N_Delay_Relative_Statement
             | N_Delay_Until_Statement
-         =>
+            =>
+            Mark_Entity (RTE (RE_Clock));
             Mark (Expression (N));
 
          when N_Exit_Statement =>
