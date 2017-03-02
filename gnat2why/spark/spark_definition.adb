@@ -159,9 +159,9 @@ package body SPARK_Definition is
    --  are attached to the entity itself, which is directly added to the lists
    --  for translation after marking.
 
-   function SPARK_Pragma_Of_Type (E : Entity_Id) return Node_Id with
+   function SPARK_Pragma_Of_Entity (E : Entity_Id) return Node_Id with
      Pre => Is_Type (E);
-   --  Return SPARK_Pragma that applies to type E
+   --  Return SPARK_Pragma that applies to entity E
    --
    --  SPARK_Pragma cannot be directly specified for types nor declare blocks
    --  but comes from the most immediate scope where pragma SPARK_Mode can be
@@ -4444,54 +4444,7 @@ package body SPARK_Definition is
          Actions_Entity_Set.Insert (E);
       end if;
 
-      --  Entities may be marked out of order, for example because completions
-      --  of private types need to be marked at the point of their partial view
-      --  declaration, to avoid out-of-order declarations in Why.
-      --  Retrieve the appropriate SPARK_Mode pragma before marking.
-      --
-      --  For concurrent types SPARK_Mode can be queried directly
-
-      if Ekind (E) in E_Protected_Type | E_Task_Type then
-
-         Current_SPARK_Pragma := SPARK_Pragma (E);
-
-      --  ??? perhaps use SPARK_Pragma_Of_Type here, but not sure if that works
-      --  for itypes.
-
-      elsif Is_Type (E) or else Is_Object (E) then
-         declare
-            Decl : constant Node_Id :=
-              (if Is_Itype (E)
-               then Associated_Node_For_Itype (E)
-               else Parent (E));
-
-         begin
-            pragma Assert (Present (Parent (Decl)));
-
-            if Nkind (Parent (Decl)) = N_Package_Specification then
-               declare
-                  Pack_Decl : constant Node_Id := Parent (Parent (Decl));
-                  pragma Assert (Nkind (Pack_Decl) = N_Package_Declaration);
-
-                  Pack_Ent : constant Entity_Id := Defining_Entity (Pack_Decl);
-               begin
-                  Current_SPARK_Pragma :=
-                    (if In_Private_Declarations (Decl)
-                     then SPARK_Aux_Pragma (Pack_Ent)
-                     else SPARK_Pragma (Pack_Ent));
-               end;
-            end if;
-         end;
-
-      --  Get appropriate SPARK_Mode for subprograms and packages (only happens
-      --  for packages with external axioms).
-
-      elsif Is_Subprogram (E)
-        or else Is_Entry (E)
-        or else Ekind (E) = E_Package
-      then
-         Current_SPARK_Pragma := SPARK_Pragma (E);
-      end if;
+      Current_SPARK_Pragma := SPARK_Pragma (E);
 
       --  Include entity E in the set of marked entities
 
@@ -5656,7 +5609,7 @@ package body SPARK_Definition is
             pragma Assert (Has_Predicates (Current_Delayed_Aspect_Type));
 
             Current_SPARK_Pragma :=
-              SPARK_Pragma_Of_Type (Current_Delayed_Aspect_Type);
+              SPARK_Pragma_Of_Entity (Current_Delayed_Aspect_Type);
 
          else
             Current_SPARK_Pragma := SPARK_Pragma (Def_E);
@@ -5871,7 +5824,7 @@ package body SPARK_Definition is
                pragma Assert (Has_Predicates (Current_Delayed_Aspect_Type));
 
                Current_SPARK_Pragma :=
-                 SPARK_Pragma_Of_Type (Current_Delayed_Aspect_Type);
+                 SPARK_Pragma_Of_Entity (Current_Delayed_Aspect_Type);
 
             else
                Current_SPARK_Pragma := SPARK_Pragma (E);
@@ -6151,11 +6104,11 @@ package body SPARK_Definition is
       --  Otherwise there is no applicable pragma, so SPARK_Mode is None
      );
 
-   --------------------------
-   -- SPARK_Pragma_Of_Type --
-   --------------------------
+   ----------------------------
+   -- SPARK_Pragma_Of_Entity --
+   ----------------------------
 
-   function SPARK_Pragma_Of_Type (E : Entity_Id) return Node_Id is
+   function SPARK_Pragma_Of_Entity (E : Entity_Id) return Node_Id is
 
       function Lexical_Scope (E : Entity_Id) return Entity_Id is
         (Defining_Entity
@@ -6173,7 +6126,7 @@ package body SPARK_Definition is
       Def : Entity_Id := E;
       --  Entity which defines type E
 
-      Def_Scop : Entity_Id := Lexical_Scope (E);
+      Def_Scop : Entity_Id;
       --  Immediate scope of the entity that defines E
 
       subtype SPARK_Pragma_Scope_With_Type_Decl is Entity_Kind
@@ -6189,6 +6142,16 @@ package body SPARK_Definition is
                   E_Task_Body;
 
    begin
+      if Ekind (E) in SPARK_Pragma_Scope_With_Type_Decl then
+         return SPARK_Pragma (E);
+      end if;
+      if Scope (E) = Standard_Standard
+        or else Is_Itype (E)
+        or else Ekind (E) = E_Abstract_State
+      then
+         return Empty;
+      end if;
+      Def_Scop := Lexical_Scope (E);
       while Ekind (Def_Scop) not in SPARK_Pragma_Scope_With_Type_Decl
       loop
          Def := Def_Scop;
@@ -6217,7 +6180,7 @@ package body SPARK_Definition is
 
       return SPARK_Pragma (Def_Scop);
 
-   end SPARK_Pragma_Of_Type;
+   end SPARK_Pragma_Of_Entity;
 
    ----------------------------------------------------------------------
    --  Iterators
