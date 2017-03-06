@@ -6166,6 +6166,12 @@ package body SPARK_Definition is
       then
          return Empty;
       end if;
+
+      if Ekind (E) in E_Loop_Parameter then
+         return
+           SPARK_Pragma_Of_Entity (Enclosing_Package_Or_Subprogram (E));
+      end if;
+
       Def_Scop := Lexical_Scope (E);
       while Ekind (Def_Scop) not in SPARK_Pragma_Scope_With_Type_Decl
       loop
@@ -6180,7 +6186,6 @@ package body SPARK_Definition is
 
       case Ekind (Def_Scop) is
          when E_Package =>
-            --  ??? doesn't work for function specifications
             if List_Containing (Parent (Def)) =
               Private_Declarations (Package_Specification (Def_Scop))
             then
