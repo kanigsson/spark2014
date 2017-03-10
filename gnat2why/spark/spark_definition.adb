@@ -6166,7 +6166,7 @@ package body SPARK_Definition is
          return Empty;
       end if;
 
-      if Ekind (E) in E_Loop_Parameter then
+      if Ekind (E) in E_Loop_Parameter | E_Loop then
          return
            SPARK_Pragma_Of_Entity (Enclosing_Package_Or_Subprogram (E));
       end if;
