@@ -4528,6 +4528,21 @@ package body SPARK_Definition is
          end if;
       end if;
 
+      --  Mark predicate function, if any Predicate functions should be
+      --  marked after the subtype, that's why we need to do this here, after
+      --  inserting the subtype into the entity list. ??? is it correct to mark
+      --  things here?
+
+      if Is_Type (E) and then Has_Predicates (E) then
+         declare
+            PF : constant Entity_Id := Predicate_Function (E);
+         begin
+            if Present (PF) then
+               Mark_Entity (PF);
+            end if;
+         end;
+      end if;
+
       --  Update the information that a violation was detected
 
       Violation_Detected := Save_Violation_Detected;
