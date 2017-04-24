@@ -4600,6 +4600,7 @@ package body SPARK_Definition is
             --  violation will already have been reported.
 
             elsif Ekind (E) in E_Discriminant | E_Component then
+               Mark_Entity (Scope (E));
                declare
                   Ty : constant Entity_Id := Retysp (Scope (E));
                begin
