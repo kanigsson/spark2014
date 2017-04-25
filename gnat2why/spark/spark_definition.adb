@@ -4511,6 +4511,28 @@ package body SPARK_Definition is
             raise Program_Error;
       end case;
 
+      --  mark possible pragma nodes after the entity declaration, that may be
+      --  of interest for us
+      if not Violation_Detected then
+         declare
+            Decl_Node : constant Node_Id := Parent (Declaration_Node (E));
+            Cur_Node : Node_Id;
+         begin
+            if Is_List_Member (Decl_Node) then
+               Cur_Node := Next (Decl_Node);
+               while Nkind (Cur_Node) = N_Pragma loop
+                  if Is_Pragma_Annotate_GNATprove (Cur_Node) then
+                     Mark_Pragma_Annotate (Cur_Node, Decl_Node,
+                                           Consider_Next => True);
+                  else
+                     Mark_Pragma (Cur_Node);
+                  end if;
+                  Next (Cur_Node);
+               end loop;
+            end if;
+         end;
+      end if;
+
       --  If a violation was detected, remove E from the set of SPARK entities
 
       if Violation_Detected then
