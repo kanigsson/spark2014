@@ -261,9 +261,12 @@ dynamic_fixed.adb:6:40: info: range check proved (CVC4: 1 VC)
 dynamic_fixed.adb:7:19: info: range check proved (CVC4: 1 VC)
 dynamic_fixed.adb:9:25: medium: assertion might fail, cannot prove Integer (T'Last) = I (e.g. when I = 1)
 dynamic_fixed.adb:10:25: info: assertion proved
-unsupported.adb:2:04: fixed-point type whose small is not a negative power of 2 or 10 is not yet supported
-unsupported.adb:5:04: fixed-point type whose small is not a negative power of 2 or 10 is not yet supported
-unsupported.adb:8:04: fixed-point type whose small is not a negative power of 2 or 10 is not yet supported
+unsupported.adb:2:09: "T1" is not allowed in SPARK
+unsupported.adb:2:09: violation of pragma SPARK_Mode at test.adc:1
+unsupported.adb:5:09: "T2" is not allowed in SPARK
+unsupported.adb:5:09: violation of pragma SPARK_Mode at test.adc:1
+unsupported.adb:8:09: "T3" is not allowed in SPARK
+unsupported.adb:8:09: violation of pragma SPARK_Mode at test.adc:1
 unsupported.adb:18:13: operation on fixed-point type with non-integer result type is not yet supported
 unsupported.adb:19:13: operation between different fixed-point types is not yet supported
 unsupported.adb:20:13: operation between fixed-point type and universal real is not yet supported
