@@ -1770,6 +1770,31 @@ package body SPARK_Definition is
          when N_Entry_Declaration =>
             Mark_Subprogram_Declaration (N);
 
+         when N_With_Clause =>
+
+            --  initial condition of other packages needs to be marked
+
+            if not Limited_Present (N)
+              and then Nkind (Unit (Library_Unit (N))) = N_Package_Declaration
+            then
+               declare
+                  Package_E : constant Entity_Id :=
+                    Unique_Defining_Entity (Unit (Library_Unit (N)));
+                  Init_Cond : constant Node_Id :=
+                    Get_Pragma (Package_E, Pragma_Initial_Condition);
+               begin
+                  if Present (Init_Cond) then
+                     declare
+                        Expr : constant Node_Id :=
+                          Expression
+                            (First (Pragma_Argument_Associations (Init_Cond)));
+                     begin
+                        Mark (Expr);
+                     end;
+                  end if;
+               end;
+            end if;
+
          --  Unsupported tasking constructs
 
          when N_Abort_Statement
@@ -1816,7 +1841,6 @@ package body SPARK_Definition is
             | N_String_Literal
             | N_Subprogram_Renaming_Declaration
             | N_Use_Package_Clause
-            | N_With_Clause
             | N_Use_Type_Clause
             | N_Validate_Unchecked_Conversion
          =>
