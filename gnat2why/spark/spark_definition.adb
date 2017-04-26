@@ -216,6 +216,11 @@ package body SPARK_Definition is
    --  Set of entities defined in actions which require a special translation.
    --  See gnat2why.ads for details.
 
+   Marking_Queue : Node_Lists.List;
+   --  Used to queue entities for marking when calling Mark_Entity directly
+   --  would not be appropriate, e.g. for primitive operations of a tagged
+   --  type.
+
    function Entity_In_SPARK (E : Entity_Id) return Boolean
      renames Entities_In_SPARK.Contains;
 
@@ -239,6 +244,9 @@ package body SPARK_Definition is
 
    procedure Discard_Underlying_Type (T : Entity_Id);
    --  Mark T's underlying type as seen and store T as its partial view
+
+   procedure Queue_For_Marking (E : Entity_Id);
+   --  register the entity in argument for later marking
 
    ------------------------------
    -- Body_Statements_In_SPARK --
@@ -2570,6 +2578,17 @@ package body SPARK_Definition is
 
       Mark (N);
 
+      --  go through Marking_Queue to mark remaining entities
+
+      while not Marking_Queue.Is_Empty loop
+         declare
+            E : constant Entity_Id := Marking_Queue.First_Element;
+         begin
+            Marking_Queue.Delete_First;
+            Mark_Entity (E);
+         end;
+      end loop;
+
       --  Mark delayed type aspects
 
       --  If no SPARK_Mode is set for the type, we only mark delayed aspects
@@ -4567,6 +4586,27 @@ package body SPARK_Definition is
          end;
       end if;
 
+      --  ??? Is marking things here correct? Might want to use a post-marking
+      --  queue or something
+
+      --  Currently, proof looks at overriding operations for a given
+      --  subprogram operation on tagged types. To make this work, they should
+      --  be marked first. Easiest is to mark all primitive operations of a
+      --  tagged type.
+
+      if Is_Tagged_Type (E)
+        and then Present (Direct_Primitive_Operations (E))
+      then
+         declare
+            Prim : Elmt_Id := First_Elmt (Direct_Primitive_Operations (E));
+         begin
+            while Present (Prim) loop
+               Queue_For_Marking (Ultimate_Alias (Node (Prim)));
+               Next_Elmt (Prim);
+            end loop;
+         end;
+      end if;
+
       --  Update the information that a violation was detected
 
       Violation_Detected := Save_Violation_Detected;
@@ -6085,9 +6125,18 @@ package body SPARK_Definition is
       end if;
    end Mark_Most_Underlying_Type_In_SPARK;
 
-   --------------
-   -- In_SPARK --
-   --------------
+   -----------------------
+   -- Queue_For_Marking --
+   -----------------------
+
+   procedure Queue_For_Marking (E : Entity_Id) is
+   begin
+      Marking_Queue.Append (E);
+   end Queue_For_Marking;
+
+   ---------------------
+   -- Retysp_In_SPARK --
+   ---------------------
 
    function Retysp_In_SPARK (E : Entity_Id) return Boolean is
    begin
