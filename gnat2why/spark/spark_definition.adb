@@ -3605,20 +3605,15 @@ package body SPARK_Definition is
             end if;
          end if;
 
-         --  Fill in the map between classwide types and their
-         --  corresponding specific type, in the case of the implicitly
-         --  declared classwide type T'Class. Also fill in the map
-         --  between primitive operations and their corresponding
-         --  tagged type.
-
-         if Ekind (E) in E_Record_Type | E_Record_Subtype
+         if Ekind (E) in
+           E_Record_Type_With_Private | E_Record_Subtype_With_Private
            and then Is_Tagged_Type (E)
            and then (if Ekind (E) = E_Record_Subtype then
                          not (Present (Cloned_Subtype (E))))
            and then not Is_Class_Wide_Type (E)
            and then not Is_Itype (E)
          then
-            Set_Specific_Tagged (Class_Wide_Type (E), E);
+            Mark_Entity (Full_View (E));
          end if;
 
          declare
@@ -4446,6 +4441,22 @@ package body SPARK_Definition is
 
       if Inside_Actions then
          Actions_Entity_Set.Insert (E);
+      end if;
+
+      --  Fill in the map between classwide types and their
+      --  corresponding specific type, in the case of the implicitly
+      --  declared classwide type T'Class. Also fill in the map
+      --  between primitive operations and their corresponding
+      --  tagged type.
+
+      if Ekind (E) in E_Record_Type | E_Record_Subtype
+        and then Is_Tagged_Type (E)
+        and then (if Ekind (E) = E_Record_Subtype then
+                      not (Present (Cloned_Subtype (E))))
+        and then not Is_Class_Wide_Type (E)
+        and then not Is_Itype (E)
+      then
+         Set_Specific_Tagged (Class_Wide_Type (E), E);
       end if;
 
       Current_SPARK_Pragma := SPARK_Pragma_Of_Entity (E);
