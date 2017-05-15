@@ -3351,36 +3351,9 @@ package body Flow.Control_Flow_Graph is
                                          Variable_Kind,
                                          FA);
 
-      if No (Expr) then
-         --  We have no initializing expression so we fall back to the default
-         --  initialization (if any).
+      --  We have a declaration with an explicit initialization
 
-         for F of Flatten_Variable (E, FA.B_Scope) loop
-            if Is_Default_Initialized (F) then
-               Add_Vertex
-                 (FA,
-                  Make_Default_Initialization_Attributes
-                    (FA    => FA,
-                     Scope => FA.B_Scope,
-                     F     => F,
-                     Loops => Ctx.Current_Loops),
-                  V);
-               Inits.Append (V);
-            end if;
-         end loop;
-
-         if Inits.Is_Empty then
-            --  We did not have anything with a default initial value,
-            --  so we just create a null vertex here.
-            Add_Vertex (FA,
-                        Direct_Mapping_Id (N),
-                        Null_Node_Attributes,
-                        V);
-            Inits.Append (V);
-         end if;
-
-      else
-         --  We have a variable declaration with an initialization
+      if Present (Expr) then
          declare
             Var_Def : Flow_Id_Sets.Set;
             Funcs   : Node_Sets.Set;
@@ -3402,6 +3375,12 @@ package body Flow.Control_Flow_Graph is
                end if;
             end loop;
 
+            Collect_Functions_And_Read_Locked_POs
+              (Expr,
+               Functions_Called   => Funcs,
+               Tasking            => FA.Tasking,
+               Include_Predicates => FA.Generating_Globals);
+
             if RHS_Split_Useful (N, FA.B_Scope) then
 
                declare
@@ -3417,13 +3396,8 @@ package body Flow.Control_Flow_Graph is
 
                   All_Vertices : Vertex_Sets.Set  := Vertex_Sets.Empty_Set;
                   Missing      : Flow_Id_Sets.Set := Var_Def;
-               begin
-                  Collect_Functions_And_Read_Locked_POs
-                    (Expr,
-                     Functions_Called   => Funcs,
-                     Tasking            => FA.Tasking,
-                     Include_Predicates => FA.Generating_Globals);
 
+               begin
                   for C in M.Iterate loop
                      declare
                         Output : Flow_Id          renames Flow_Id_Maps.Key (C);
@@ -3487,12 +3461,6 @@ package body Flow.Control_Flow_Graph is
                end;
 
             else
-               Collect_Functions_And_Read_Locked_POs
-                 (Expr,
-                  Functions_Called   => Funcs,
-                  Tasking            => FA.Tasking,
-                  Include_Predicates => FA.Generating_Globals);
-
                Add_Vertex
                  (FA,
                   Direct_Mapping_Id (N),
@@ -3516,14 +3484,44 @@ package body Flow.Control_Flow_Graph is
 
             Ctx.Folded_Function_Checks (N).Include (Expr);
          end;
+
+      --  We have no initializing expression so we fall back to the default
+      --  initialization (if any).
+
+      else
+         for F of Flatten_Variable (E, FA.B_Scope) loop
+            if Is_Default_Initialized (F) then
+               Add_Vertex
+                 (FA,
+                  Make_Default_Initialization_Attributes
+                    (FA    => FA,
+                     Scope => FA.B_Scope,
+                     F     => F,
+                     Loops => Ctx.Current_Loops),
+                  V);
+               Inits.Append (V);
+            end if;
+         end loop;
+
+         if Inits.Is_Empty then
+            --  We did not have anything with a default initial value,
+            --  so we just create a null vertex here.
+            Add_Vertex (FA,
+                        Direct_Mapping_Id (N),
+                        Null_Node_Attributes,
+                        V);
+            Inits.Append (V);
+         end if;
+
       end if;
 
       --  If this type has a Default_Initial_Condition then we need to
       --  create a vertex to check for uninitialized variables within the
       --  Default_Initial_Condition's expression.
       declare
-         Typ  : constant Node_Id := Etype (E);
-         Expr : Node_Id;
+         Typ : constant Node_Id := Etype (E);
+
+         DIC_Expr : Node_Id;
 
          Variables_Used       : Flow_Id_Sets.Set := Flow_Id_Sets.Empty_Set;
          Components_Of_Type   : Flow_Id_Sets.Set := Flow_Id_Sets.Empty_Set;
@@ -3535,9 +3533,9 @@ package body Flow.Control_Flow_Graph is
                or else Has_Inherited_DIC (Typ))
            and then Present (DIC_Procedure (Typ))
          then
-            Expr := Get_Expr_From_Check_Only_Proc (DIC_Procedure (Typ));
+            DIC_Expr := Get_Expr_From_Check_Only_Proc (DIC_Procedure (Typ));
 
-            if Present (Expr) then
+            if Present (DIC_Expr) then
                --  Note that default initial conditions can make use of
                --  the type mark. For example
                --
@@ -3552,7 +3550,7 @@ package body Flow.Control_Flow_Graph is
                --  all components of T with all components of X)
                --  to produce the correct default initial condition.
                Variables_Used := Get_Variables
-                 (Expr,
+                 (DIC_Expr,
                   Scope                => FA.B_Scope,
                   Local_Constants      => FA.Local_Constants,
                   Fold_Functions       => True,
@@ -3574,7 +3572,7 @@ package body Flow.Control_Flow_Graph is
                end if;
 
                Collect_Functions_And_Read_Locked_POs
-                 (Expr,
+                 (DIC_Expr,
                   Functions_Called   => Funcs,
                   Tasking            => FA.Tasking,
                   Include_Predicates => FA.Generating_Globals);
@@ -3596,7 +3594,7 @@ package body Flow.Control_Flow_Graph is
                Inits.Append (V);
 
                --  Check for folded functions
-               Ctx.Folded_Function_Checks (N).Include (Expr);
+               Ctx.Folded_Function_Checks (N).Include (DIC_Expr);
             end if;
          end if;
       end;
