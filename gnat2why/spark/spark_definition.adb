@@ -3246,9 +3246,13 @@ package body SPARK_Definition is
                                         then Parent (E)
                                         else Subprogram_Specification (E));
 
-         if Present (Subprogram_Body (E)) then
-            Mark_Subprogram_Body (Subprogram_Body (E));
-         end if;
+         declare
+            My_Body : constant Node_Id := Get_Body (E);
+         begin
+            if Present (My_Body) then
+               Mark_Subprogram_Body (My_Body);
+            end if;
+         end;
 
          Prag := (if Present (Contract (E))
                   then Pre_Post_Conditions (Contract (E))
