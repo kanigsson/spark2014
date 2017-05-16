@@ -1766,7 +1766,8 @@ package body SPARK_Definition is
             Mark (Prefix (N));
             Mark (Discrete_Range (N));
 
-         when N_Subprogram_Declaration |
+         when N_Entry_Body |
+              N_Subprogram_Declaration |
               N_Subprogram_Body |
               N_Subprogram_Body_Stub =>
             declare
@@ -2058,9 +2059,6 @@ package body SPARK_Definition is
             else
                Mark_Violation_In_Tasking (N);
             end if;
-
-         when N_Entry_Body =>
-            Mark_Subprogram_Body (N);
 
          when N_Entry_Call_Statement =>
             if Is_SPARK_Tasking_Configuration then
