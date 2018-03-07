@@ -177,6 +177,9 @@ package SPARK_Definition is
    --  Returns True iff entity E is defined in loop before the invariants and
    --  thus may require a special translation. See gnat2why.ads for details.
 
+   procedure Mark_Standard_Package;
+   --  Put marks on package Standard
+
    ----------------------------------------------------------------------
    --  Marked entity collections
    ----------------------------------------------------------------------

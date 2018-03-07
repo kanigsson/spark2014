@@ -418,6 +418,8 @@ package body Gnat2Why.Driver is
          SPARK_Implicit_Load (RE_Default_Priority);
       end if;
 
+      Mark_Standard_Package;
+
       --  Before any analysis takes place, perform some rewritings of the tree
       --  that facilitates analysis.
 
