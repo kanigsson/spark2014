@@ -1766,63 +1766,15 @@ package body SPARK_Definition is
             Mark (Prefix (N));
             Mark (Discrete_Range (N));
 
-         when N_Subprogram_Body =>
-
-            --  For expression functions that have a unique declaration, the
-            --  body inserted by the frontend may be far from the original
-            --  point of declaration, after the private declarations of the
-            --  package (to avoid premature freezing.) In those cases, mark the
-            --  subprogram body at the same point as the subprogram
-            --  declaration, so that entities declared afterwards have access
-            --  to the axiom defining the expression function.
-
-            if Present (Get_Expression_Function (Unique_Defining_Entity (N)))
-              and then not Comes_From_Source (Original_Node (N))
-            then
-               null;
-
-            --  In GNATprove_Mode, a separate declaration is usually generated
-            --  before the body for a subprogram if not defined by the user
-            --  (unless the subprogram defines a unit or has a contract). So
-            --  in general Mark_Subprogram_Declaration is always called on the
-            --  declaration before Mark_Subprogram_Body is called on the body.
-            --  In the remaining cases where a subprogram unit body does not
-            --  have a prior declaration, call Mark_Subprogram_Declaration on
-            --  the subprogram body.
-
-            else
-               if Acts_As_Spec (N) then
-                  Mark_Subprogram_Declaration (N);
-               end if;
-
-               Mark_Subprogram_Body (N);
-            end if;
-
-         when N_Subprogram_Body_Stub =>
-            if Is_Subprogram_Stub_Without_Prior_Declaration (N) then
-               Mark_Subprogram_Declaration (N);
-            end if;
-            Mark_Subprogram_Body (Get_Body_From_Stub (N));
-
-         when N_Subprogram_Declaration =>
-            Mark_Subprogram_Declaration (N);
-
-            --  For expression functions that have a unique declaration, the
-            --  body inserted by the frontend may be far from the original
-            --  point of declaration, after the private declarations of the
-            --  package (to avoid premature freezing). In those cases, mark the
-            --  subprogram body at the same point as the subprogram
-            --  declaration, so that entities declared afterwards have access
-            --  to the axiom defining the expression function.
-
+         when N_Subprogram_Declaration |
+              N_Subprogram_Body |
+              N_Subprogram_Body_Stub =>
             declare
-               E      : constant Entity_Id := Defining_Entity (N);
-               Body_N : constant Node_Id := Subprogram_Body (E);
+               E : constant Entity_Id :=
+                 Unique_Defining_Entity (N);
             begin
-               if Present (Get_Expression_Function (E))
-                 and then not Comes_From_Source (Original_Node (Body_N))
-               then
-                  Mark_Subprogram_Body (Body_N);
+               if Ekind (E) not in Generic_Subprogram_Kind then
+                  Mark_Entity (E);
                end if;
             end;
 
@@ -3696,6 +3648,13 @@ package body SPARK_Definition is
                                         then Parent (E)
                                         else Subprogram_Specification (E));
 
+         if Present (Subprogram_Spec (E)) then
+            Mark_Subprogram_Declaration (Subprogram_Spec (E));
+         end if;
+         if Present (Subprogram_Body (E)) then
+            Mark_Subprogram_Body (Subprogram_Body (E));
+         end if;
+
          Prag := (if Present (Contract (E))
                   then Pre_Post_Conditions (Contract (E))
                   else Empty);
@@ -4888,6 +4847,9 @@ package body SPARK_Definition is
             end if;
 
          when Entry_Kind       => Mark_Subprogram_Entity (E);
+
+         when E_Subprogram_Body =>
+            null;
 
          when others           =>
             Ada.Text_IO.Put_Line ("[Mark_Entity] kind ="
