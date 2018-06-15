@@ -6303,7 +6303,6 @@ package body SPARK_Definition is
 
                if Ekind (E) in E_Function | E_Procedure
                  and then Might_Be_Main (E)
-                 and then E = Main_Unit_Entity
                then
                   --  The System unit must be already loaded; see call to
                   --  SPARK_Implicit_Load in GNAT_To_Why.
