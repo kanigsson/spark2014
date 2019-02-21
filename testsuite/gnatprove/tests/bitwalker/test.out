@@ -100,7 +100,7 @@ bitwalker.adb:163:59: info: range check proved (CVC4_More_Axioms: 1 VC)
 bitwalker.adb:164:22: info: assertion proved (altergo: 1 VC)
 bitwalker.adb:164:22: info: precondition proved (CVC4_More_Axioms: 1 VC)
 bitwalker.adb:164:45: info: range check proved (CVC4_More_Axioms: 1 VC)
-bitwalker.adb:164:66: info: range check proved (altergo: 1 VC)
+bitwalker.adb:164:66: medium: range check might fail
 bitwalker.adb:165:22: info: assertion proved (CVC4_More_Axioms: 1 VC)
 bitwalker.adb:165:22: info: precondition proved (CVC4_More_Axioms: 1 VC)
 bitwalker.adb:166:30: info: assertion proved (CVC4_More_Axioms: 1 VC)
@@ -221,4 +221,4 @@ bitwalker.ads:151:28: info: initialization of "Result" proved
 bitwalker.ads:156:18: info: range check proved (CVC4_More_Axioms: 1 VC)
 bitwalker.ads:158:29: info: range check proved (CVC4_More_Axioms: 1 VC)
 bitwalker.ads:161:11: info: initialization of "Result" proved
-bitwalker.ads:161:11: info: postcondition proved (altergo: 1 VC)
+bitwalker.ads:161:11: medium: postcondition might fail, cannot prove Result = Value

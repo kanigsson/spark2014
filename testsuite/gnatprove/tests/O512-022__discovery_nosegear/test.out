@@ -4,11 +4,11 @@ ng.adb:33:18: info: initialization of "Success" proved
 ng.adb:34:17: info: initialization of "Result" proved
 ng.adb:34:17: medium: postcondition might fail, cannot prove Result = Velocity( (((WHCF * Integer (ThisCount - PrevCount)) + ((WHCF * Integer (ThisCount - PrevCount)) * Integer (CurrTime - ThisTime)) / Integer (ThisTime - PrevTime)) * 3600) / Integer (CurrTime - PrevTime))
 ng.adb:36:27: info: overflow check proved (altergo: 1 VC)
-ng.adb:36:62: info: overflow check proved (altergo: 1 VC)
+ng.adb:36:62: medium: overflow check might fail
 ng.adb:37:29: info: overflow check proved (altergo: 1 VC)
-ng.adb:38:22: info: overflow check proved (altergo: 1 VC)
+ng.adb:38:22: medium: overflow check might fail
 ng.adb:39:22: medium: divide by zero might fail
-ng.adb:40:19: info: overflow check proved (altergo: 1 VC)
+ng.adb:40:19: medium: overflow check might fail
 ng.adb:41:19: medium: divide by zero might fail
 ng.adb:41:19: medium: range check might fail
 ng.adb:61:18: info: overflow check proved (altergo: 1 VC)
@@ -26,7 +26,7 @@ ng.adb:65:29: medium: overflow check might fail
 ng.adb:65:37: medium: divide by zero might fail
 ng.adb:65:37: medium: range check might fail
 ng.adb:65:40: info: initialization of "T1" proved
-ng.adb:65:43: info: overflow check proved (altergo: 1 VC)
+ng.adb:65:43: medium: overflow check might fail
 ng.adb:65:45: info: initialization of "T2" proved
 ng.adb:73:10: info: initialization of "ThisTime" proved
 ng.adb:78:07: medium: precondition might fail, cannot prove ThisCount /= PrevCount [possible explanation: subprogram at ng.ads:26 should mention PrevCount and PrevTime in a precondition]

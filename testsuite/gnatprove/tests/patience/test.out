@@ -86,9 +86,9 @@ patience.adb:66:25: info: index check proved (CVC4: 2 VC)
 patience.adb:66:30: info: initialization of "Idx" proved
 patience.adb:66:33: info: initialization of "StackISize" proved
 patience.adb:71:08: info: assertion proved (CVC4: 4 VC)
-patience.adb:80:13: medium: assertion might fail, cannot prove S.StackSizes(I) >= 1
+patience.adb:79:22: info: assertion proved (altergo: 1 VC)
 patience.adb:80:26: info: index check proved (CVC4: 2 VC)
-patience.adb:83:13: medium: assertion might fail, cannot prove S.StackSizes(I) <= S.NumElts
+patience.adb:82:22: info: assertion proved (CVC4: 2 VC; altergo: 1 VC)
 patience.adb:83:26: info: index check proved (CVC4: 2 VC)
 patience.adb:86:45: info: index check proved (CVC4: 2 VC)
 patience.adb:87:30: info: index check proved (CVC4: 2 VC)

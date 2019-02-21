@@ -124,7 +124,7 @@ prefixsum.ads:48:17: info: precondition proved (CVC4: 2 VC)
 prefixsum.ads:50:08: info: postcondition proved (Z3: 8 VC)
 prefixsum_expanded.adb:10:13: info: initialization of "Space" proved
 prefixsum_expanded.adb:12:14: info: loop invariant initialization proved (CVC4: 10 VC)
-prefixsum_expanded.adb:12:14: info: loop invariant preservation proved (CVC4: 3 VC; Z3: 15 VC; altergo: 1 VC)
+prefixsum_expanded.adb:12:14: info: loop invariant preservation proved (CVC4: 3 VC; Z3: 16 VC)
 prefixsum_expanded.adb:12:34: info: initialization of "Space" proved
 prefixsum_expanded.adb:12:40: info: range check proved (CVC4: 2 VC)
 prefixsum_expanded.adb:52:10: info: loop variant proved (CVC4: 1 VC)
