@@ -1,3 +1,4 @@
+SOUNDNESS BUG at fib.adb:110: mark @LOOP_INVARIANT_PRESERV:FAIL not found
 fib.adb:7:11: info: range check proved (CVC4: 2 VC)
 fib.adb:8:33: info: initialization of "b" proved
 fib.adb:8:33: info: loop invariant initialization proved (CVC4: 2 VC)
@@ -94,7 +95,7 @@ fib.adb:98:19: info: initialization of "k1" proved
 fib.adb:98:22: info: division check proved (CVC4: 1 VC)
 fib.adb:99:19: info: initialization of "b1" proved
 fib.adb:99:22: medium: overflow check might fail
-fib.adb:101:28: medium: assertion might fail, cannot prove (p1 * b1) * (b1 ** (k1 - 1)) = a1 ** n1
+fib.adb:101:28: info: assertion proved (altergo: 1 VC)
 fib.adb:101:29: info: initialization of "p1" proved
 fib.adb:101:34: info: initialization of "b1" proved
 fib.adb:101:48: info: initialization of "k1" proved
@@ -105,11 +106,11 @@ fib.adb:103:19: info: initialization of "b1" proved
 fib.adb:103:22: medium: overflow check might fail
 fib.adb:103:24: info: initialization of "p1" proved
 fib.adb:109:14: info: initialization of "k2" proved
-fib.adb:110:33: medium: loop invariant might fail after first iteration, cannot prove a2 ** n2 = p2 * (b2 ** k2)
 fib.adb:110:44: info: initialization of "p2" proved
 fib.adb:110:50: info: initialization of "b2" proved
 fib.adb:110:56: info: initialization of "k2" proved
 fib.adb:110:69: info: initialization of "k1" proved
+fib.adb:111:27: medium: loop invariant might fail after first iteration, cannot prove p2 <= a2 ** n2
 fib.adb:111:27: medium: loop invariant might fail in first iteration, cannot prove p2 <= a2 ** n2
 fib.adb:112:10: info: loop variant proved (CVC4: 1 VC)
 fib.adb:112:44: info: initialization of "k2" proved
@@ -124,7 +125,7 @@ fib.adb:115:19: info: initialization of "k2" proved
 fib.adb:115:22: info: division check proved (CVC4: 1 VC)
 fib.adb:116:19: info: initialization of "b2" proved
 fib.adb:116:22: medium: overflow check might fail
-fib.adb:118:28: medium: assertion might fail, cannot prove (p2 * b2) * (b2 ** (k2 - 1)) = a2 ** n2
+fib.adb:118:28: info: assertion proved (CVC4: 1 VC; altergo: 1 VC)
 fib.adb:118:29: info: initialization of "p2" proved
 fib.adb:118:34: info: initialization of "b2" proved
 fib.adb:118:48: info: initialization of "k2" proved

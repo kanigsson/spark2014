@@ -221,4 +221,4 @@ bitwalker.ads:151:28: info: initialization of "Result" proved
 bitwalker.ads:156:18: info: range check proved (CVC4_More_Axioms: 1 VC)
 bitwalker.ads:158:29: info: range check proved (CVC4_More_Axioms: 1 VC)
 bitwalker.ads:161:11: info: initialization of "Result" proved
-bitwalker.ads:161:11: medium: postcondition might fail, cannot prove Result = Value
+bitwalker.ads:161:11: info: postcondition proved (altergo: 1 VC)

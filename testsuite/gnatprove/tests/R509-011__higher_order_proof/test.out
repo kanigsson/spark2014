@@ -1039,8 +1039,8 @@ spark-higher_order-fold.adb:729:30: info: range check proved (CVC4: 1 VC), in in
 spark-higher_order-fold.adb:734:21: info: precondition proved (CVC4: 4 VC), in instantiation at test_higher_order.ads:125
 spark-higher_order-fold.adb:734:31: info: range check proved (CVC4: 1 VC), in instantiation at test_higher_order.ads:125
 spark-higher_order-fold.adb:734:43: info: range check proved (CVC4: 1 VC), in instantiation at test_higher_order.ads:125
-spark-higher_order-fold.adb:735:20: medium: postcondition might fail, cannot prove Sum (A) = C * A'Length (1) * A'length, in instantiation at test_higher_order.ads:125
-spark-higher_order-fold.adb:735:32: medium: overflow check might fail, in instantiation at test_higher_order.ads:125
+spark-higher_order-fold.adb:735:20: info: postcondition proved (altergo: 1 VC), in instantiation at test_higher_order.ads:125
+spark-higher_order-fold.adb:735:32: info: overflow check proved (altergo: 1 VC), in instantiation at test_higher_order.ads:125
 spark-higher_order-fold.adb:735:35: info: range check proved (CVC4: 1 VC), in instantiation at test_higher_order.ads:125
 spark-higher_order-fold.adb:735:47: info: overflow check proved (altergo: 1 VC), in instantiation at test_higher_order.ads:125
 spark-higher_order-fold.adb:735:50: info: range check proved (CVC4: 1 VC), in instantiation at test_higher_order.ads:125
@@ -1100,7 +1100,7 @@ spark-higher_order-fold.adb:811:44: info: index check proved (CVC4: 4 VC), in in
 spark-higher_order-fold.adb:811:47: info: index check proved (CVC4: 4 VC), in instantiation at test_higher_order.ads:125
 spark-higher_order-fold.adb:812:26: info: index check proved (CVC4: 2 VC), in instantiation at test_higher_order.ads:125
 spark-higher_order-fold.adb:812:29: info: index check proved (CVC4: 2 VC), in instantiation at test_higher_order.ads:125
-spark-higher_order-fold.adb:812:33: medium: overflow check might fail, in instantiation at test_higher_order.ads:125 [possible explanation: precondition of subprogram at line 800 should mention A]
+spark-higher_order-fold.adb:812:33: info: overflow check proved (altergo: 1 VC), in instantiation at test_higher_order.ads:125
 spark-higher_order-fold.adb:812:53: info: overflow check proved (CVC4: 1 VC), in instantiation at test_higher_order.ads:125
 spark-higher_order-fold.adb:813:34: info: overflow check proved (CVC4: 1 VC), in instantiation at test_higher_order.ads:125
 spark-higher_order-fold.adb:813:49: info: overflow check proved (CVC4: 1 VC), in instantiation at test_higher_order.ads:125
