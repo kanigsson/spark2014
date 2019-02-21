@@ -117,6 +117,7 @@ spark-higher_order-fold.adb:191:10: info: initialization of "R" proved, in insta
 spark-higher_order-fold.adb:195:22: info: loop invariant initialization proved (CVC4: 2 VC), in instantiation at spark-higher_order-fold.ads:597, in instantiation at test_higher_order.ads:125
 spark-higher_order-fold.adb:195:22: info: loop invariant initialization proved (CVC4: 2 VC), in instantiation at spark-higher_order-fold.ads:660, in instantiation at test_higher_order.ads:133
 spark-higher_order-fold.adb:195:22: info: loop invariant initialization proved (CVC4: 2 VC), in instantiation at test_higher_order.ads:84
+spark-higher_order-fold.adb:195:22: info: loop invariant preservation proved (CVC4: 1 VC; altergo: 1 VC), in instantiation at spark-higher_order-fold.ads:597, in instantiation at test_higher_order.ads:125
 spark-higher_order-fold.adb:195:22: info: loop invariant preservation proved (CVC4: 2 VC), in instantiation at spark-higher_order-fold.ads:660, in instantiation at test_higher_order.ads:133
 spark-higher_order-fold.adb:195:22: info: loop invariant preservation proved (CVC4: 2 VC), in instantiation at test_higher_order.ads:84
 spark-higher_order-fold.adb:195:22: info: precondition proved (CVC4: 8 VC), in instantiation at spark-higher_order-fold.ads:597, in instantiation at test_higher_order.ads:125
@@ -135,7 +136,6 @@ spark-higher_order-fold.adb:195:42: info: range check proved (CVC4: 2 VC), in in
 spark-higher_order-fold.adb:195:42: info: range check proved (CVC4: 2 VC), in instantiation at test_higher_order.ads:84
 spark-higher_order-fold.adb:196:31: info: precondition proved (CVC4: 2 VC), in instantiation at spark-higher_order-fold.ads:660, in instantiation at test_higher_order.ads:133
 spark-higher_order-fold.adb:196:31: info: precondition proved (CVC4: 4 VC), in instantiation at spark-higher_order-fold.ads:597, in instantiation at test_higher_order.ads:125
-spark-higher_order-fold.adb:196:31: medium: loop invariant might fail after first iteration, cannot prove F (A (I, A'First (2)), R) = Acc.Fold (A, Init) (I, A'first), in instantiation at spark-higher_order-fold.ads:597, in instantiation at test_higher_order.ads:125
 spark-higher_order-fold.adb:196:37: info: index check proved (CVC4: 4 VC), in instantiation at spark-higher_order-fold.ads:597, in instantiation at test_higher_order.ads:125
 spark-higher_order-fold.adb:196:37: info: index check proved (CVC4: 4 VC), in instantiation at spark-higher_order-fold.ads:660, in instantiation at test_higher_order.ads:133
 spark-higher_order-fold.adb:196:37: info: index check proved (CVC4: 4 VC), in instantiation at test_higher_order.ads:84
@@ -260,11 +260,11 @@ spark-higher_order-fold.adb:243:39: info: loop invariant initialization proved (
 spark-higher_order-fold.adb:243:39: info: loop invariant initialization proved (CVC4: 1 VC), in instantiation at spark-higher_order-fold.ads:530, in instantiation at spark-higher_order-fold.ads:660, in instantiation at test_higher_order.ads:133
 spark-higher_order-fold.adb:243:39: info: loop invariant initialization proved (CVC4: 1 VC), in instantiation at spark-higher_order-fold.ads:530, in instantiation at test_higher_order.ads:84
 spark-higher_order-fold.adb:243:39: info: loop invariant preservation proved (CVC4: 1 VC), in instantiation at spark-higher_order-fold.ads:530, in instantiation at test_higher_order.ads:84
-spark-higher_order-fold.adb:243:39: info: loop invariant preservation proved (altergo: 1 VC), in instantiation at spark-higher_order-fold.ads:530, in instantiation at spark-higher_order-fold.ads:660, in instantiation at test_higher_order.ads:133
 spark-higher_order-fold.adb:243:39: info: precondition proved (CVC4: 8 VC), in instantiation at spark-higher_order-fold.ads:530, in instantiation at spark-higher_order-fold.ads:597, in instantiation at test_higher_order.ads:125
 spark-higher_order-fold.adb:243:39: info: precondition proved (CVC4: 8 VC), in instantiation at spark-higher_order-fold.ads:530, in instantiation at spark-higher_order-fold.ads:660, in instantiation at test_higher_order.ads:133
 spark-higher_order-fold.adb:243:39: info: precondition proved (CVC4: 8 VC), in instantiation at spark-higher_order-fold.ads:530, in instantiation at test_higher_order.ads:84
 spark-higher_order-fold.adb:243:39: medium: loop invariant might fail after first iteration, cannot prove Ind_Prop (A, Acc, I, A'first), in instantiation at spark-higher_order-fold.ads:530, in instantiation at spark-higher_order-fold.ads:597, in instantiation at test_higher_order.ads:125
+spark-higher_order-fold.adb:243:39: medium: loop invariant might fail after first iteration, cannot prove Ind_Prop (A, Acc, I, A'first), in instantiation at spark-higher_order-fold.ads:530, in instantiation at spark-higher_order-fold.ads:660, in instantiation at test_higher_order.ads:133
 spark-higher_order-fold.adb:243:49: info: range check proved (CVC4: 2 VC), in instantiation at spark-higher_order-fold.ads:530, in instantiation at spark-higher_order-fold.ads:597, in instantiation at test_higher_order.ads:125
 spark-higher_order-fold.adb:243:49: info: range check proved (CVC4: 2 VC), in instantiation at spark-higher_order-fold.ads:530, in instantiation at spark-higher_order-fold.ads:660, in instantiation at test_higher_order.ads:133
 spark-higher_order-fold.adb:243:52: info: initialization of "Acc" proved, in instantiation at spark-higher_order-fold.ads:530, in instantiation at spark-higher_order-fold.ads:597, in instantiation at test_higher_order.ads:125
@@ -313,11 +313,11 @@ spark-higher_order-fold.adb:248:41: info: index check proved (CVC4: 4 VC), in in
 spark-higher_order-fold.adb:250:19: info: loop invariant initialization proved (CVC4: 2 VC), in instantiation at spark-higher_order-fold.ads:530, in instantiation at spark-higher_order-fold.ads:597, in instantiation at test_higher_order.ads:125
 spark-higher_order-fold.adb:250:19: info: loop invariant initialization proved (CVC4: 2 VC), in instantiation at spark-higher_order-fold.ads:530, in instantiation at spark-higher_order-fold.ads:660, in instantiation at test_higher_order.ads:133
 spark-higher_order-fold.adb:250:19: info: loop invariant initialization proved (CVC4: 2 VC), in instantiation at spark-higher_order-fold.ads:530, in instantiation at test_higher_order.ads:84
-spark-higher_order-fold.adb:250:19: info: loop invariant preservation proved (altergo: 2 VC), in instantiation at spark-higher_order-fold.ads:530, in instantiation at spark-higher_order-fold.ads:660, in instantiation at test_higher_order.ads:133
 spark-higher_order-fold.adb:252:26: info: precondition proved (CVC4: 8 VC), in instantiation at spark-higher_order-fold.ads:530, in instantiation at spark-higher_order-fold.ads:597, in instantiation at test_higher_order.ads:125
 spark-higher_order-fold.adb:252:26: info: precondition proved (CVC4: 8 VC), in instantiation at spark-higher_order-fold.ads:530, in instantiation at spark-higher_order-fold.ads:660, in instantiation at test_higher_order.ads:133
 spark-higher_order-fold.adb:252:26: info: precondition proved (CVC4: 8 VC), in instantiation at spark-higher_order-fold.ads:530, in instantiation at test_higher_order.ads:84
 spark-higher_order-fold.adb:252:26: medium: loop invariant might fail after first iteration, cannot prove Ind_Prop (A, R (K - 1, A'Last (2)), K, A'first), in instantiation at spark-higher_order-fold.ads:530, in instantiation at spark-higher_order-fold.ads:597, in instantiation at test_higher_order.ads:125
+spark-higher_order-fold.adb:252:26: medium: loop invariant might fail after first iteration, cannot prove Ind_Prop (A, R (K - 1, A'Last (2)), K, A'first), in instantiation at spark-higher_order-fold.ads:530, in instantiation at spark-higher_order-fold.ads:660, in instantiation at test_higher_order.ads:133
 spark-higher_order-fold.adb:252:26: medium: loop invariant might fail after first iteration, cannot prove Ind_Prop (A, R (K - 1, A'Last (2)), K, A'first), in instantiation at spark-higher_order-fold.ads:530, in instantiation at test_higher_order.ads:84
 spark-higher_order-fold.adb:252:36: info: range check proved (CVC4: 2 VC), in instantiation at spark-higher_order-fold.ads:530, in instantiation at spark-higher_order-fold.ads:597, in instantiation at test_higher_order.ads:125
 spark-higher_order-fold.adb:252:36: info: range check proved (CVC4: 2 VC), in instantiation at spark-higher_order-fold.ads:530, in instantiation at spark-higher_order-fold.ads:660, in instantiation at test_higher_order.ads:133
@@ -455,7 +455,6 @@ spark-higher_order-fold.adb:268:22: info: loop invariant preservation proved (CV
 spark-higher_order-fold.adb:272:29: info: precondition proved (CVC4: 8 VC), in instantiation at spark-higher_order-fold.ads:530, in instantiation at spark-higher_order-fold.ads:597, in instantiation at test_higher_order.ads:125
 spark-higher_order-fold.adb:272:29: info: precondition proved (CVC4: 8 VC), in instantiation at spark-higher_order-fold.ads:530, in instantiation at spark-higher_order-fold.ads:660, in instantiation at test_higher_order.ads:133
 spark-higher_order-fold.adb:272:29: info: precondition proved (CVC4: 8 VC), in instantiation at spark-higher_order-fold.ads:530, in instantiation at test_higher_order.ads:84
-spark-higher_order-fold.adb:272:29: medium: loop invariant might fail after first iteration, cannot prove Ind_Prop (A, R (K - 1, A'Last (2)), K, A'first), in instantiation at spark-higher_order-fold.ads:530, in instantiation at spark-higher_order-fold.ads:597, in instantiation at test_higher_order.ads:125
 spark-higher_order-fold.adb:272:29: medium: loop invariant might fail after first iteration, cannot prove Ind_Prop (A, R (K - 1, A'Last (2)), K, A'first), in instantiation at spark-higher_order-fold.ads:530, in instantiation at spark-higher_order-fold.ads:660, in instantiation at test_higher_order.ads:133
 spark-higher_order-fold.adb:272:39: info: range check proved (CVC4: 2 VC), in instantiation at spark-higher_order-fold.ads:530, in instantiation at spark-higher_order-fold.ads:597, in instantiation at test_higher_order.ads:125
 spark-higher_order-fold.adb:272:39: info: range check proved (CVC4: 2 VC), in instantiation at spark-higher_order-fold.ads:530, in instantiation at spark-higher_order-fold.ads:660, in instantiation at test_higher_order.ads:133
@@ -477,6 +476,7 @@ spark-higher_order-fold.adb:272:65: info: range check proved (CVC4: 2 VC), in in
 spark-higher_order-fold.adb:272:69: info: range check proved (CVC4: 2 VC), in instantiation at spark-higher_order-fold.ads:530, in instantiation at spark-higher_order-fold.ads:597, in instantiation at test_higher_order.ads:125
 spark-higher_order-fold.adb:272:69: info: range check proved (CVC4: 2 VC), in instantiation at spark-higher_order-fold.ads:530, in instantiation at spark-higher_order-fold.ads:660, in instantiation at test_higher_order.ads:133
 spark-higher_order-fold.adb:272:69: info: range check proved (CVC4: 2 VC), in instantiation at spark-higher_order-fold.ads:530, in instantiation at test_higher_order.ads:84
+spark-higher_order-fold.adb:273:36: medium: loop invariant might fail after first iteration, cannot prove R (K, A'First (2)) = F (A (K, A'First (2)), R (K - 1, A'last)), in instantiation at spark-higher_order-fold.ads:530, in instantiation at spark-higher_order-fold.ads:597, in instantiation at test_higher_order.ads:125
 spark-higher_order-fold.adb:273:39: info: index check proved (CVC4: 4 VC), in instantiation at spark-higher_order-fold.ads:530, in instantiation at spark-higher_order-fold.ads:597, in instantiation at test_higher_order.ads:125
 spark-higher_order-fold.adb:273:39: info: index check proved (CVC4: 4 VC), in instantiation at spark-higher_order-fold.ads:530, in instantiation at spark-higher_order-fold.ads:660, in instantiation at test_higher_order.ads:133
 spark-higher_order-fold.adb:273:39: info: index check proved (CVC4: 4 VC), in instantiation at spark-higher_order-fold.ads:530, in instantiation at test_higher_order.ads:84
@@ -754,6 +754,7 @@ spark-higher_order-fold.adb:388:26: info: precondition proved (CVC4: 4 VC), in i
 spark-higher_order-fold.adb:388:26: info: precondition proved (CVC4: 4 VC), in instantiation at spark-higher_order-fold.ads:104, in instantiation at spark-higher_order-fold.ads:391, in instantiation at test_higher_order.ads:117
 spark-higher_order-fold.adb:388:26: info: precondition proved (CVC4: 4 VC), in instantiation at spark-higher_order-fold.ads:104, in instantiation at test_higher_order.ads:52
 spark-higher_order-fold.adb:388:26: medium: loop invariant might fail after first iteration, cannot prove Ind_Prop (A, R (K - 1), K), in instantiation at spark-higher_order-fold.ads:104, in instantiation at spark-higher_order-fold.ads:339, in instantiation at test_higher_order.ads:106
+spark-higher_order-fold.adb:388:26: medium: loop invariant might fail after first iteration, cannot prove Ind_Prop (A, R (K - 1), K), in instantiation at spark-higher_order-fold.ads:104, in instantiation at spark-higher_order-fold.ads:391, in instantiation at test_higher_order.ads:117
 spark-higher_order-fold.adb:388:26: medium: loop invariant might fail after first iteration, cannot prove Ind_Prop (A, R (K - 1), K), in instantiation at spark-higher_order-fold.ads:104, in instantiation at test_higher_order.ads:52
 spark-higher_order-fold.adb:388:36: info: range check proved (CVC4: 2 VC), in instantiation at spark-higher_order-fold.ads:104, in instantiation at spark-higher_order-fold.ads:339, in instantiation at test_higher_order.ads:106
 spark-higher_order-fold.adb:388:36: info: range check proved (CVC4: 2 VC), in instantiation at spark-higher_order-fold.ads:104, in instantiation at spark-higher_order-fold.ads:391, in instantiation at test_higher_order.ads:117
@@ -769,7 +770,6 @@ spark-higher_order-fold.adb:388:44: info: overflow check proved (CVC4: 2 VC), in
 spark-higher_order-fold.adb:388:50: info: range check proved (CVC4: 2 VC), in instantiation at spark-higher_order-fold.ads:104, in instantiation at spark-higher_order-fold.ads:339, in instantiation at test_higher_order.ads:106
 spark-higher_order-fold.adb:388:50: info: range check proved (CVC4: 2 VC), in instantiation at spark-higher_order-fold.ads:104, in instantiation at spark-higher_order-fold.ads:391, in instantiation at test_higher_order.ads:117
 spark-higher_order-fold.adb:388:50: info: range check proved (CVC4: 2 VC), in instantiation at spark-higher_order-fold.ads:104, in instantiation at test_higher_order.ads:52
-spark-higher_order-fold.adb:389:31: medium: loop invariant might fail after first iteration, cannot prove R (K) = F (A (K), R (K - 1)), in instantiation at spark-higher_order-fold.ads:104, in instantiation at spark-higher_order-fold.ads:391, in instantiation at test_higher_order.ads:117
 spark-higher_order-fold.adb:389:34: info: index check proved (CVC4: 4 VC), in instantiation at spark-higher_order-fold.ads:104, in instantiation at spark-higher_order-fold.ads:339, in instantiation at test_higher_order.ads:106
 spark-higher_order-fold.adb:389:34: info: index check proved (CVC4: 4 VC), in instantiation at spark-higher_order-fold.ads:104, in instantiation at spark-higher_order-fold.ads:391, in instantiation at test_higher_order.ads:117
 spark-higher_order-fold.adb:389:34: info: index check proved (CVC4: 4 VC), in instantiation at spark-higher_order-fold.ads:104, in instantiation at test_higher_order.ads:52
@@ -802,18 +802,18 @@ spark-higher_order-fold.adb:391:69: info: index check proved (CVC4: 4 VC), in in
 spark-higher_order-fold.adb:391:69: info: overflow check proved (CVC4: 2 VC), in instantiation at spark-higher_order-fold.ads:104, in instantiation at spark-higher_order-fold.ads:339, in instantiation at test_higher_order.ads:106
 spark-higher_order-fold.adb:391:69: info: overflow check proved (CVC4: 2 VC), in instantiation at spark-higher_order-fold.ads:104, in instantiation at spark-higher_order-fold.ads:391, in instantiation at test_higher_order.ads:117
 spark-higher_order-fold.adb:391:69: info: overflow check proved (CVC4: 2 VC), in instantiation at spark-higher_order-fold.ads:104, in instantiation at test_higher_order.ads:52
-spark-higher_order-fold.adb:393:19: medium: precondition might fail, cannot prove Ind_Prop (A, X, I), in instantiation at spark-higher_order-fold.ads:104, in instantiation at spark-higher_order-fold.ads:339, in instantiation at test_higher_order.ads:106
-spark-higher_order-fold.adb:393:19: medium: precondition might fail, cannot prove Ind_Prop (A, X, I), in instantiation at spark-higher_order-fold.ads:104, in instantiation at spark-higher_order-fold.ads:391, in instantiation at test_higher_order.ads:117
-spark-higher_order-fold.adb:393:19: medium: precondition might fail, cannot prove Ind_Prop (A, X, I), in instantiation at spark-higher_order-fold.ads:104, in instantiation at test_higher_order.ads:52
+spark-higher_order-fold.adb:393:19: info: precondition proved (CVC4: 3 VC; altergo: 1 VC), in instantiation at spark-higher_order-fold.ads:104, in instantiation at spark-higher_order-fold.ads:339, in instantiation at test_higher_order.ads:106
+spark-higher_order-fold.adb:393:19: info: precondition proved (CVC4: 3 VC; altergo: 1 VC), in instantiation at spark-higher_order-fold.ads:104, in instantiation at spark-higher_order-fold.ads:391, in instantiation at test_higher_order.ads:117
+spark-higher_order-fold.adb:393:19: info: precondition proved (CVC4: 3 VC; altergo: 1 VC), in instantiation at spark-higher_order-fold.ads:104, in instantiation at test_higher_order.ads:52
 spark-higher_order-fold.adb:393:33: info: initialization of "Acc" proved, in instantiation at spark-higher_order-fold.ads:104, in instantiation at spark-higher_order-fold.ads:339, in instantiation at test_higher_order.ads:106
 spark-higher_order-fold.adb:393:33: info: initialization of "Acc" proved, in instantiation at spark-higher_order-fold.ads:104, in instantiation at spark-higher_order-fold.ads:391, in instantiation at test_higher_order.ads:117
 spark-higher_order-fold.adb:393:33: info: initialization of "Acc" proved, in instantiation at spark-higher_order-fold.ads:104, in instantiation at test_higher_order.ads:52
 spark-higher_order-fold.adb:393:38: info: range check proved (CVC4: 1 VC), in instantiation at spark-higher_order-fold.ads:104, in instantiation at spark-higher_order-fold.ads:339, in instantiation at test_higher_order.ads:106
 spark-higher_order-fold.adb:393:38: info: range check proved (CVC4: 1 VC), in instantiation at spark-higher_order-fold.ads:104, in instantiation at spark-higher_order-fold.ads:391, in instantiation at test_higher_order.ads:117
 spark-higher_order-fold.adb:393:38: info: range check proved (CVC4: 1 VC), in instantiation at spark-higher_order-fold.ads:104, in instantiation at test_higher_order.ads:52
-spark-higher_order-fold.adb:395:19: medium: precondition might fail, cannot prove Ind_Prop (A, X, A'last), in instantiation at spark-higher_order-fold.ads:104, in instantiation at spark-higher_order-fold.ads:339, in instantiation at test_higher_order.ads:106
-spark-higher_order-fold.adb:395:19: medium: precondition might fail, cannot prove Ind_Prop (A, X, A'last), in instantiation at spark-higher_order-fold.ads:104, in instantiation at spark-higher_order-fold.ads:391, in instantiation at test_higher_order.ads:117
-spark-higher_order-fold.adb:395:19: medium: precondition might fail, cannot prove Ind_Prop (A, X, A'last), in instantiation at spark-higher_order-fold.ads:104, in instantiation at test_higher_order.ads:52
+spark-higher_order-fold.adb:395:19: info: precondition proved (CVC4: 1 VC; altergo: 1 VC), in instantiation at spark-higher_order-fold.ads:104, in instantiation at spark-higher_order-fold.ads:339, in instantiation at test_higher_order.ads:106
+spark-higher_order-fold.adb:395:19: info: precondition proved (CVC4: 1 VC; altergo: 1 VC), in instantiation at spark-higher_order-fold.ads:104, in instantiation at spark-higher_order-fold.ads:391, in instantiation at test_higher_order.ads:117
+spark-higher_order-fold.adb:395:19: info: precondition proved (CVC4: 1 VC; altergo: 1 VC), in instantiation at spark-higher_order-fold.ads:104, in instantiation at test_higher_order.ads:52
 spark-higher_order-fold.adb:395:34: info: initialization of "Acc" proved, in instantiation at spark-higher_order-fold.ads:104, in instantiation at spark-higher_order-fold.ads:339, in instantiation at test_higher_order.ads:106
 spark-higher_order-fold.adb:395:34: info: initialization of "Acc" proved, in instantiation at spark-higher_order-fold.ads:104, in instantiation at spark-higher_order-fold.ads:391, in instantiation at test_higher_order.ads:117
 spark-higher_order-fold.adb:395:34: info: initialization of "Acc" proved, in instantiation at spark-higher_order-fold.ads:104, in instantiation at test_higher_order.ads:52
@@ -873,10 +873,10 @@ spark-higher_order-fold.adb:483:58: info: initialization of "Acc" proved, in ins
 spark-higher_order-fold.adb:483:64: info: initialization of "R" proved, in instantiation at spark-higher_order-fold.ads:200, in instantiation at test_higher_order.ads:144
 spark-higher_order-fold.adb:483:69: info: index check proved (CVC4: 4 VC), in instantiation at spark-higher_order-fold.ads:200, in instantiation at test_higher_order.ads:144
 spark-higher_order-fold.adb:483:69: info: overflow check proved (CVC4: 2 VC), in instantiation at spark-higher_order-fold.ads:200, in instantiation at test_higher_order.ads:144
-spark-higher_order-fold.adb:485:19: medium: precondition might fail, cannot prove Ind_Prop (A, X, I), in instantiation at spark-higher_order-fold.ads:200, in instantiation at test_higher_order.ads:144
+spark-higher_order-fold.adb:485:19: info: precondition proved (CVC4: 3 VC; altergo: 1 VC), in instantiation at spark-higher_order-fold.ads:200, in instantiation at test_higher_order.ads:144
 spark-higher_order-fold.adb:485:33: info: initialization of "Acc" proved, in instantiation at spark-higher_order-fold.ads:200, in instantiation at test_higher_order.ads:144
 spark-higher_order-fold.adb:485:38: info: range check proved (CVC4: 1 VC), in instantiation at spark-higher_order-fold.ads:200, in instantiation at test_higher_order.ads:144
-spark-higher_order-fold.adb:487:19: medium: precondition might fail, cannot prove Ind_Prop (A, X, A'last), in instantiation at spark-higher_order-fold.ads:200, in instantiation at test_higher_order.ads:144
+spark-higher_order-fold.adb:487:19: info: precondition proved (CVC4: 1 VC; altergo: 1 VC), in instantiation at spark-higher_order-fold.ads:200, in instantiation at test_higher_order.ads:144
 spark-higher_order-fold.adb:487:34: info: initialization of "Acc" proved, in instantiation at spark-higher_order-fold.ads:200, in instantiation at test_higher_order.ads:144
 spark-higher_order-fold.adb:489:23: info: initialization of "R" proved, in instantiation at spark-higher_order-fold.ads:200, in instantiation at test_higher_order.ads:144
 spark-higher_order-fold.adb:528:10: info: initialization of "R" proved, in instantiation at test_higher_order.ads:43
@@ -927,10 +927,10 @@ spark-higher_order-fold.adb:575:57: info: initialization of "Acc" proved, in ins
 spark-higher_order-fold.adb:575:63: info: initialization of "R" proved, in instantiation at spark-higher_order-fold.ads:290, in instantiation at test_higher_order.ads:43
 spark-higher_order-fold.adb:575:68: info: index check proved (CVC4: 4 VC), in instantiation at spark-higher_order-fold.ads:290, in instantiation at test_higher_order.ads:43
 spark-higher_order-fold.adb:575:68: info: overflow check proved (CVC4: 2 VC), in instantiation at spark-higher_order-fold.ads:290, in instantiation at test_higher_order.ads:43
-spark-higher_order-fold.adb:577:19: medium: precondition might fail, cannot prove Ind_Prop (A, X, I), in instantiation at spark-higher_order-fold.ads:290, in instantiation at test_higher_order.ads:43
+spark-higher_order-fold.adb:577:19: info: precondition proved (CVC4: 3 VC; altergo: 1 VC), in instantiation at spark-higher_order-fold.ads:290, in instantiation at test_higher_order.ads:43
 spark-higher_order-fold.adb:577:33: info: initialization of "Acc" proved, in instantiation at spark-higher_order-fold.ads:290, in instantiation at test_higher_order.ads:43
 spark-higher_order-fold.adb:577:38: info: range check proved (CVC4: 1 VC), in instantiation at spark-higher_order-fold.ads:290, in instantiation at test_higher_order.ads:43
-spark-higher_order-fold.adb:579:19: medium: precondition might fail, cannot prove Ind_Prop (A, X, A'first), in instantiation at spark-higher_order-fold.ads:290, in instantiation at test_higher_order.ads:43
+spark-higher_order-fold.adb:579:19: info: precondition proved (CVC4: 1 VC; altergo: 1 VC), in instantiation at spark-higher_order-fold.ads:290, in instantiation at test_higher_order.ads:43
 spark-higher_order-fold.adb:579:34: info: initialization of "Acc" proved, in instantiation at spark-higher_order-fold.ads:290, in instantiation at test_higher_order.ads:43
 spark-higher_order-fold.adb:581:23: info: initialization of "R" proved, in instantiation at spark-higher_order-fold.ads:290, in instantiation at test_higher_order.ads:43
 spark-higher_order-fold.adb:624:16: info: loop invariant initialization proved (CVC4: 1 VC), in instantiation at test_higher_order.ads:106
@@ -1039,7 +1039,7 @@ spark-higher_order-fold.adb:729:30: info: range check proved (CVC4: 1 VC), in in
 spark-higher_order-fold.adb:734:21: info: precondition proved (CVC4: 4 VC), in instantiation at test_higher_order.ads:125
 spark-higher_order-fold.adb:734:31: info: range check proved (CVC4: 1 VC), in instantiation at test_higher_order.ads:125
 spark-higher_order-fold.adb:734:43: info: range check proved (CVC4: 1 VC), in instantiation at test_higher_order.ads:125
-spark-higher_order-fold.adb:735:20: info: postcondition proved (altergo: 1 VC), in instantiation at test_higher_order.ads:125
+spark-higher_order-fold.adb:735:20: medium: postcondition might fail, cannot prove Sum (A) = C * A'Length (1) * A'length, in instantiation at test_higher_order.ads:125
 spark-higher_order-fold.adb:735:32: medium: overflow check might fail, in instantiation at test_higher_order.ads:125
 spark-higher_order-fold.adb:735:35: info: range check proved (CVC4: 1 VC), in instantiation at test_higher_order.ads:125
 spark-higher_order-fold.adb:735:47: info: overflow check proved (altergo: 1 VC), in instantiation at test_higher_order.ads:125
@@ -1146,8 +1146,8 @@ spark-higher_order-fold.adb:852:36: info: precondition proved (CVC4: 16 VC), in 
 spark-higher_order-fold.adb:852:50: info: range check proved (CVC4: 2 VC), in instantiation at test_higher_order.ads:125
 spark-higher_order-fold.adb:852:55: info: range check proved (CVC4: 2 VC), in instantiation at test_higher_order.ads:125
 spark-higher_order-fold.adb:853:36: info: loop invariant initialization proved (Z3: 1 VC), in instantiation at test_higher_order.ads:125
+spark-higher_order-fold.adb:853:36: info: loop invariant preservation proved (altergo: 1 VC), in instantiation at test_higher_order.ads:125
 spark-higher_order-fold.adb:853:36: info: precondition proved (CVC4: 16 VC), in instantiation at test_higher_order.ads:125
-spark-higher_order-fold.adb:853:36: medium: loop invariant might fail after first iteration, cannot prove In_Range (A2, K, A2'first), in instantiation at test_higher_order.ads:125
 spark-higher_order-fold.adb:853:50: info: range check proved (CVC4: 2 VC), in instantiation at test_higher_order.ads:125
 spark-higher_order-fold.adb:853:55: info: range check proved (CVC4: 2 VC), in instantiation at test_higher_order.ads:125
 spark-higher_order-fold.adb:855:16: info: loop invariant initialization proved (CVC4: 2 VC), in instantiation at test_higher_order.ads:125
@@ -1287,9 +1287,6 @@ spark-higher_order-fold.ads:70:49: info: range check proved (CVC4: 1 VC), in ins
 spark-higher_order-fold.ads:70:59: info: range check proved (CVC4: 1 VC), in instantiation at spark-higher_order-fold.ads:104, in instantiation at spark-higher_order-fold.ads:339, in instantiation at test_higher_order.ads:106
 spark-higher_order-fold.ads:70:59: info: range check proved (CVC4: 1 VC), in instantiation at spark-higher_order-fold.ads:104, in instantiation at spark-higher_order-fold.ads:391, in instantiation at test_higher_order.ads:117
 spark-higher_order-fold.ads:70:59: info: range check proved (CVC4: 1 VC), in instantiation at spark-higher_order-fold.ads:104, in instantiation at test_higher_order.ads:52
-spark-higher_order-fold.ads:71:17: info: postcondition proved (CVC4: 6 VC; altergo: 1 VC), in instantiation at spark-higher_order-fold.ads:104, in instantiation at spark-higher_order-fold.ads:339, in instantiation at test_higher_order.ads:106
-spark-higher_order-fold.ads:71:17: info: postcondition proved (CVC4: 6 VC; altergo: 1 VC), in instantiation at spark-higher_order-fold.ads:104, in instantiation at spark-higher_order-fold.ads:391, in instantiation at test_higher_order.ads:117
-spark-higher_order-fold.ads:71:17: info: postcondition proved (CVC4: 6 VC; altergo: 1 VC), in instantiation at spark-higher_order-fold.ads:104, in instantiation at test_higher_order.ads:52
 spark-higher_order-fold.ads:73:18: info: precondition proved (CVC4: 2 VC), in instantiation at spark-higher_order-fold.ads:104, in instantiation at spark-higher_order-fold.ads:339, in instantiation at test_higher_order.ads:106
 spark-higher_order-fold.ads:73:18: info: precondition proved (CVC4: 2 VC), in instantiation at spark-higher_order-fold.ads:104, in instantiation at spark-higher_order-fold.ads:391, in instantiation at test_higher_order.ads:117
 spark-higher_order-fold.ads:73:18: info: precondition proved (CVC4: 2 VC), in instantiation at spark-higher_order-fold.ads:104, in instantiation at test_higher_order.ads:52
@@ -1309,6 +1306,9 @@ spark-higher_order-fold.ads:74:49: info: index check proved (CVC4: 2 VC), in ins
 spark-higher_order-fold.ads:76:42: info: precondition proved (CVC4: 2 VC), in instantiation at spark-higher_order-fold.ads:104, in instantiation at spark-higher_order-fold.ads:339, in instantiation at test_higher_order.ads:106
 spark-higher_order-fold.ads:76:42: info: precondition proved (CVC4: 2 VC), in instantiation at spark-higher_order-fold.ads:104, in instantiation at spark-higher_order-fold.ads:391, in instantiation at test_higher_order.ads:117
 spark-higher_order-fold.ads:76:42: info: precondition proved (CVC4: 2 VC), in instantiation at spark-higher_order-fold.ads:104, in instantiation at test_higher_order.ads:52
+spark-higher_order-fold.ads:76:42: medium: postcondition might fail, cannot prove Ind_Prop (A, Fold'Result (I - 1), I), in instantiation at spark-higher_order-fold.ads:104, in instantiation at spark-higher_order-fold.ads:339, in instantiation at test_higher_order.ads:106
+spark-higher_order-fold.ads:76:42: medium: postcondition might fail, cannot prove Ind_Prop (A, Fold'Result (I - 1), I), in instantiation at spark-higher_order-fold.ads:104, in instantiation at spark-higher_order-fold.ads:391, in instantiation at test_higher_order.ads:117
+spark-higher_order-fold.ads:76:42: medium: postcondition might fail, cannot prove Ind_Prop (A, Fold'Result (I - 1), I), in instantiation at spark-higher_order-fold.ads:104, in instantiation at test_higher_order.ads:52
 spark-higher_order-fold.ads:76:52: info: range check proved (CVC4: 1 VC), in instantiation at spark-higher_order-fold.ads:104, in instantiation at spark-higher_order-fold.ads:339, in instantiation at test_higher_order.ads:106
 spark-higher_order-fold.ads:76:52: info: range check proved (CVC4: 1 VC), in instantiation at spark-higher_order-fold.ads:104, in instantiation at spark-higher_order-fold.ads:391, in instantiation at test_higher_order.ads:117
 spark-higher_order-fold.ads:76:70: info: index check proved (CVC4: 2 VC), in instantiation at spark-higher_order-fold.ads:104, in instantiation at spark-higher_order-fold.ads:339, in instantiation at test_higher_order.ads:106
@@ -1380,13 +1380,13 @@ spark-higher_order-fold.ads:156:48: info: range check proved (CVC4: 1 VC), in in
 spark-higher_order-fold.ads:162:16: info: subprogram "Fold" will terminate, terminating annotation has been proved, in instantiation at spark-higher_order-fold.ads:200, in instantiation at test_higher_order.ads:144
 spark-higher_order-fold.ads:163:39: info: precondition proved (CVC4: 2 VC), in instantiation at spark-higher_order-fold.ads:200, in instantiation at test_higher_order.ads:144
 spark-higher_order-fold.ads:163:59: info: range check proved (CVC4: 1 VC), in instantiation at spark-higher_order-fold.ads:200, in instantiation at test_higher_order.ads:144
-spark-higher_order-fold.ads:164:17: info: postcondition proved (CVC4: 6 VC; altergo: 1 VC), in instantiation at spark-higher_order-fold.ads:200, in instantiation at test_higher_order.ads:144
 spark-higher_order-fold.ads:166:18: info: precondition proved (CVC4: 2 VC), in instantiation at spark-higher_order-fold.ads:200, in instantiation at test_higher_order.ads:144
 spark-higher_order-fold.ads:166:38: info: range check proved (CVC4: 1 VC), in instantiation at spark-higher_order-fold.ads:200, in instantiation at test_higher_order.ads:144
 spark-higher_order-fold.ads:167:32: info: index check proved (CVC4: 2 VC), in instantiation at spark-higher_order-fold.ads:200, in instantiation at test_higher_order.ads:144
 spark-higher_order-fold.ads:167:49: info: index check proved (CVC4: 2 VC), in instantiation at spark-higher_order-fold.ads:200, in instantiation at test_higher_order.ads:144
 spark-higher_order-fold.ads:167:59: info: range check proved (CVC4: 1 VC), in instantiation at spark-higher_order-fold.ads:200, in instantiation at test_higher_order.ads:144
 spark-higher_order-fold.ads:169:42: info: precondition proved (CVC4: 2 VC), in instantiation at spark-higher_order-fold.ads:200, in instantiation at test_higher_order.ads:144
+spark-higher_order-fold.ads:169:42: medium: postcondition might fail, cannot prove Ind_Prop (A, Fold'Result (I - 1), I), in instantiation at spark-higher_order-fold.ads:200, in instantiation at test_higher_order.ads:144
 spark-higher_order-fold.ads:169:70: info: index check proved (CVC4: 2 VC), in instantiation at spark-higher_order-fold.ads:200, in instantiation at test_higher_order.ads:144
 spark-higher_order-fold.ads:169:70: info: overflow check proved (CVC4: 1 VC), in instantiation at spark-higher_order-fold.ads:200, in instantiation at test_higher_order.ads:144
 spark-higher_order-fold.ads:169:76: info: range check proved (CVC4: 1 VC), in instantiation at spark-higher_order-fold.ads:200, in instantiation at test_higher_order.ads:144
@@ -1420,12 +1420,12 @@ spark-higher_order-fold.ads:249:39: info: index check proved (CVC4: 2 VC), in in
 spark-higher_order-fold.ads:255:16: info: subprogram "Fold" will terminate, terminating annotation has been proved, in instantiation at spark-higher_order-fold.ads:290, in instantiation at test_higher_order.ads:43
 spark-higher_order-fold.ads:256:39: info: precondition proved (CVC4: 2 VC), in instantiation at spark-higher_order-fold.ads:290, in instantiation at test_higher_order.ads:43
 spark-higher_order-fold.ads:256:59: info: range check proved (CVC4: 1 VC), in instantiation at spark-higher_order-fold.ads:290, in instantiation at test_higher_order.ads:43
-spark-higher_order-fold.ads:257:17: info: postcondition proved (CVC4: 6 VC; altergo: 1 VC), in instantiation at spark-higher_order-fold.ads:290, in instantiation at test_higher_order.ads:43
 spark-higher_order-fold.ads:259:18: info: precondition proved (CVC4: 2 VC), in instantiation at spark-higher_order-fold.ads:290, in instantiation at test_higher_order.ads:43
 spark-higher_order-fold.ads:259:38: info: range check proved (CVC4: 1 VC), in instantiation at spark-higher_order-fold.ads:290, in instantiation at test_higher_order.ads:43
 spark-higher_order-fold.ads:260:32: info: index check proved (CVC4: 2 VC), in instantiation at spark-higher_order-fold.ads:290, in instantiation at test_higher_order.ads:43
 spark-higher_order-fold.ads:260:48: info: index check proved (CVC4: 2 VC), in instantiation at spark-higher_order-fold.ads:290, in instantiation at test_higher_order.ads:43
 spark-higher_order-fold.ads:262:41: info: precondition proved (CVC4: 2 VC), in instantiation at spark-higher_order-fold.ads:290, in instantiation at test_higher_order.ads:43
+spark-higher_order-fold.ads:262:41: medium: postcondition might fail, cannot prove Ind_Prop (A, Fold'Result (I + 1), I), in instantiation at spark-higher_order-fold.ads:290, in instantiation at test_higher_order.ads:43
 spark-higher_order-fold.ads:262:69: info: index check proved (CVC4: 2 VC), in instantiation at spark-higher_order-fold.ads:290, in instantiation at test_higher_order.ads:43
 spark-higher_order-fold.ads:262:69: info: overflow check proved (CVC4: 1 VC), in instantiation at spark-higher_order-fold.ads:290, in instantiation at test_higher_order.ads:43
 spark-higher_order-fold.ads:262:75: info: range check proved (CVC4: 1 VC), in instantiation at spark-higher_order-fold.ads:290, in instantiation at test_higher_order.ads:43
@@ -1603,7 +1603,6 @@ spark-higher_order-fold.ads:481:38: info: range check proved (CVC4: 1 VC), in in
 spark-higher_order-fold.ads:481:51: info: range check proved (CVC4: 1 VC), in instantiation at spark-higher_order-fold.ads:530, in instantiation at spark-higher_order-fold.ads:597, in instantiation at test_higher_order.ads:125
 spark-higher_order-fold.ads:481:51: info: range check proved (CVC4: 1 VC), in instantiation at spark-higher_order-fold.ads:530, in instantiation at spark-higher_order-fold.ads:660, in instantiation at test_higher_order.ads:133
 spark-higher_order-fold.ads:481:51: info: range check proved (CVC4: 1 VC), in instantiation at spark-higher_order-fold.ads:530, in instantiation at test_higher_order.ads:84
-spark-higher_order-fold.ads:482:17: info: postcondition proved (CVC4: 7 VC; Z3: 2 VC; altergo: 2 VC), in instantiation at spark-higher_order-fold.ads:530, in instantiation at spark-higher_order-fold.ads:660, in instantiation at test_higher_order.ads:133
 spark-higher_order-fold.ads:486:18: info: precondition proved (CVC4: 4 VC), in instantiation at spark-higher_order-fold.ads:530, in instantiation at spark-higher_order-fold.ads:597, in instantiation at test_higher_order.ads:125
 spark-higher_order-fold.ads:486:18: info: precondition proved (CVC4: 4 VC), in instantiation at spark-higher_order-fold.ads:530, in instantiation at spark-higher_order-fold.ads:660, in instantiation at test_higher_order.ads:133
 spark-higher_order-fold.ads:486:18: info: precondition proved (CVC4: 4 VC), in instantiation at spark-higher_order-fold.ads:530, in instantiation at test_higher_order.ads:84
@@ -1633,6 +1632,7 @@ spark-higher_order-fold.ads:492:19: info: precondition proved (CVC4: 4 VC), in i
 spark-higher_order-fold.ads:492:19: info: precondition proved (CVC4: 4 VC), in instantiation at spark-higher_order-fold.ads:530, in instantiation at spark-higher_order-fold.ads:660, in instantiation at test_higher_order.ads:133
 spark-higher_order-fold.ads:492:19: info: precondition proved (CVC4: 4 VC), in instantiation at spark-higher_order-fold.ads:530, in instantiation at test_higher_order.ads:84
 spark-higher_order-fold.ads:492:19: medium: postcondition might fail, cannot prove Ind_Prop (A, Fold'Result (I - 1, A'Last (2)), I, A'first), in instantiation at spark-higher_order-fold.ads:530, in instantiation at spark-higher_order-fold.ads:597, in instantiation at test_higher_order.ads:125
+spark-higher_order-fold.ads:492:19: medium: postcondition might fail, cannot prove Ind_Prop (A, Fold'Result (I - 1, A'Last (2)), I, A'first), in instantiation at spark-higher_order-fold.ads:530, in instantiation at spark-higher_order-fold.ads:660, in instantiation at test_higher_order.ads:133
 spark-higher_order-fold.ads:492:19: medium: postcondition might fail, cannot prove Ind_Prop (A, Fold'Result (I - 1, A'Last (2)), I, A'first), in instantiation at spark-higher_order-fold.ads:530, in instantiation at test_higher_order.ads:84
 spark-higher_order-fold.ads:492:29: info: range check proved (CVC4: 1 VC), in instantiation at spark-higher_order-fold.ads:530, in instantiation at spark-higher_order-fold.ads:597, in instantiation at test_higher_order.ads:125
 spark-higher_order-fold.ads:492:29: info: range check proved (CVC4: 1 VC), in instantiation at spark-higher_order-fold.ads:530, in instantiation at spark-higher_order-fold.ads:660, in instantiation at test_higher_order.ads:133
