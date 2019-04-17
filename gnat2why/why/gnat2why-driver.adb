@@ -279,7 +279,14 @@ package body Gnat2Why.Driver is
    ---------------------
 
    procedure Do_Generate_VCs (E : Entity_Id) is
+      Old_Num : constant Natural := Num_Registered_VCs;
    begin
+
+      --  delete all theories in main so that we start this file with no other
+      --  VCs
+
+      Why_Sections (WF_Main).Theories.Clear;
+
       case Ekind (E) is
          when Entry_Kind
             | E_Function
@@ -346,6 +353,15 @@ package body Gnat2Why.Driver is
          when others =>
             raise Program_Error;
       end case;
+      if Num_Registered_VCs > Old_Num then
+         declare
+            File_Name : constant String :=
+              Unit_Name & Short_Name (E) & Why_File_Suffix;
+         begin
+            Print_Why_File (File_Name);
+            Run_Gnatwhy3 (File_Name);
+         end;
+      end if;
    end Do_Generate_VCs;
 
    -----------------
@@ -594,23 +610,11 @@ package body Gnat2Why.Driver is
             Translate_CUnit;
             Timing_Phase_Completed (Timing, "translation of compilation unit");
 
-            if Has_Registered_VCs then
-               declare
-                  Filename : constant String := Unit_Name & Why_File_Suffix;
-               begin
-                  Print_Why_File (Filename);
+            --  After printing the .mlw files the memory consumed by the
+            --  Why3 AST is no longer needed; give it back to OS, so that
+            --  provers can use it.
 
-                  --  After printing the .mlw file the memory consumed by the
-                  --  Why3 AST is no longer needed; give it back to OS, so that
-                  --  provers can use it. When not printing the .mlw file just
-                  --  do nothing; there is almost nothing left to do and there
-                  --  is no point to waste time on manually releasing memory.
-
-                  Why.Atree.Tables.Free;
-
-                  Run_Gnatwhy3 (Filename);
-               end;
-            end if;
+            Why.Atree.Tables.Free;
 
             --  If the analysis is requested for a specific piece of code, we
             --  do not warn about useless pragma Annotate, because it's likely
@@ -766,8 +770,7 @@ package body Gnat2Why.Driver is
    procedure Run_Gnatwhy3 (Filename : String) is
       use Ada.Directories;
       Status    : aliased Integer;
-      Fn        : constant String :=
-        Compose (Current_Directory, Filename);
+      Fn        : constant String := Compose (Current_Directory, Filename);
       Old_Dir   : constant String := Current_Directory;
       Why3_Args : String_Lists.List := Gnat2Why_Args.Why3_Args;
       Command   : constant String := Why3_Args.First_Element;
