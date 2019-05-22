@@ -24,6 +24,7 @@
 --                                                                          --
 ------------------------------------------------------------------------------
 
+with Ada.Containers.Doubly_Linked_Lists;
 with Ada.Directories;
 with Ada.Environment_Variables;
 with Ada.Strings.Unbounded;           use Ada.Strings.Unbounded;
@@ -45,7 +46,7 @@ with Flow_Generated_Globals.Phase_2;  use Flow_Generated_Globals.Phase_2;
 with Flow_Types;                      use Flow_Types;
 with Flow_Utility;                    use Flow_Utility;
 with Flow_Visibility;                 use Flow_Visibility;
-with GNAT.Expect;
+with GNAT.OS_Lib;                     use GNAT.OS_Lib;
 with GNAT.Source_Info;
 with GNATCOLL.JSON;                   use GNATCOLL.JSON;
 with Gnat2Why.Assumptions;            use Gnat2Why.Assumptions;
@@ -80,6 +81,7 @@ with SPARK_Xrefs;
 with Stand;                           use Stand;
 with String_Utils;                    use String_Utils;
 with Switch;                          use Switch;
+with Tempdir;                         use Tempdir;
 with VC_Kinds;
 with Why;                             use Why;
 with Why.Atree.Modules;               use Why.Atree.Modules;
@@ -137,6 +139,9 @@ package body Gnat2Why.Driver is
    procedure Print_Why_File (Filename : String);
    --  Print the input Why3 file on disk
 
+   procedure Collect_Results (Timing : in out Time_Token);
+   --  Wait until all child gnatwhy3 processes finish and collect their results
+
    procedure Touch_Main_File (Prefix : String);
    --  This procedure is used when there is nothing to do, but it should be
    --  signalled that everything went fine. This is done by creating the main
@@ -162,6 +167,32 @@ package body Gnat2Why.Driver is
    --  Objects not in SPARK but still translated to Why; we get them from the
    --  Global contracts (where repetitions are fine) and keep track of them to
    --  translate each of them exactly once.
+
+   package Path_Name_Lists is new Ada.Containers.Doubly_Linked_Lists
+     (Element_Type => Path_Name_Type,
+      "="          => "=");
+
+   Output_File_List : Path_Name_Lists.List;
+
+   ---------------------
+   -- Collect_Results --
+   ---------------------
+
+   procedure Collect_Results (Timing : in out Time_Token)
+   is
+      Pid : Process_Id;
+      Success : Boolean;
+   begin
+      loop
+         Wait_Process (Pid, Success);
+         exit when Pid = Invalid_Pid;
+      end loop;
+      for Name of Output_File_List loop
+         Parse_Why3_Results
+           (Call.Read_File_Into_String (Get_Name_String (Name)),
+            Timing);
+      end loop;
+   end Collect_Results;
 
    --------------------------
    -- Complete_Declaration --
@@ -608,7 +639,6 @@ package body Gnat2Why.Driver is
             Timing_Phase_Completed (Timing, "translation of standard");
 
             Translate_CUnit;
-            Timing_Phase_Completed (Timing, "translation of compilation unit");
 
             --  After printing the .mlw files the memory consumed by the
             --  Why3 AST is no longer needed; give it back to OS, so that
@@ -616,6 +646,7 @@ package body Gnat2Why.Driver is
 
             Why.Atree.Tables.Free;
 
+            Collect_Results (Timing);
             --  If the analysis is requested for a specific piece of code, we
             --  do not warn about useless pragma Annotate, because it's likely
             --  to be a false positive.
@@ -627,7 +658,6 @@ package body Gnat2Why.Driver is
                Generate_Useless_Pragma_Annotate_Warnings;
             end if;
 
-            Timing_Phase_Completed (Timing, "proof");
          end if;
          Create_JSON_File (Proof_Done);
       end if;
@@ -769,7 +799,6 @@ package body Gnat2Why.Driver is
 
    procedure Run_Gnatwhy3 (Filename : String) is
       use Ada.Directories;
-      Status    : aliased Integer;
       Fn        : constant String := Compose (Current_Directory, Filename);
       Old_Dir   : constant String := Current_Directory;
       Why3_Args : String_Lists.List := Gnat2Why_Args.Why3_Args;
@@ -798,14 +827,24 @@ package body Gnat2Why.Driver is
       --  We need to capture stderr of gnatwhy3 output in case of Out_Of_Memory
       --  messages.
 
-      Parse_Why3_Results
-        (GNAT.Expect.Get_Command_Output
-           (Command,
-            Call.Argument_List_Of_String_List (Why3_Args),
-            Err_To_Out => True,
-            Input      => "",
-            Status     => Status'Access),
-         Timing);
+      declare
+         Fd   : File_Descriptor;
+         Name : Path_Name_Type;
+         Pid  : Process_Id;
+      begin
+         Create_Temp_File (Fd, Name);
+         pragma Assert (Fd /= Invalid_FD);
+         Output_File_List.Append (Name);
+         Pid :=
+           GNAT.OS_Lib.Non_Blocking_Spawn
+             (Program_Name           => Command,
+              Args                   =>
+                Call.Argument_List_Of_String_List (Why3_Args),
+              Output_File_Descriptor => Fd,
+              Err_To_Out             => True);
+         pragma Assert (Pid /= Invalid_Pid);
+         Close (Fd);
+      end;
       Set_Directory (Old_Dir);
    end Run_Gnatwhy3;
 
