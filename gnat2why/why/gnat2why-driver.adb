@@ -189,8 +189,7 @@ package body Gnat2Why.Driver is
       end loop;
       for Name of Output_File_List loop
          Parse_Why3_Results
-           (Call.Read_File_Into_String (Get_Name_String (Name)),
-            Timing);
+           (Call.Read_File_Into_String (Get_Name_String (Name)), Timing);
       end loop;
    end Collect_Results;
 
@@ -802,7 +801,8 @@ package body Gnat2Why.Driver is
       Fn        : constant String := Compose (Current_Directory, Filename);
       Old_Dir   : constant String := Current_Directory;
       Why3_Args : String_Lists.List := Gnat2Why_Args.Why3_Args;
-      Command   : constant String := Why3_Args.First_Element;
+      Command   : GNAT.OS_Lib.String_Access :=
+        GNAT.OS_Lib.Locate_Exec_On_Path (Why3_Args.First_Element);
    begin
 
       --  modifying the command line and printing it for debug purposes. We
@@ -837,7 +837,7 @@ package body Gnat2Why.Driver is
          Output_File_List.Append (Name);
          Pid :=
            GNAT.OS_Lib.Non_Blocking_Spawn
-             (Program_Name           => Command,
+             (Program_Name           => Command.all,
               Args                   =>
                 Call.Argument_List_Of_String_List (Why3_Args),
               Output_File_Descriptor => Fd,
@@ -846,6 +846,7 @@ package body Gnat2Why.Driver is
          Close (Fd);
       end;
       Set_Directory (Old_Dir);
+      Free (Command);
    end Run_Gnatwhy3;
 
    ---------------------
