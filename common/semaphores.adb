@@ -2,11 +2,11 @@
 --                                                                          --
 --                            GNATPROVE COMPONENTS                          --
 --                                                                          --
---              S P A R K _ S E M A P H O R E _ W R A P P E R               --
+--                            S E M A P H O R E S                           --
 --                                                                          --
 --                                 B o d y                                  --
 --                                                                          --
---                     Copyright (C) 2017-2019, AdaCore                     --
+--                     Copyright (C) 2019, AdaCore                     --
 --                                                                          --
 -- gnatprove is  free  software;  you can redistribute it and/or  modify it --
 -- under terms of the  GNU General Public License as published  by the Free --
@@ -23,32 +23,47 @@
 --                                                                          --
 ------------------------------------------------------------------------------
 
-with Ada.Command_Line; use Ada.Command_Line;
-with Ada.Text_IO;
-with GNAT.OS_Lib;      use GNAT.OS_Lib;
-with Semaphores;       use Semaphores;
+with Interfaces.C; use Interfaces.C;
 
-procedure SPARK_Semaphore_Wrapper
-  with No_Return
-is
-   Ret : Integer;
-   Args : String_List (1 .. Argument_Count - 2);
-begin
-   if Argument_Count < 2 then
-      Ada.Text_IO.Put_Line ("spark_semaphore_wrapper: not enough arguments");
-      OS_Exit (1);
-   end if;
-   for I in Args'Range loop
-      Args (I) := new String'(Argument (I + 2));
-   end loop;
-   declare
-      Sem : constant Semaphore := Open_Semaphore (Argument (1));
-      Prog : constant String_Access := Locate_Exec_On_Path (Argument (2));
+package body Semaphores is
+
+   function Create_Semaphore_C
+     (Name : char_array; Parallel : int) return Semaphore
+     with Import, Convention => C, External_Name => "create_semaphore";
+
+   function Open_Semaphore_C (Name : char_array) return Semaphore
+     with Import, Convention => C, External_Name => "open_semaphore";
+
+   procedure Delete_Semaphore_C (Name : char_array)
+   with Import, Convention => C, External_Name => "delete_semaphore";
+
+   ----------------------
+   -- Create_Semaphore --
+   ----------------------
+
+   function Create_Semaphore (Name : String; Parallel : Natural)
+                              return Semaphore
+   is
    begin
-      Wait_Semaphore (Sem);
-      Ret := Spawn (Prog.all, Args);
-      Release_Semaphore (Sem);
-      Close_Semaphore (Sem);
-   end;
-   OS_Exit (Ret);
-end SPARK_Semaphore_Wrapper;
+      return Create_Semaphore_C (To_C (Name), int (Parallel));
+   end Create_Semaphore;
+
+   ----------------------
+   -- Delete_Semaphore --
+   ----------------------
+
+   procedure Delete_Semaphore (Name : String) is
+   begin
+      Delete_Semaphore_C (To_C (Name));
+   end Delete_Semaphore;
+
+   --------------------
+   -- Open_Semaphore --
+   --------------------
+
+   function Open_Semaphore (Name : String) return Semaphore is
+   begin
+      return Open_Semaphore_C (To_C (Name));
+   end Open_Semaphore;
+
+end Semaphores;

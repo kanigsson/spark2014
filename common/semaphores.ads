@@ -23,20 +23,28 @@
 --                                                                          --
 ------------------------------------------------------------------------------
 
+with System;
+
 package Semaphores is
 
    type Semaphore is private;
 
+   function Create_Semaphore
+     (Name : String; Parallel : Natural) return Semaphore;
    function Open_Semaphore (Name : String) return Semaphore;
+   procedure Close_Semaphore (S : Semaphore)
+   with Import, Convention => C, External_Name => "close_semaphore";
 
-   procedure Wait_Semaphore (S : Semaphore);
+   procedure Wait_Semaphore (S : Semaphore)
+   with Import, Convention => C, External_Name => "wait_semaphore";
 
-   procedure Release_Semaphore (S : Semaphore);
+   procedure Release_Semaphore (S : Semaphore)
+     with Import, Convention => C, External_Name => "release_semaphore";
 
    procedure Delete_Semaphore (Name : String);
 
 private
 
-   type Semaphore is Integer;
+   type Semaphore is new System.Address;
 
 end Semaphores;

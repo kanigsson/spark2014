@@ -33,6 +33,7 @@ with Gnat2Why_Opts;     use Gnat2Why_Opts;
 with GNATCOLL.Projects; use GNATCOLL.Projects;
 with GNATCOLL.Utils;    use GNATCOLL.Utils;
 with GNATCOLL.VFS;      use GNATCOLL.VFS;
+with Semaphores;        use Semaphores;
 with String_Utils;      use String_Utils;
 
 package Configuration is
@@ -299,6 +300,8 @@ package Configuration is
    Socket_Name : GNAT.Strings.String_Access;
    --  Name of the socket used by why3server, based on a hash of the main
    --  object directory.
+
+   Why3_Semaphore : Semaphore;
 
    function SPARK_Report_File (Out_Dir : String) return String;
    --  The name of the file in which the SPARK report is generated:

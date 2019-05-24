@@ -79,6 +79,7 @@ with GNATCOLL.JSON;              use GNATCOLL.JSON;
 with GNATCOLL.Projects;          use GNATCOLL.Projects;
 with GNATCOLL.VFS;               use GNATCOLL.VFS;
 with GNATCOLL.Utils;             use GNATCOLL.Utils;
+with Semaphores;                 use Semaphores;
 with String_Utils;               use String_Utils;
 
 procedure Gnatprove with SPARK_Mode is
@@ -482,6 +483,8 @@ procedure Gnatprove with SPARK_Mode is
          end;
          Close (Id);
          GNAT.OS_Lib.Delete_File (Socket_Name.all, Del_Succ);
+         Close_Semaphore (Why3_Semaphore);
+         Delete_Semaphore (Base_Name (Socket_Name.all));
          pragma Assert (Del_Succ);
       end;
    end Flow_Analysis_And_Proof;
@@ -839,6 +842,12 @@ procedure Gnatprove with SPARK_Mode is
       end if;
       Id := Non_Blocking_Spawn ("why3server", Args);
       Ada.Directories.Set_Directory (Cur);
+      declare
+         Sem_Name : constant String := Base_Name (Socket_Name.all);
+      begin
+         Delete_Semaphore (Sem_Name);
+         Why3_Semaphore := Create_Semaphore (Sem_Name, Parallel);
+      end;
       return Id;
    end Spawn_VC_Server;
 
