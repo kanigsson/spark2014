@@ -386,7 +386,7 @@ package body Gnat2Why.Driver is
       if Num_Registered_VCs > Old_Num then
          declare
             File_Name : constant String :=
-              Unit_Name & Short_Name (E) & Why_File_Suffix;
+              Unit_Name & "__" & Full_Name (E) & Why_File_Suffix;
          begin
             Print_Why_File (File_Name);
             Run_Gnatwhy3 (File_Name);
