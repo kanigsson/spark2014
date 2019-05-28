@@ -78,7 +78,7 @@ void close_semaphore (HANDLE s) {
 void wait_semaphore (HANDLE s) {
   DWORD waitresult = WaitForSingleObject (s, INFINITE);
   if (waitresult != WAIT_OBJECT_0) {
-    printf("failed to wait for semaphore: %lu\n", dw);    
+    printf("failed to wait for semaphore\n");
     exit(1);
   }
 }
