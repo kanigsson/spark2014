@@ -60,7 +60,12 @@ project GNATprove is
    end Compiler;
 
    package Linker is
-      for Default_Switches ("Ada") use ("-pthread");
+      case Target is
+         when "x86-linux" | "x86_64-linux" =>
+            for Default_Switches ("Ada") use ("-pthread");
+         when others =>
+            null;
+      end case;
    end Linker;
 
    package CodePeer is

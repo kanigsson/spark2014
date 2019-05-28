@@ -1,3 +1,5 @@
+#ifndef _WIN32
+
 #include <fcntl.h>
 #include <semaphore.h>
 #include <stdio.h>
@@ -43,3 +45,52 @@ void delete_semaphore (const char* name) {
     //  ignore errors of deleting on purpose
   }
 }
+
+#else
+
+#include <stdio.h>
+#include <windows.h>
+
+HANDLE create_semaphore (const char* name, int parallel) {
+  HANDLE r = CreateSemaphore(NULL, parallel, parallel, name);
+  if (r == NULL) {
+    printf("failed to create semaphore");
+    exit(1);
+  }
+  return r;
+}
+
+HANDLE open_semaphore (const char* name) {
+  HANDLE r = OpenSemaphore(SEMAPHORE_ALL_ACCESS, FALSE, name);
+  if (r == NULL) {
+    printf("failed to open semaphore\n");
+    exit(1);
+  }
+  return r;
+}
+
+void close_semaphore (HANDLE s) {
+  if (!CloseHandle(s)) {
+    printf("failed to close semaphore\n");
+    exit(1);
+  }
+}
+void wait_semaphore (HANDLE s) {
+  DWORD waitresult = WaitForSingleObject (s, INFINITE);
+  if (waitresult != WAIT_OBJECT_0) {
+    printf("failed to wait for semaphore: %lu\n", dw);    
+    exit(1);
+  }
+}
+void release_semaphore (HANDLE s) {
+  if (!ReleaseSemaphore(s,1, NULL)) {
+    printf("failed to release semaphore\n");
+    exit(1);
+  }
+}
+
+void delete_semaphore (const char* name) {
+  ;
+}
+
+#endif
