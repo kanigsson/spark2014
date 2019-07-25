@@ -198,7 +198,7 @@ package body Why.Atree.Sprint is
       Effects : constant W_Effects_Id := Get_Effects (Node);
       Pre     : constant W_Pred_Id := Get_Pre (Node);
       Post    : constant W_Pred_Id := Get_Post (Node);
-      Labels  : constant Symbol_Sets.Set := Get_Labels (Node);
+      Labels  : constant Symbol_Sets.Set := Get_Symbol_Set (Get_Labels (Node));
    begin
       P (O, "(val _f : ");
       Print_Node (+Res_Ty);
@@ -252,7 +252,7 @@ package body Why.Atree.Sprint is
    ----------------------
 
    procedure Print_Assignment (Node : W_Assignment_Id) is
-      Labels : constant Symbol_Set := Get_Labels (Node);
+      Labels : constant Symbol_Set := Get_Symbol_Set (Get_Labels (Node));
    begin
       P (O, "(");
       if not Labels.Is_Empty then
@@ -1415,7 +1415,7 @@ package body Why.Atree.Sprint is
    -----------------
 
    procedure Print_Label (Node : W_Label_Id) is
-      Labels : constant Symbol_Set := Get_Labels (Node);
+      Labels : constant Symbol_Set := Get_Symbol_Set (Get_Labels (Node));
    begin
       if not Labels.Is_Empty then
          P (O, "( ");

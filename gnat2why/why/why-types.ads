@@ -47,7 +47,7 @@ package Why.Types is
    function Present (N : Why_Node_Id) return Boolean is (N /= Why_Empty);
    --  Returns True if N is not the empty node, False otherwise
 
-   subtype Symbol_Set is Symbol_Sets.Set;
+   subtype Symbol_Set is Symbol_Set_Id;
 
    function Why_Node_Hash (X : Why_Node_Id) return Ada.Containers.Hash_Type is
      (Ada.Containers.Hash_Type (X));

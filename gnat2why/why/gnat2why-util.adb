@@ -349,10 +349,10 @@ package body Gnat2Why.Util is
 
    function Get_Counterexample_Labels
      (E              : Entity_Id;
-      Append_To_Name : String := "") return Symbol_Sets.Set
+      Append_To_Name : String := "") return Symbol_Set_Id
    is
       Labels : Symbol_Sets.Set;
-      Model_Trace : constant Symbol_Sets.Set := Get_Model_Trace_Label
+      Model_Trace : constant Symbol_Set_Id := Get_Model_Trace_Label
         (E, False, Append_To_Name);
 
       E_Type : constant Entity_Id := Retysp (Etype (E));
@@ -469,7 +469,7 @@ package body Gnat2Why.Util is
    -------------------------
 
    function Build_Printing_Plan return Why_Node_Lists.List is
-      Seen : Symbol_Set;
+      Seen : Symbol_Sets.Set;
       Plan : Why_Node_Lists.List;
 
       External_Axioms_Found : exception;
@@ -819,7 +819,7 @@ package body Gnat2Why.Util is
    function Get_Model_Trace_Label
      (E               : Entity_Id;
       Is_Record_Field : Boolean := False;
-      Append          : String := "") return Symbol_Sets.Set
+      Append          : String := "") return Symbol_Set_Id
    is
       S : Symbol_Sets.Set :=
        (Symbol_Sets.To_Set
@@ -841,8 +841,8 @@ package body Gnat2Why.Util is
       return S;
    end Get_Model_Trace_Label;
 
-   function Get_Model_Trace_Label (Name : String) return Symbol_Sets.Set is
-     (Symbol_Sets.To_Set (NID (Model_Trace_Label & Name)));
+   function Get_Model_Trace_Label (Name : String) return Symbol_Set_Id is
+     (To_Symbol_Set (NID (Model_Trace_Label & Name)));
 
    ------------------------------
    -- Get_Static_Call_Contract --

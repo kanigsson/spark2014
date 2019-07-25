@@ -42,11 +42,33 @@ package body Common_Containers is
      (Index_Type   => Entity_Name,
       Element_Type => Symbol);
 
+   subtype Symbol_Set_Index is Symbol_Set_Id
+     range 1 .. Symbol_Set_Id'Last;
+
+   package Symbol_Set_Vectors is new Ada.Containers.Vectors
+     (Index_Type   => Symbol_Set_Index,
+      Element_Type => Symbol_Sets.Set,
+      "="          => Symbol_Sets."=");
+
    Intern_Strings : constant Symbol_Table_Access := Allocate;
 
-   Symbol_Cache : Symbol_To_Entity_Name_Maps.Map;
-   String_Cache : Entity_Name_To_Symbol_Vectors.Vector;
-   Name_Cache   : Entity_Id_To_Entity_Name_Maps.Map;
+   Symbol_Cache     : Symbol_To_Entity_Name_Maps.Map;
+   String_Cache     : Entity_Name_To_Symbol_Vectors.Vector;
+   Name_Cache       : Entity_Id_To_Entity_Name_Maps.Map;
+   Symbol_Set_Cache : Symbol_Set_Vectors.Vector;
+
+   --------------------
+   -- Get_Symbol_Set --
+   --------------------
+
+   function Get_Symbol_Set (Id : Symbol_Set_Id) return Symbol_Sets.Set is
+   begin
+      if Id = 0 then
+         return Symbol_Sets.Empty_Set;
+      else
+         return Symbol_Set_Cache (Id);
+      end if;
+   end Get_Symbol_Set;
 
    --------------------
    -- To_Entity_Name --
@@ -99,5 +121,15 @@ package body Common_Containers is
    begin
       return Get (String_Cache (E)).all;
    end To_String;
+
+   -------------------
+   -- To_Symbol_Set --
+   -------------------
+
+   function To_Symbol_Set (X : Symbol) return Symbol_Set_Id is
+   begin
+      Symbol_Set_Cache.Append (Symbol_Sets.To_Set (X));
+      return Symbol_Set_Cache.Last_Index;
+   end To_Symbol_Set;
 
 end Common_Containers;

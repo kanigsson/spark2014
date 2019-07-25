@@ -223,7 +223,7 @@ package body Gnat2Why.Types is
                     (Domain   => EW_Pred,
                      Name     => To_Local (E_Symb (E, WNE_Default_Init)),
                      Def      => +Def,
-                     Labels   => Symbol_Sets.To_Set (NID ("inline")),
+                     Labels   => To_Symbol_Set (NID ("inline")),
                      Location => No_Location,
                      Binders  =>
                        Binder_Array'(1 => Binder_Type'(B_Name => Main_Arg,
@@ -379,7 +379,7 @@ package body Gnat2Why.Types is
                            New_Function_Decl
                              (Domain   => EW_Pred,
                               Name     => Name,
-                              Labels   => Symbol_Sets.Empty_Set,
+                              Labels   => Empty_Symbol_Set,
                               Binders  => Binders,
                               Location => No_Location));
 
@@ -398,7 +398,7 @@ package body Gnat2Why.Types is
                               Name     => Name,
                               Def      => +Def,
                               Location => No_Location,
-                              Labels   => Symbol_Sets.To_Set (NID ("inline")),
+                              Labels   => To_Symbol_Set (NID ("inline")),
                               Binders  => Binders));
                   end if;
                end;
@@ -465,7 +465,7 @@ package body Gnat2Why.Types is
                   Name     => To_Local (E_Symb (E, WNE_Dynamic_Predicate)),
                   Def      => +Def,
                   Location => No_Location,
-                  Labels   => Symbol_Sets.To_Set (NID ("inline")),
+                  Labels   => To_Symbol_Set (NID ("inline")),
                   Binders  =>
                     Binder_Array'(1 => Binder_Type'(B_Name => Main_Arg,
                                                     others => <>))
@@ -520,7 +520,7 @@ package body Gnat2Why.Types is
                   Name     => To_Local (E_Symb (E, WNE_Type_Invariant)),
                   Def      => +Def,
                   Location => No_Location,
-                  Labels   => Symbol_Sets.To_Set (NID ("inline")),
+                  Labels   => To_Symbol_Set (NID ("inline")),
                   Binders  =>
                     Binder_Array'(1 => Binder_Type'(B_Name => Main_Arg,
                                                     others => <>))
@@ -729,7 +729,7 @@ package body Gnat2Why.Types is
                Name     => Def_Name,
                Binders  => (1 => Unit_Param),
                Location => No_Location,
-               Labels   => Symbol_Sets.To_Set (Cur_Subp_Sloc),
+               Labels   => To_Symbol_Set (Cur_Subp_Sloc),
                Def      => +Why_Body));
 
       Close_Theory (File,
@@ -843,7 +843,7 @@ package body Gnat2Why.Types is
                  (Domain      => EW_Pterm,
                   Name        => To_Local (E_Symb (E, WNE_Dummy)),
                   Binders     => (1 .. 0 => <>),
-                  Labels      => Symbol_Sets.Empty_Set,
+                  Labels      => Empty_Symbol_Set,
                   Location    => No_Location,
                   Return_Type =>
                     +New_Named_Type (Name => To_Why_Type (E, Local => True))));

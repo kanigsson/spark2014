@@ -160,6 +160,15 @@ package Common_Containers is
       Equivalent_Elements => "=",
       "="                 => "=");
 
+   type Symbol_Set_Id is new Natural;
+
+   function To_Symbol_Set (X : Symbol) return Symbol_Set_Id;
+   --  Transform a single symbol to the singleton set containing the symbol
+
+   function Get_Symbol_Set (Id : Symbol_Set_Id) return Symbol_Sets.Set;
+
+   Empty_Symbol_Set : constant Symbol_Set_Id := 0;
+
 private
 
    Null_Entity_Name : constant Any_Entity_Name := 0;

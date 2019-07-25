@@ -94,7 +94,7 @@ package body Gnat2Why.Decls is
               (Domain      => EW_Pterm,
                Name        => To_Local (E_Symb (E, WNE_Attr_Address)),
                Binders     => (1 .. 0 => <>),
-               Labels      => Symbol_Sets.Empty_Set,
+               Labels      => Empty_Symbol_Set,
                Location    => No_Location,
                Return_Type => EW_Int_Type));
 
@@ -246,7 +246,7 @@ package body Gnat2Why.Decls is
         (File,
          New_Global_Ref_Declaration
            (Name     => To_Why_Id (E, Local => True),
-            Labels   => Symbol_Sets.Empty_Set,
+            Labels   => Empty_Symbol_Set,
             Location => No_Location,
             Ref_Type => EW_Private_Type));
 
@@ -371,7 +371,7 @@ package body Gnat2Why.Decls is
                     (Domain      => EW_Pterm,
                      Name        => To_Local (Var.Tag.Id),
                      Binders     => (1 .. 0 => <>),
-                     Labels      => Symbol_Sets.Empty_Set,
+                     Labels      => Empty_Symbol_Set,
                      Location    => Safe_First_Sloc (E),
                      Return_Type => Get_Typ (Var.Tag.Id)));
             end if;
@@ -454,7 +454,7 @@ package body Gnat2Why.Decls is
                  (File,
                   New_Global_Ref_Declaration
                     (Name     => To_Local (Var.Address),
-                     Labels   => Symbol_Sets.Empty_Set,
+                     Labels   => Empty_Symbol_Set,
                      Location => Safe_First_Sloc (E),
                      Ref_Type => Get_Typ (Var.Address)));
 
@@ -475,7 +475,7 @@ package body Gnat2Why.Decls is
                   Why.Atree.Builders.New_Function_Decl
                     (Domain      => EW_Pterm,
                      Name        => To_Local (Var.Address),
-                     Labels      => Symbol_Sets.Empty_Set,
+                     Labels      => Empty_Symbol_Set,
                      Binders     => (1 .. 0 => <>),
                      Location    => Safe_First_Sloc (E),
                      Return_Type => Get_Typ (Var.Address)));
@@ -518,7 +518,7 @@ package body Gnat2Why.Decls is
            (File,
             New_Global_Ref_Declaration
               (Name     => To_Local (Var.Init.Id),
-               Labels   => Symbol_Sets.Empty_Set,
+               Labels   => Empty_Symbol_Set,
                Location => Safe_First_Sloc (E),
                Ref_Type => EW_Bool_Type));
       end if;
@@ -529,7 +529,7 @@ package body Gnat2Why.Decls is
                Name        => To_Local (E_Symb (E, WNE_Attr_Address)),
                Binders     => (1 .. 0 => <>),
                Location    => No_Location,
-               Labels      => Symbol_Sets.Empty_Set,
+               Labels      => Empty_Symbol_Set,
                Return_Type => EW_Int_Type));
 
       --  Declare the variable for the pledge of E
