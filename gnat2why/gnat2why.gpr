@@ -1,5 +1,6 @@
 with "gnat2why_c";
 with "gnatcoll";
+with "gnatcov_rts_full";
 
 project GNAT2Why is
 
@@ -20,7 +21,7 @@ project GNAT2Why is
 
    Build : Build_Type := External ("Build", "Devel");
 
-   Common_Switches := ("-gnatg", "-g");
+   Common_Switches := ("-g");
 
    package Compiler is
       for Local_Configuration_Pragmas use "gnat.adc";
@@ -87,5 +88,95 @@ project GNAT2Why is
          "flow_visibility.adb");
 
    end CodePeer;
+
+   package Coverage is
+
+      for Excluded_Units use ("atree",
+                              "debug",
+                              "einfo",
+                              "lib",
+                              "lib.list",
+                              "lib.sort",
+                              "nmake",
+                              "opt",
+                              "output",
+                              "osint",
+                              "osint.c",
+                              "par",
+                              "par.ch2",
+                              "par.ch3",
+                              "par.ch4",
+                              "par.ch5",
+                              "par.ch6",
+                              "par.ch7",
+                              "par.ch8",
+                              "par.ch9",
+                              "par.ch10",
+                              "par.ch11",
+                              "par.ch12",
+                              "par.ch13",
+                              "par.endh",
+                              "par.labl",
+                              "par.load",
+                              "par.prag",
+                              "par.sync",
+                              "par.tchk",
+                              "par.sco",
+                              "par.util",
+                              "restrict",
+                              "rident",
+                              "rtsfind",
+                              "scn",
+                              "scans",
+                              "scil_ll",
+                              "sem",
+                              "sem_aggr",
+                              "sem_attr",
+                              "sem_aux",
+                              "sem_cat",
+                              "sem_ch3",
+                              "sem_ch4",
+                              "sem_ch6",
+                              "sem_ch7",
+                              "sem_ch8",
+                              "sem_ch10",
+                              "sem_ch12",
+                              "sem_ch13",
+                              "sem_case",
+                              "sem_dim",
+                              "sem_disp",
+                              "sem_dist",
+                              "sem_elab",
+                              "sem_elim",
+                              "sem_eval",
+                              "sem_intr",
+                              "sem_mech",
+                              "sem_prag",
+                              "sem_res",
+                              "sem_type",
+                              "sem_util",
+                              "sem_warn",
+                              "set_targ",
+                              "sinfo",
+                              "sinfo.cn",
+                              "sinput",
+                              "sinput.l",
+                              "sprint",
+                              "stand",
+                              "stringt",
+                              "style",
+                              "stylesw",
+                              "targparm",
+                              "tbuild",
+                              "types",
+                              "ttypes",
+                              "uname",
+                              "validsw",
+                              "warnsw",
+                              "why",
+                              "why.classes",
+                              "why.sinfo"
+                              );
+   end Coverage;
 
 end GNAT2Why;

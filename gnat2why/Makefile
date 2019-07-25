@@ -62,13 +62,17 @@ setup: setup_precheck
 	cp -f gnat_src/ada_get_targ.adb obj/get_targ.adb
 
 build: setup force
-	$(GPRBUILD) $(GPRARGS) -Pgnat2why -j$(PROCS) -cargs ${CFLAGS} -largs $(LDFLAGS)
+	$(GPRBUILD) $(GPRARGS) -Pgnat2why -v -j$(PROCS) -cargs ${CFLAGS} -largs $(LDFLAGS)
 
 # Compilation and linking settings for coverage and profiling; for details see
 # "Code Coverage and Profiling" in GNAT User's Guide.
 
-coverage: GPRARGS=-XBuild=Coverage
-coverage: build
+coverage-setup: force
+	gnatcov instrument -P gnat2why.gpr --level=stmt --dump-method=atexit project.isi
+	sed -i 's/;[^ ]/\n&/g' obj/gnatcov-instr/gnat1drv.adb
+
+coverage: GPRARGS=-XBuild=Coverage --src-subdirs=gnatcov-instr
+coverage: coverage-setup build
 
 profile: CFLAGS = -pg
 profile: LDFLAGS += -pg
