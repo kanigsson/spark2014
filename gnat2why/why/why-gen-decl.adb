@@ -47,7 +47,7 @@ package body Why.Gen.Decl is
      (Section       : W_Section_Id;
       Param_Ty_Name : W_Name_Id;
       Field_Id      : W_Identifier_Id;
-      Labels        : Symbol_Sets.Set)
+      Labels        : Symbol_Set_Id)
    with Pre => Field_Id /= Why_Empty;
    --  Emit declaration of a projection for a Why3 record type. The projection
    --  projects values of the record type to given field of this type.
@@ -130,7 +130,7 @@ package body Why.Gen.Decl is
             Field_Id      => Binders (Binder).B_Name,
             Labels        =>
               (if SPARK_Record then Binders (Binder).Labels
-               else Symbol_Sets.Empty_Set));
+               else Empty_Symbol_Set));
       end loop;
    end Emit_Record_Declaration;
 
@@ -161,7 +161,7 @@ package body Why.Gen.Decl is
      (Section       : W_Section_Id;
       Param_Ty_Name : W_Name_Id;
       Field_Id      : W_Identifier_Id;
-      Labels        : Symbol_Sets.Set)
+      Labels        : Symbol_Set_Id)
    is
       use Projection_Names;
 
@@ -266,7 +266,7 @@ package body Why.Gen.Decl is
                                                    Arg_Type => Typ)),
                   Effects     => New_Effects (Writes   => (1 => X)),
                   Return_Type => EW_Unit_Type,
-                  Labels      => Symbol_Sets.Empty_Set,
+                  Labels      => Empty_Symbol_Set,
                   Location    => No_Location);
    end New_Havoc_Declaration;
 
@@ -279,7 +279,7 @@ package body Why.Gen.Decl is
       return
         New_Type_Decl
           (Name   => New_Name (Symb => NID (Name)),
-           Labels => Symbol_Sets.Empty_Set);
+           Labels => Empty_Symbol_Set);
    end New_Type_Decl;
 
    function New_Type_Decl
@@ -288,7 +288,7 @@ package body Why.Gen.Decl is
    begin
       return New_Type_Decl
         (Name       => Name,
-         Labels     => Symbol_Sets.Empty_Set,
+         Labels     => Empty_Symbol_Set,
          Definition => New_Transparent_Type_Definition
            (Domain          => EW_Prog,
             Type_Definition => Alias));

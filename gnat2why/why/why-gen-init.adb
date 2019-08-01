@@ -210,7 +210,7 @@ package body Why.Gen.Init is
                  (Domain      => EW_Prog,
                   Name        => To_Program_Space (Init_Val),
                   Binders     => A_Binder,
-                  Labels      => Symbol_Sets.Empty_Set,
+                  Labels      => Empty_Symbol_Set,
                   Location    => No_Location,
                   Return_Type => Ty,
                   Pre         => Pre,
@@ -410,7 +410,7 @@ package body Why.Gen.Init is
             Conv : constant W_Expr_Id := New_Label
               (Ada_Node => Ada_Node,
                Domain   => Domain,
-               Labels   => Symbol_Sets.Empty_Set,
+               Labels   => Empty_Symbol_Set,
                Def      => Name,
                Typ      => EW_Split (E));
          begin

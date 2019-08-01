@@ -690,7 +690,7 @@ package body Why.Gen.Expr is
          --  adding a dummy node.
 
          else
-            T := New_Label (Labels => Symbol_Sets.Empty_Set,
+            T := New_Label (Labels => Empty_Symbol_Set,
                             Def    => T,
                             Domain => Domain,
                             Typ    => Split_To);
@@ -1887,7 +1887,7 @@ package body Why.Gen.Expr is
       --  Ada_Node to the expected type. We do that by adding a dummy node.
 
       elsif Get_Type_Kind (To_Conc) = EW_Split then
-         Result := New_Label (Labels => Symbol_Sets.Empty_Set,
+         Result := New_Label (Labels => Empty_Symbol_Set,
                               Def    => Result,
                               Domain => Domain,
                               Typ    => To_Conc);
@@ -2830,8 +2830,8 @@ package body Why.Gen.Expr is
                                        Condition : W_Expr_Id)
                                        return W_Expr_Id
    is
-      Node_Label : constant Symbol_Sets.Set :=
-        Symbol_Sets.To_Set
+      Node_Label : constant Symbol_Set_Id :=
+        To_Symbol_Set
           (NID (Branch_Id_Label &
                 Ada.Strings.Fixed.Trim (Source => Node_Id'Image (If_Node),
                                         Side   => Left)));

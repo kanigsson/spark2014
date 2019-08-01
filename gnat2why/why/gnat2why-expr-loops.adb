@@ -979,7 +979,7 @@ package body Gnat2Why.Expr.Loops is
                          New_Assignment
                            (Ada_Node => Stmt,
                             Name     => Loop_Index,
-                            Labels   => Symbol_Sets.Empty_Set,
+                            Labels   => Empty_Symbol_Set,
                             Value    => +Insert_Simple_Conversion
                               (Domain         => EW_Term,
                                Expr           => +Call_Elmt,
@@ -1088,7 +1088,7 @@ package body Gnat2Why.Expr.Loops is
                         return New_Assignment
                           (Name   => Loop_Index,
                            Value  => +Init_Index,
-                           Labels => Symbol_Sets.Empty_Set,
+                           Labels => Empty_Symbol_Set,
                            Typ    => Loop_Index_Type);
                      end;
                   else
@@ -1105,7 +1105,7 @@ package body Gnat2Why.Expr.Loops is
                         return New_Assignment
                           (Name   => Nam_For_Iter,
                            Value  => Init_Iter,
-                           Labels => Symbol_Sets.Empty_Set,
+                           Labels => Empty_Symbol_Set,
                            Typ    => Typ_For_Iter);
                      end if;
                   end if;
@@ -1203,7 +1203,7 @@ package body Gnat2Why.Expr.Loops is
                         return New_Assignment
                           (Ada_Node => Stmt,
                            Name     => Loop_Index,
-                           Labels   => Symbol_Sets.Empty_Set,
+                           Labels   => Empty_Symbol_Set,
                            Value    => +Update_Expr,
                            Typ      => Loop_Index_Type);
                      end;
@@ -1236,7 +1236,7 @@ package body Gnat2Why.Expr.Loops is
                           New_Assignment
                             (Ada_Node => Stmt,
                              Name     => Nam_For_Iter,
-                             Labels   => Symbol_Sets.Empty_Set,
+                             Labels   => Empty_Symbol_Set,
                              Value    => +Insert_Simple_Conversion
                                (Domain         => EW_Term,
                                 Expr           => +Call_Next,
@@ -1609,7 +1609,7 @@ package body Gnat2Why.Expr.Loops is
             Assign : constant W_Assignment_Id :=
               New_Assignment (Name   => Name,
                               Value  => +Variant_Expr (Expr, EW_Pterm),
-                              Labels => Symbol_Sets.Empty_Set,
+                              Labels => Empty_Symbol_Set,
                               Typ    => Base_Why_Type_No_Bool (Expr));
 
          begin
@@ -1703,7 +1703,7 @@ package body Gnat2Why.Expr.Loops is
               New_Assignment
                 (Name   => Loop_Index,
                  Value  => Cur_Cst,
-                 Labels => Symbol_Sets.Empty_Set,
+                 Labels => Empty_Symbol_Set,
                  Typ    => Loop_Index_Type);
             Cur_Idx := Cur_Idx + 1;
             Stmt_List (Cur_Idx) := Body_Prog;

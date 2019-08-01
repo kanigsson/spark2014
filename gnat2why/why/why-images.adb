@@ -529,7 +529,7 @@ package body Why.Images is
 
    procedure P
      (O         : Output_Id;
-      Value     : Symbol_Set;
+      Value     : Symbol_Sets.Set;
       As_Labels : Boolean := False) is
    begin
       for Name of Value loop
@@ -547,6 +547,14 @@ package body Why.Images is
             P (O, " ");
          end if;
       end loop;
+   end P;
+
+   procedure P
+     (O         : Output_Id;
+      Value     : Symbol_Set;
+      As_Labels : Boolean := False) is
+   begin
+      P (O, Get_Symbol_Set (Value), As_Labels => As_Labels);
    end P;
 
    procedure P

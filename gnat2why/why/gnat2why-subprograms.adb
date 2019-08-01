@@ -5482,7 +5482,7 @@ package body Gnat2Why.Subprograms is
                                 Binders     =>
                                   Tag_Binder & Procedure_Logic_Binders (E),
                                 Location    => No_Location,
-                                Labels      => Empty_Symbol_Sett,
+                                Labels      => Empty_Symbol_Set,
                                 Return_Type => EW_Bool_Type),
                            2 => New_Function_Decl
                                (Domain      => EW_Prog,
@@ -5900,7 +5900,7 @@ package body Gnat2Why.Subprograms is
                              Binders     =>
                                Pred_Binders (1) & Tag_Binder &
                                Pred_Binders (2 .. Pred_Binders'Length),
-                             Labels      => Symbol_Sets.Empty_Set,
+                             Labels      => Empty_Symbol_Set,
                              Location    => No_Location,
                              Return_Type => EW_Bool_Type))));
             end if;

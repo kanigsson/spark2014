@@ -588,13 +588,13 @@ package body Why.Gen.Arrays is
          B_Name   => New_Identifier (Name => "a", Typ => From_Symb.Ty),
          B_Ent    => Null_Entity_Name,
          Mutable  => False,
-         Labels   => <>);
+         Labels   => Empty_Symbol_Set);
       B_Binder   : constant Binder_Type :=
         (Ada_Node => Empty,
          B_Name   => New_Identifier (Name => "b", Typ => To_Symb.Ty),
          B_Ent    => Null_Entity_Name,
          Mutable  => False,
-         Labels   => <>);
+         Labels   => Empty_Symbol_Set);
 
       C         : Cursor;
       Not_Found : Boolean;
@@ -650,7 +650,7 @@ package body Why.Gen.Arrays is
             Binders     => (1 => A_Binder),
             Location    => No_Location,
             Return_Type => To_Symb.Ty,
-            Labels      => Symbol_Sets.Empty_Set));
+            Labels      => Empty_Symbol_Set));
 
       --  Generate an axiom for the conversion function:
       --  axiom convert__def:
@@ -1059,7 +1059,7 @@ package body Why.Gen.Arrays is
               (Domain      => EW_Pterm,
                Name        => To_Local (To_String_Id),
                Location    => No_Location,
-               Labels      => Symbol_Sets.Empty_Set,
+               Labels      => Empty_Symbol_Set,
                Binders     => To_String_Binders,
                Return_Type => Str_Typ));
       Emit (Section,
@@ -1067,7 +1067,7 @@ package body Why.Gen.Arrays is
               (Domain      => EW_Pterm,
                Name        => To_Local (Of_String_Id),
                Location    => No_Location,
-               Labels      => Symbol_Sets.Empty_Set,
+               Labels      => Empty_Symbol_Set,
                Binders     =>
                  (1 =>
                       Binder_Type'(
@@ -1196,7 +1196,7 @@ package body Why.Gen.Arrays is
                     (Domain      => EW_Term,
                      Name        => To_Local (To_Rep_Name),
                      Binders     => A_Binder,
-                     Labels      => Symbol_Sets.Empty_Set,
+                     Labels      => Empty_Symbol_Set,
                      Location    => No_Location,
                      Return_Type => Base,
                      Def         => New_Call
@@ -1541,7 +1541,7 @@ package body Why.Gen.Arrays is
                Binders     => Args,
                Return_Type => +EW_Bool_Type,
                Location    => No_Location,
-               Labels      => Symbol_Sets.Empty_Set));
+               Labels      => Empty_Symbol_Set));
 
       --  Emit:
       --  function bool_eq (a : map) (a__first : t1) ... (b : map) ... : bool =
@@ -1606,7 +1606,7 @@ package body Why.Gen.Arrays is
                   Binders     => Args,
                   Return_Type => +EW_Bool_Type,
                   Location    => No_Location,
-                  Labels      => Symbol_Sets.Empty_Set,
+                  Labels      => Empty_Symbol_Set,
                   Def         => +Def));
 
             --  This axiom is provable from the definition of bool_eq. We
@@ -1684,7 +1684,7 @@ package body Why.Gen.Arrays is
                     (Domain      => EW_Term,
                      Name        => To_Local (Arr_Symbs.Get),
                      Binders     => Binders,
-                     Labels      => Symbol_Sets.Empty_Set,
+                     Labels      => Empty_Symbol_Set,
                      Location    => No_Location,
                      Return_Type => EW_Abstract (Component_Typ),
                      Def         => New_Init_Wrapper_Value_Access
@@ -1776,7 +1776,7 @@ package body Why.Gen.Arrays is
                     (Domain      => EW_Pterm,
                      Name        => New_Identifier (Attr_Name),
                      Binders     => (1 .. 0 => <>),
-                     Labels      => Symbol_Sets.Empty_Set,
+                     Labels      => Empty_Symbol_Set,
                      Location    => No_Location,
                      Return_Type => Typ,
                      Def         => New_Discrete_Constant
@@ -1969,7 +1969,7 @@ package body Why.Gen.Arrays is
                            Name        => Id_Id,
                            Binders     =>
                              (1 => (B_Name => X_Id, others => <>)),
-                           Labels      => Symbol_Sets.Empty_Set,
+                           Labels      => Empty_Symbol_Set,
                            Location    => No_Location,
                            Def         => +X_Id,
                            Return_Type => R_Ty));
@@ -2885,7 +2885,7 @@ package body Why.Gen.Arrays is
                  (Domain      => EW_Term,
                   Name        => One_Id,
                   Location    => No_Location,
-                  Labels      => Symbol_Sets.Empty_Set,
+                  Labels      => Empty_Symbol_Set,
                   Binders     => (1 .. 0 => <>),
                   Def         =>
                     (if Is_Modular_Integer_Type (Typ) then

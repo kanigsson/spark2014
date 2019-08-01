@@ -1052,7 +1052,7 @@ package body Why.Gen.Binders is
            (Ada_Node  => Ada_Node,
             Variables => (1 => Binders (Binders'First).B_Name),
             Var_Type  => Get_Type (+Binders (Binders'First).B_Name),
-            Labels    => Symbol_Sets.Empty_Set,
+            Labels    => Empty_Symbol_Set,
             Pred      =>
               New_Existential_Quantif (Empty,
                                        Binders (Binders'First + 1
@@ -1187,7 +1187,7 @@ package body Why.Gen.Binders is
          New_Type_Decl
            (Ada_Node   => Ada_Node,
             Name       => Name,
-            Labels     => Symbol_Sets.Empty_Set,
+            Labels     => Empty_Symbol_Set,
             Definition =>
               New_Record_Definition
                 (Fields => New_Constant_Record_Binders (EW_Pred, Binders)));
@@ -1215,7 +1215,7 @@ package body Why.Gen.Binders is
            (Ada_Node  => Ada_Node,
             Variables => (1 => Binders (Binders'First).B_Name),
             Var_Type  => Get_Type (+Binders (Binders'First).B_Name),
-            Labels    => Symbol_Sets.Empty_Set,
+            Labels    => Empty_Symbol_Set,
             Triggers  => Triggers,
             Pred      => Pred);
 
@@ -1270,7 +1270,7 @@ package body Why.Gen.Binders is
                  (Ada_Node  => Ada_Node,
                   Variables => Vars,
                   Var_Type  => Typ,
-                  Labels    => Symbol_Sets.Empty_Set,
+                  Labels    => Empty_Symbol_Set,
                   Triggers  => Triggers,
                   Pred      => Pred);
             else
@@ -1278,7 +1278,7 @@ package body Why.Gen.Binders is
                  (Ada_Node  => Ada_Node,
                   Variables => Vars,
                   Var_Type  => Typ,
-                  Labels    => Symbol_Sets.Empty_Set,
+                  Labels    => Empty_Symbol_Set,
                   Pred      =>
                     New_Universal_Quantif (Ada_Node => Empty,
                                            Binders  => Other_Binders,
@@ -1370,7 +1370,7 @@ package body Why.Gen.Binders is
             T := New_Label
               (Ada_Node => Ent,
                Domain   => EW_Term,
-               Labels   => Symbol_Sets.Empty_Set,
+               Labels   => Empty_Symbol_Set,
                Def      => T,
                Typ      => EW_Init_Wrapper (Etype (Ent), EW_Split));
          end;

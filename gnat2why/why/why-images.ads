@@ -68,6 +68,11 @@ package Why.Images is
 
    procedure P
      (O         : Output_Id;
+      Value     : Symbol_Sets.Set;
+      As_Labels : Boolean := False);
+
+   procedure P
+     (O         : Output_Id;
       Value     : Symbol_Set;
       As_Labels : Boolean := False);
 

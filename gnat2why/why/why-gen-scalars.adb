@@ -160,7 +160,7 @@ package body Why.Gen.Scalars is
                Name        => New_Identifier (Num_Small),
                Binders     => (1 .. 0 => <>),
                Return_Type => EW_Int_Type,
-               Labels      => Symbol_Sets.Empty_Set,
+               Labels      => Empty_Symbol_Set,
                Location    => No_Location,
                Def         => +Num_Small_V));
       Emit (File,
@@ -169,7 +169,7 @@ package body Why.Gen.Scalars is
                Name        => New_Identifier (Den_Small),
                Binders     => (1 .. 0 => <>),
                Return_Type => EW_Int_Type,
-               Labels      => Symbol_Sets.Empty_Set,
+               Labels      => Empty_Symbol_Set,
                Location    => No_Location,
                Def         => +Den_Small_V));
 
@@ -313,7 +313,7 @@ package body Why.Gen.Scalars is
                Name        => New_Identifier (Num_Small_X),
                Binders     => (1 .. 0 => <>),
                Return_Type => EW_Int_Type,
-               Labels      => Symbol_Sets.Empty_Set,
+               Labels      => Empty_Symbol_Set,
                Location    => No_Location,
                Def         => +Num_Small_L));
       Emit (File,
@@ -322,7 +322,7 @@ package body Why.Gen.Scalars is
                Name        => New_Identifier (Den_Small_X),
                Binders     => (1 .. 0 => <>),
                Return_Type => EW_Int_Type,
-               Labels      => Symbol_Sets.Empty_Set,
+               Labels      => Empty_Symbol_Set,
                Location    => No_Location,
                Def         => +Den_Small_L));
       Emit (File,
@@ -331,7 +331,7 @@ package body Why.Gen.Scalars is
                Name        => New_Identifier (Num_Small_Y),
                Binders     => (1 .. 0 => <>),
                Return_Type => EW_Int_Type,
-               Labels      => Symbol_Sets.Empty_Set,
+               Labels      => Empty_Symbol_Set,
                Location    => No_Location,
                Def         => +Num_Small_R));
       Emit (File,
@@ -340,7 +340,7 @@ package body Why.Gen.Scalars is
                Name        => New_Identifier (Den_Small_Y),
                Binders     => (1 .. 0 => <>),
                Return_Type => EW_Int_Type,
-               Labels      => Symbol_Sets.Empty_Set,
+               Labels      => Empty_Symbol_Set,
                Location    => No_Location,
                Def         => +Den_Small_R));
       Emit (File,
@@ -349,7 +349,7 @@ package body Why.Gen.Scalars is
                Name        => New_Identifier (Num_Small_Res),
                Binders     => (1 .. 0 => <>),
                Return_Type => EW_Int_Type,
-               Labels      => Symbol_Sets.Empty_Set,
+               Labels      => Empty_Symbol_Set,
                Location    => No_Location,
                Def         => +Num_Small_Op));
       Emit (File,
@@ -358,7 +358,7 @@ package body Why.Gen.Scalars is
                Name        => New_Identifier (Den_Small_Res),
                Binders     => (1 .. 0 => <>),
                Return_Type => EW_Int_Type,
-               Labels      => Symbol_Sets.Empty_Set,
+               Labels      => Empty_Symbol_Set,
                Location    => No_Location,
                Def         => +Den_Small_Op));
 
@@ -598,7 +598,7 @@ package body Why.Gen.Scalars is
                      Name     => To_Local (E_Symb (E, Name)),
                      Def      => +True_Pred,
                      Location => No_Location,
-                     Labels   => Symbol_Sets.Empty_Set,
+                     Labels   => Empty_Symbol_Set,
                      Binders  => (1 => Binder_Type'(B_Name => Var,
                                                     others => <>))));
 
@@ -615,7 +615,7 @@ package body Why.Gen.Scalars is
                                                       (Base_Why_Type (E))
                                                   .Module),
                      Location => No_Location,
-                     Labels   => Symbol_Sets.Empty_Set,
+                     Labels   => Empty_Symbol_Set,
                      Binders  => (1 => Binder_Type'
                                       (B_Name => New_Identifier (
                                        Name => "x", Typ => EW_Int_Type),
@@ -652,7 +652,7 @@ package body Why.Gen.Scalars is
                                                 MF_Floats (Ty).Is_Finite,
                                               Args   => (1 => +Var)),
                         Location => No_Location,
-                        Labels   => Symbol_Sets.Empty_Set,
+                        Labels   => Empty_Symbol_Set,
                         Binders  => (1 => Binder_Type'(B_Name => Var,
                                                        others => <>))));
 
@@ -705,7 +705,7 @@ package body Why.Gen.Scalars is
                      Name     => To_Local (E_Symb (E, Name)),
                      Def      => +Def,
                      Location => No_Location,
-                     Labels   => Symbol_Sets.Empty_Set,
+                     Labels   => Empty_Symbol_Set,
                      Binders  => Binders));
 
             --  in case we're dealing with bitvectors, we also need to generate
@@ -807,7 +807,7 @@ package body Why.Gen.Scalars is
          Emit (File,
                New_Type_Decl
                  (Name       => Why_Name,
-                  Labels     => Symbol_Sets.Empty_Set,
+                  Labels     => Empty_Symbol_Set,
                   Definition => New_Range_Type_Definition
                     (First => Expr_Value (Low_Bound (Rng)),
                      Last  => Expr_Value (High_Bound (Rng)))));
@@ -818,7 +818,7 @@ package body Why.Gen.Scalars is
          Emit (File,
                New_Type_Decl
                  (Name   => Why_Name,
-                  Labels => Symbol_Sets.Empty_Set));
+                  Labels => Empty_Symbol_Set));
       end if;
 
       --  retrieve and declare the attributes first, last, small, and modulus
@@ -839,7 +839,7 @@ package body Why.Gen.Scalars is
                      Typ  => EW_Int_Type),
                   Binders     => (1 .. 0 => <>),
                   Return_Type => EW_Int_Type,
-                  Labels      => Symbol_Sets.Empty_Set,
+                  Labels      => Empty_Symbol_Set,
                   Location    => No_Location,
                   Def         => New_Integer_Constant
                     (Value => Expr_Value (Low_Bound (Rng)))));
@@ -851,7 +851,7 @@ package body Why.Gen.Scalars is
                      Typ  => EW_Int_Type),
                   Binders     => (1 .. 0 => <>),
                   Return_Type => EW_Int_Type,
-                  Labels      => Symbol_Sets.Empty_Set,
+                  Labels      => Empty_Symbol_Set,
                   Location    => No_Location,
                   Def         => New_Integer_Constant
                     (Value => Expr_Value (High_Bound (Rng)))));
@@ -940,7 +940,7 @@ package body Why.Gen.Scalars is
                        To_Local (E_Symb (E, WNE_Attr_Modulus)),
                      Binders     => (1 .. 0 => <>),
                      Return_Type => Base_Type,
-                     Labels      => Symbol_Sets.Empty_Set,
+                     Labels      => Empty_Symbol_Set,
                      Location    => No_Location,
                      Def         => +Modul));
          end;
@@ -962,7 +962,7 @@ package body Why.Gen.Scalars is
                        To_Local (E_Symb (E, WNE_Small_Num)),
                      Binders     => (1 .. 0 => <>),
                      Return_Type => Base_Type,
-                     Labels      => Symbol_Sets.Empty_Set,
+                     Labels      => Empty_Symbol_Set,
                      Location    => No_Location,
                      Def         => +Num_Small));
             Emit (Section,
@@ -972,7 +972,7 @@ package body Why.Gen.Scalars is
                        To_Local (E_Symb (E, WNE_Small_Den)),
                      Binders     => (1 .. 0 => <>),
                      Return_Type => Base_Type,
-                     Labels      => Symbol_Sets.Empty_Set,
+                     Labels      => Empty_Symbol_Set,
                      Location    => No_Location,
                      Def         => +Den_Small));
          end;
@@ -1029,7 +1029,7 @@ package body Why.Gen.Scalars is
                        (1 => Binder_Type'(B_Name => X_Ident,
                                           others => <>)),
                      Return_Type => EW_Int_Type,
-                     Labels      => Symbol_Sets.Empty_Set,
+                     Labels      => Empty_Symbol_Set,
                      Location    => No_Location,
                      Def         => Expr));
          end;
@@ -1054,7 +1054,7 @@ package body Why.Gen.Scalars is
                     (Low_Bound (Rng), Compute => True),
                   Return_Type => Base_Type,
                   Location    => No_Location,
-                  Labels      => Symbol_Sets.Empty_Set,
+                  Labels      => Empty_Symbol_Set,
                   Def         => +First));
          Emit (Section,
                New_Function_Decl
@@ -1065,7 +1065,7 @@ package body Why.Gen.Scalars is
                     (High_Bound (Rng), Compute => True),
                   Return_Type => Base_Type,
                   Location    => No_Location,
-                  Labels      => Symbol_Sets.Empty_Set,
+                  Labels      => Empty_Symbol_Set,
                   Def         => +Last));
       end if;
    end Define_Scalar_Attributes;
@@ -1210,7 +1210,7 @@ package body Why.Gen.Scalars is
                           Args   => (1 => +Var),
                           Typ    => EW_Int_Type),
                      Location    => No_Location,
-                     Labels      => Symbol_Sets.Empty_Set));
+                     Labels      => Empty_Symbol_Set));
          end;
       end if;
 

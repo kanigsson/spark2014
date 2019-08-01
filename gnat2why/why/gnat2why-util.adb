@@ -369,7 +369,7 @@ package body Gnat2Why.Util is
       --  label.
 
       elsif Ekind (E) = E_Function then
-         Labels := Model_Trace;
+         Labels := Get_Symbol_Set (Model_Trace);
          Labels.Include (Model_Projected);
 
       --  Generate counterexample labels for variables of supported types.
@@ -385,7 +385,7 @@ package body Gnat2Why.Util is
       else
          case Ekind (E_Type) is
             when Scalar_Kind =>
-               Labels := Model_Trace;
+               Labels := Get_Symbol_Set (Model_Trace);
 
                --  If the type used in Why3 for the entity is not abstract or
                --  the entity is not mutable, the type is builtin Why3 type.
@@ -411,7 +411,7 @@ package body Gnat2Why.Util is
                | Array_Kind
                | Access_Kind
             =>
-               Labels := Model_Trace;
+               Labels := Get_Symbol_Set (Model_Trace);
                Labels.Include (Model_Projected);
 
          when others =>
@@ -419,7 +419,7 @@ package body Gnat2Why.Util is
          end case;
       end if;
 
-      return Labels;
+      return To_Symbol_Set (Labels);
    end Get_Counterexample_Labels;
 
    ------------------
@@ -838,7 +838,7 @@ package body Gnat2Why.Util is
                (if Ekind (E) = E_Function then "@result" else "")))));
    begin
       S.Include (NID ("name:" & Source_Name (E)));
-      return S;
+      return To_Symbol_Set (S);
    end Get_Model_Trace_Label;
 
    function Get_Model_Trace_Label (Name : String) return Symbol_Set_Id is

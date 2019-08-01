@@ -252,7 +252,7 @@ package body Why.Atree.Sprint is
    ----------------------
 
    procedure Print_Assignment (Node : W_Assignment_Id) is
-      Labels : constant Symbol_Set := Get_Symbol_Set (Get_Labels (Node));
+      Labels : constant Symbol_Sets.Set := Get_Symbol_Set (Get_Labels (Node));
    begin
       P (O, "(");
       if not Labels.Is_Empty then
@@ -1415,7 +1415,7 @@ package body Why.Atree.Sprint is
    -----------------
 
    procedure Print_Label (Node : W_Label_Id) is
-      Labels : constant Symbol_Set := Get_Symbol_Set (Get_Labels (Node));
+      Labels : constant Symbol_Sets.Set := Get_Symbol_Set (Get_Labels (Node));
    begin
       if not Labels.Is_Empty then
          P (O, "( ");

@@ -128,7 +128,12 @@ package body Common_Containers is
 
    function To_Symbol_Set (X : Symbol) return Symbol_Set_Id is
    begin
-      Symbol_Set_Cache.Append (Symbol_Sets.To_Set (X));
+      return To_Symbol_Set (Symbol_Sets.To_Set (X));
+   end To_Symbol_Set;
+
+   function To_Symbol_Set (S : Symbol_Sets.Set) return Symbol_Set_Id is
+   begin
+      Symbol_Set_Cache.Append (S);
       return Symbol_Set_Cache.Last_Index;
    end To_Symbol_Set;
 

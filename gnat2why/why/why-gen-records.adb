@@ -367,7 +367,7 @@ package body Why.Gen.Records is
             Emit (P,
                   New_Type_Decl
                     (Name   => Ty_Name,
-                     Labels => Symbol_Sets.Empty_Set));
+                     Labels => Empty_Symbol_Set));
          else
             Emit (P,
                   New_Type_Decl
@@ -389,7 +389,7 @@ package body Why.Gen.Records is
                   Name        => To_Local (E_Symb (E, WNE_To_Base)),
                   Binders     => R_Binder,
                   Location    => No_Location,
-                  Labels      => Symbol_Sets.To_Set (NID ("inline")),
+                  Labels      => To_Symbol_Set (NID ("inline")),
                   Return_Type => (if Is_Root then Abstr_Ty
                                   else EW_Abstract (Root)),
                   Def         => +A_Ident));
@@ -401,7 +401,7 @@ package body Why.Gen.Records is
                   Binders     => Binder_Array'(1 => (B_Name => R_Ident,
                                                      others => <>)),
                   Location    => No_Location,
-                  Labels      => Symbol_Sets.To_Set (NID ("inline")),
+                  Labels      => To_Symbol_Set (NID ("inline")),
                   Return_Type => Abstr_Ty,
                   Def         => +R_Ident));
          end;
@@ -424,7 +424,7 @@ package body Why.Gen.Records is
                                                     others => <>)),
                   Return_Type => +EW_Bool_Type,
                   Location    => No_Location,
-                  Labels      => Symbol_Sets.To_Set (NID ("inline")),
+                  Labels      => To_Symbol_Set (NID ("inline")),
                   Def         => +True_Term));
 
             Emit
@@ -437,7 +437,7 @@ package body Why.Gen.Records is
                     Binder_Array'(1 => Binder_Type'(B_Name => B_Ident,
                                                     others => <>)),
                   Location    => No_Location,
-                  Labels      => Symbol_Sets.Empty_Set));
+                  Labels      => Empty_Symbol_Set));
          end;
 
          Declare_Attributes (P, E);
@@ -490,7 +490,7 @@ package body Why.Gen.Records is
                New_Function_Decl
                  (Domain      => EW_Pterm,
                   Name        => To_Local (E_Symb (E, WNE_Tag)),
-                  Labels      => Symbol_Sets.Empty_Set,
+                  Labels      => Empty_Symbol_Set,
                   Location    => No_Location,
                   Return_Type => EW_Int_Type));
       end if;
@@ -521,7 +521,7 @@ package body Why.Gen.Records is
                  Binder_Array'(1 => Binder_Type'(B_Name => B_Ident,
                                                  others => <>)),
                Location    => No_Location,
-               Labels      => Symbol_Sets.Empty_Set));
+               Labels      => Empty_Symbol_Set));
       end;
 
    end Declare_Ada_Record;
@@ -541,7 +541,7 @@ package body Why.Gen.Records is
             New_Function_Decl
               (Domain      => EW_Pterm,
                Name        => To_Local (E_Symb (E, WNE_Attr_Value_Size)),
-               Labels      => Symbol_Sets.Empty_Set,
+               Labels      => Empty_Symbol_Set,
                Location    => No_Location,
                Return_Type => EW_Int_Type));
 
@@ -551,7 +551,7 @@ package body Why.Gen.Records is
             New_Function_Decl
               (Domain      => EW_Pterm,
                Name        => To_Local (E_Symb (E, WNE_Attr_Object_Size)),
-               Labels      => Symbol_Sets.Empty_Set,
+               Labels      => Empty_Symbol_Set,
                Location    => No_Location,
                Return_Type => EW_Int_Type));
 
@@ -561,7 +561,7 @@ package body Why.Gen.Records is
             New_Function_Decl
               (Domain      => EW_Pterm,
                Name        => To_Local (E_Symb (E, WNE_Attr_Alignment)),
-               Labels      => Symbol_Sets.Empty_Set,
+               Labels      => Empty_Symbol_Set,
                Location    => No_Location,
                Return_Type => EW_Int_Type));
 
@@ -688,7 +688,7 @@ package body Why.Gen.Records is
                  (Domain      => EW_Pterm,
                   Name        =>
                     To_Local (E_Symb (Field, WNE_Attr_First_Bit)),
-                  Labels      => Symbol_Sets.Empty_Set,
+                  Labels      => Empty_Symbol_Set,
                   Location    => No_Location,
                   Return_Type => EW_Int_Type));
 
@@ -697,7 +697,7 @@ package body Why.Gen.Records is
                  (Domain      => EW_Pterm,
                   Name        =>
                     To_Local (E_Symb (Field, WNE_Attr_Last_Bit)),
-                  Labels      => Symbol_Sets.Empty_Set,
+                  Labels      => Empty_Symbol_Set,
                   Location    => No_Location,
                   Return_Type => EW_Int_Type));
 
@@ -706,7 +706,7 @@ package body Why.Gen.Records is
                  (Domain      => EW_Pterm,
                   Name        =>
                     To_Local (E_Symb (Field, WNE_Attr_Position)),
-                  Labels      => Symbol_Sets.Empty_Set,
+                  Labels      => Empty_Symbol_Set,
                   Location    => No_Location,
                   Return_Type => EW_Int_Type));
 
@@ -825,7 +825,7 @@ package body Why.Gen.Records is
               (Domain   => EW_Pred,
                Name     => To_Local (E_Symb (E, WNE_Range_Pred)),
                Location => No_Location,
-               Labels   => Symbol_Sets.Empty_Set,
+               Labels   => Empty_Symbol_Set,
                Binders  => R_Binder,
                Def      => +Check_Pred));
       Pre_Cond :=
@@ -837,7 +837,7 @@ package body Why.Gen.Records is
                Name        => To_Local (E_Symb (E, WNE_Range_Check_Fun)),
                Binders     => R_Binder,
                Location    => No_Location,
-               Labels      => Symbol_Sets.Empty_Set,
+               Labels      => Empty_Symbol_Set,
                Return_Type => Root_Abstr,
                Pre         => Pre_Cond,
                Post        => Post));
@@ -1371,7 +1371,7 @@ package body Why.Gen.Records is
                Name        => To_Local (E_Symb (E, WNE_To_Base)),
                Binders     => R_Binder,
                Location    => No_Location,
-               Labels      => Symbol_Sets.Empty_Set,
+               Labels      => Empty_Symbol_Set,
                Return_Type => EW_Abstract (Root),
                Def         =>
                  New_Record_Aggregate
@@ -1383,7 +1383,7 @@ package body Why.Gen.Records is
                Name        => To_Local (E_Symb (E, WNE_Of_Base)),
                Binders     => From_Binder,
                Location    => No_Location,
-               Labels      => Symbol_Sets.Empty_Set,
+               Labels      => Empty_Symbol_Set,
                Return_Type => Abstr_Ty,
                Def         =>
                  New_Record_Aggregate
@@ -1612,7 +1612,7 @@ package body Why.Gen.Records is
                                                       others => <>)),
                      Return_Type => +EW_Bool_Type,
                      Location    => No_Location,
-                     Labels      => Symbol_Sets.Empty_Set,
+                     Labels      => Empty_Symbol_Set,
                      Def         =>
                        (if Is_Simple_Private_Type (E) then Why_Empty
                         else New_Conditional
@@ -1635,7 +1635,7 @@ package body Why.Gen.Records is
                     Binder_Array'(1 => Binder_Type'(B_Name => B_Ident,
                                                     others => <>)),
                   Location    => No_Location,
-                  Labels      => Symbol_Sets.Empty_Set));
+                  Labels      => Empty_Symbol_Set));
          end if;
       end Declare_Equality_Function;
 
@@ -1686,7 +1686,7 @@ package body Why.Gen.Records is
                  (Domain      => EW_Pterm,
                   Name        => Hide_Name,
                   Binders     => Hide_Binders,
-                  Labels      => Symbol_Sets.Empty_Set,
+                  Labels      => Empty_Symbol_Set,
                   Location    => No_Location,
                   Return_Type => EW_Private_Type));
 
@@ -1720,7 +1720,7 @@ package body Why.Gen.Records is
                        (Domain      => EW_Pterm,
                         Name        => Extract_Fun (Field, Rec => E),
                         Binders     => Binder,
-                        Labels      => Symbol_Sets.Empty_Set,
+                        Labels      => Empty_Symbol_Set,
                         Location    => No_Location,
                         Return_Type => W_Type_Of_Component (Field, E),
                         Def         => Definition));
@@ -1763,7 +1763,7 @@ package body Why.Gen.Records is
                   Name        => Extract_Func,
                   Binders     => Binder,
                   Location    => No_Location,
-                  Labels      => Symbol_Sets.Empty_Set,
+                  Labels      => Empty_Symbol_Set,
                   Return_Type => EW_Private_Type));
       end Declare_Extraction_Functions;
 
@@ -1836,7 +1836,7 @@ package body Why.Gen.Records is
                      Name        => Prog_Name,
                      Binders     => R_Binder,
                      Location    => No_Location,
-                     Labels      => Symbol_Sets.Empty_Set,
+                     Labels      => Empty_Symbol_Set,
                      Return_Type => W_Type_Of_Component (Field, E),
                      Pre         => Precond,
                      Post        => Post));
@@ -1879,7 +1879,7 @@ package body Why.Gen.Records is
                            Name     => Pred_Name,
                            Binders  => R_Binder,
                            Location => No_Location,
-                           Labels   => Symbol_Sets.Empty_Set,
+                           Labels   => Empty_Symbol_Set,
                            Def      => +Pre_Cond));
                end;
             end if;
@@ -2182,7 +2182,7 @@ package body Why.Gen.Records is
                   Binders     => Binders,
                   Return_Type => +EW_Bool_Type,
                   Location    => No_Location,
-                  Labels      => Symbol_Sets.Empty_Set));
+                  Labels      => Empty_Symbol_Set));
          end;
       end if;
 
@@ -2210,7 +2210,7 @@ package body Why.Gen.Records is
                Name        => To_Local (E_Symb (E, WNE_To_Base)),
                Binders     => R_Binder,
                Location    => No_Location,
-               Labels      => Symbol_Sets.Empty_Set,
+               Labels      => Empty_Symbol_Set,
                Return_Type => Abstr_Ty,
                Def         => +A_Ident));
          Emit
@@ -2220,7 +2220,7 @@ package body Why.Gen.Records is
                Name        => To_Local (E_Symb (E, WNE_Of_Base)),
                Binders     => R_Binder,
                Location    => No_Location,
-               Labels      => Symbol_Sets.Empty_Set,
+               Labels      => Empty_Symbol_Set,
                Return_Type => Abstr_Ty,
                Def         => +A_Ident));
       end if;
