@@ -557,21 +557,4 @@ package body Why.Images is
       P (O, Get_Symbol_Set (Value), As_Labels => As_Labels);
    end P;
 
-   procedure P
-     (O         : Output_Id;
-      Value     : String_Sets.Set;
-      As_Labels : Boolean := False) is
-   begin
-      for Name of Value loop
-         if As_Labels then
-            P (O, "[@");
-         end if;
-         P (O, Name);
-         if As_Labels then
-            P (O, "]");
-         end if;
-         P (O, " ");
-      end loop;
-   end P;
-
 end Why.Images;

@@ -77,11 +77,6 @@ package Why.Images is
       As_Labels : Boolean := False);
 
    procedure P
-     (O         : Output_Id;
-      Value     : String_Sets.Set;
-      As_Labels : Boolean := False);
-
-   procedure P
      (O      : Output_Id;
       Value  : EW_Literal;
       Domain : EW_Domain := EW_Prog);

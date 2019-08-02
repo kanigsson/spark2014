@@ -73,7 +73,7 @@ package Why.Gen.Names is
      (Ada_Node : Node_Id := Empty;
       Name     : String;
       Typ      : W_Type_Id := Why.Types.Why_Empty;
-      Attrs    : String_Sets.Set := String_Sets.Empty_Set)
+      Attrs    : Symbol_Set := Empty_Symbol_Set)
       return W_Identifier_Id;
    --  Create a new term identifier for Name and return the result
 
@@ -83,7 +83,7 @@ package Why.Gen.Names is
       Namespace : Symbol := No_Symbol;
       Module    : W_Module_Id;
       Typ       : W_Type_Id := Why.Types.Why_Empty;
-      Attrs     : String_Sets.Set := String_Sets.Empty_Set)
+      Attrs    : Symbol_Set := Empty_Symbol_Set)
       return W_Identifier_Id;
 
    function New_Identifier
@@ -91,7 +91,7 @@ package Why.Gen.Names is
       Domain   : EW_Domain;
       Name     : String;
       Typ      : W_Type_Id := Why.Types.Why_Empty;
-      Attrs    : String_Sets.Set := String_Sets.Empty_Set)
+      Attrs    : Symbol_Set := Empty_Symbol_Set)
       return W_Identifier_Id;
 
    function New_Identifier
@@ -101,7 +101,7 @@ package Why.Gen.Names is
       Namespace : Symbol := No_Symbol;
       Module    : W_Module_Id;
       Typ       : W_Type_Id := Why.Types.Why_Empty;
-      Attrs     : String_Sets.Set := String_Sets.Empty_Set)
+      Attrs    : Symbol_Set := Empty_Symbol_Set)
       return W_Identifier_Id;
 
    function New_Identifier (Name : W_Name_Id) return W_Identifier_Id;
@@ -114,7 +114,7 @@ package Why.Gen.Names is
       Typ       : W_Type_Id := Why.Types.Why_Empty;
       Module    : W_Module_Id := Why.Types.Why_Empty;
       Infix     : Boolean := False;
-      Attrs     : String_Sets.Set := String_Sets.Empty_Set)
+      Attrs    : Symbol_Set := Empty_Symbol_Set)
       return W_Identifier_Id;
 
    function New_Temp_Identifier (Base_Name : String := "") return String;
@@ -133,7 +133,7 @@ package Why.Gen.Names is
      (Ada_Node  : Node_Id   := Empty;
       Typ       : W_Type_Id := Why.Types.Why_Empty;
       Base_Name : String    := "";
-      Attrs     : String_Sets.Set) return W_Identifier_Id;
+      Attrs     : Symbol_Set) return W_Identifier_Id;
 
    function New_Temp_Identifiers
      (Num : Positive;

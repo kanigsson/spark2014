@@ -308,8 +308,7 @@ package body Xtree_Sinfo is
 
       New_Field (W_Identifier, "Name", "W_Name", Id_One);
       New_Field (W_Identifier, "Typ", "W_Type", Id_Lone);
-      New_Field (W_Identifier,
-                 "Labels", "String_Sets.Set", "String_Sets.Empty_Set");
+      New_Field (W_Identifier, "Labels", "Symbol_Set");
 
       --------------
       -- W_Tagged --

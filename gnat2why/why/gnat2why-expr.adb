@@ -6720,8 +6720,7 @@ package body Gnat2Why.Expr is
 
          use Ada_To_Why_Ident;
 
-         Attrs : Common_Containers.String_Sets.Set :=
-                   Common_Containers.String_Sets.Empty_Set;
+         Attrs : Symbol_Sets.Set := Symbol_Sets.Empty_Set;
          Model_Trace : constant String :=
            --  Here we exclude Loop_Entry expressions and only consider
            --  Entities
@@ -6749,14 +6748,15 @@ package body Gnat2Why.Expr is
             end if;
 
             if Model_Trace /= "" then
-               Common_Containers.String_Sets.Insert (Attrs, Model_Trace);
+               Attrs.Insert (NID (Model_Trace));
             end if;
             Loop_Map.Insert (Key      => Expr,
                              New_Item => New_Generated_Identifier
                                            (Typ       => Typ,
                                             Ada_Node  => Nd,
                                             Base_Name => "loop_entry",
-                                            Attrs     => Attrs),
+                                            Attrs     =>
+                                              To_Symbol_Set (Attrs)),
                              Position => Pos,
                              Inserted => Dummy);
          end if;
@@ -6809,8 +6809,6 @@ package body Gnat2Why.Expr is
 
             Typ : W_Type_Id;
             Nd  : Node_Id;
-            Attrs : Common_Containers.String_Sets.Set :=
-                   Common_Containers.String_Sets.Empty_Set;
             Model_Trace : constant String :=
               --  Here we exclude Old expressions and only consider Entities
               (if Nkind (N) in N_Has_Entity then
@@ -6831,13 +6829,12 @@ package body Gnat2Why.Expr is
             if Present (Enclosing_Contract_Case (N)) and then
               Model_Trace /= ""
             then
-               Common_Containers.String_Sets.Insert (Attrs, Model_Trace);
                Old_Map (Position) :=
                  New_Generated_Identifier
                    (Base_Name => "old",
                     Typ       => Typ,
                     Ada_Node  => Nd,
-                    Attrs     => Attrs);
+                    Attrs     => To_Symbol_Set (NID (Model_Trace)));
             else
                Old_Map (Position) :=
                  New_Temp_Identifier (Base_Name => "old",
