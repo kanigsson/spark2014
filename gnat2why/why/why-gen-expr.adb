@@ -27,7 +27,6 @@ with Ada.Strings;             use Ada.Strings;
 with Ada.Strings.Unbounded;   use Ada.Strings.Unbounded;
 with Ada.Strings.Fixed;
 with Checks;                  use Checks;
-with Common_Containers;       use Common_Containers;
 with Errout;                  use Errout;
 with Eval_Fat;
 with Flow_Error_Messages;     use Flow_Error_Messages;
@@ -3255,7 +3254,7 @@ package body Why.Gen.Expr is
 
    function New_VC_Labels
      (N      : Node_Id;
-      Reason : VC_Kind) return Symbol_Set
+      Reason : VC_Kind) return Symbol_Set_Id
    is
       --  A GNATprove label in Why3 has the following form
       --
@@ -3276,7 +3275,7 @@ package body Why.Gen.Expr is
       Id  : constant VC_Id := Register_VC (N, Reason, Current_Subp);
       Location_Lab : constant Symbol := New_Located_Label (Sloc);
 
-      Labels : Symbol_Set;
+      Labels : Symbol_Sets.Set;
 
    begin
       if CodePeer_Has_Proved (Sloc, Reason) then
@@ -3314,7 +3313,7 @@ package body Why.Gen.Expr is
          Labels.Insert (VC_Annotation);
       end if;
 
-      return Labels;
+      return To_Symbol_Set (Labels);
    end New_VC_Labels;
 
    ------------------

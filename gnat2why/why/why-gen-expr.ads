@@ -23,6 +23,7 @@
 --                                                                          --
 ------------------------------------------------------------------------------
 
+with Common_Containers;    use Common_Containers;
 with GNATCOLL.Symbols;     use GNATCOLL.Symbols;
 with Gnat2Why.Util;        use Gnat2Why.Util;
 with Snames;               use Snames;
@@ -195,7 +196,7 @@ package Why.Gen.Expr is
 
    function New_VC_Labels
      (N      : Node_Id;
-      Reason : VC_Kind) return Symbol_Set;
+      Reason : VC_Kind) return Symbol_Set_Id;
    --  Generate VC and location labels for the given Ada node, with the given
    --  VC reason
 

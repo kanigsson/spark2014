@@ -70,7 +70,7 @@ package body Why.Gen.Binders is
                      B_Name   => Concurrent_Self_Ident (Ty),
                      B_Ent    => Null_Entity_Name,
                      Mutable  => Mutable,
-                     Labels   => <>);
+                     Labels   => Empty_Symbol_Set);
    end Concurrent_Self_Binder;
 
    ---------------------------
@@ -294,7 +294,7 @@ package body Why.Gen.Binders is
                             B_Name   => To_Why_Id (V, Local => False),
                             B_Ent    => V,
                             Mutable  => True,
-                            Labels   => <>));
+                            Labels   => Empty_Symbol_Set));
                I := I + 1;
             end if;
          end;
@@ -615,7 +615,7 @@ package body Why.Gen.Binders is
                     B_Ent    => Null_Entity_Name,
                     Ada_Node => E,
                     Mutable  => False,
-                    Labels   => <>));
+                    Labels   => Empty_Symbol_Set));
 
       --  For functions, store both the name to be used in logic and the name
       --  to be used in programs
@@ -633,14 +633,14 @@ package body Why.Gen.Binders is
                        B_Ent    => Null_Entity_Name,
                        Ada_Node => E,
                        Mutable  => False,
-                       Labels   => <>),
+                       Labels   => Empty_Symbol_Set),
                     For_Prog => Binder_Type'
                       (B_Name   =>
                          To_Why_Id (E, Typ => Typ, Domain => EW_Prog),
                        B_Ent    => Null_Entity_Name,
                        Ada_Node => E,
                        Mutable  => False,
-                       Labels   => <>));
+                       Labels   => Empty_Symbol_Set));
          end;
 
       --  If E is in SPARK, decide whether it should be split into multiple
@@ -673,7 +673,7 @@ package body Why.Gen.Binders is
                            B_Name   => Name,
                            B_Ent    => Null_Entity_Name,
                            Mutable  => Is_Mutable_In_Why (E),
-                           Labels   => <>);
+                           Labels   => Empty_Symbol_Set);
             Dim    : constant Positive := Positive (Number_Dimensions (Ty));
             Bounds : Array_Bounds;
             Index  : Node_Id := First_Index (Ty);
@@ -737,7 +737,7 @@ package body Why.Gen.Binders is
                                         Field_Type_For_Fields (Ty)),
                                  B_Ent    => Null_Entity_Name,
                                  Mutable  => True,
-                                 Labels   => <>));
+                                 Labels   => Empty_Symbol_Set));
             end if;
 
             if Count_Discriminants (Ty) > 0 then
@@ -752,7 +752,7 @@ package body Why.Gen.Binders is
                                         Field_Type_For_Discriminants (Ty)),
                                  B_Ent    => Null_Entity_Name,
                                  Mutable  => Unconstr,
-                                 Labels   => <>));
+                                 Labels   => Empty_Symbol_Set));
             end if;
 
             if Has_Defaulted_Discriminants (Ty) then
@@ -811,7 +811,7 @@ package body Why.Gen.Binders is
                                     (Directly_Designated_Type (Ty))),
                            B_Ent    => Null_Entity_Name,
                            Mutable  => True,
-                           Labels   => <>);
+                           Labels   => Empty_Symbol_Set);
 
             Result.Address :=
               Address_Append
@@ -844,7 +844,7 @@ package body Why.Gen.Binders is
                            B_Name   => Name,
                            B_Ent    => Null_Entity_Name,
                            Mutable  => Is_Mutable_In_Why (E),
-                           Labels   => <>);
+                           Labels   => Empty_Symbol_Set);
          begin
             return (Regular, Local, New_Init_Id (Name), Binder);
          end;
@@ -1398,6 +1398,7 @@ package body Why.Gen.Binders is
                Result (Count) :=
                  (B_Name  => Cur.Init.Id,
                   Mutable => True,
+                  Labels  => Empty_Symbol_Set,
                   others  => <>);
                Count := Count + 1;
             end if;

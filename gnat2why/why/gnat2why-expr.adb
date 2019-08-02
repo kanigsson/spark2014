@@ -149,7 +149,7 @@ package body Gnat2Why.Expr is
                                         +True_Term)),
                          Op    => EW_Equivalent,
                          Right => +W),
-                    Labels      => Symbol_Sets.Empty_Set,
+                    Labels      => Empty_Symbol_Set,
                     Return_Type => EW_Bool_Type));
 
    --  @param W a Why3 pred expression
@@ -875,7 +875,7 @@ package body Gnat2Why.Expr is
                         New_Assignment
                           (Ada_Node => N,
                            Name     => Binder.Fields.Binder.B_Name,
-                           Labels   => Symbol_Sets.Empty_Set,
+                           Labels   => Empty_Symbol_Set,
                            Value    => +New_Fields_Access
                              (Domain => EW_Prog,
                               Name   => +Tmp_Var,
@@ -891,7 +891,7 @@ package body Gnat2Why.Expr is
                            New_Assignment
                              (Ada_Node => N,
                               Name     => Binder.Discrs.Binder.B_Name,
-                              Labels   => Symbol_Sets.Empty_Set,
+                              Labels   => Empty_Symbol_Set,
                               Value    => +New_Discriminants_Access
                                 (Domain => EW_Prog,
                                  Name   => +Tmp_Var,
@@ -981,7 +981,7 @@ package body Gnat2Why.Expr is
                      New_Assignment
                        (Ada_Node => N,
                         Name     => Binder.Content.B_Name,
-                        Labels   => Symbol_Sets.Empty_Set,
+                        Labels   => Empty_Symbol_Set,
                         Value    => +Array_Convert_To_Base (EW_Prog, +Tmp_Var),
                         Typ      => Get_Typ (Binder.Content.B_Name)));
 
@@ -1055,7 +1055,7 @@ package body Gnat2Why.Expr is
                               New_Assignment
                                 (Ada_Node => N,
                                  Name     => Binder.Value.B_Name,
-                                 Labels   => Symbol_Sets.Empty_Set,
+                                 Labels   => Empty_Symbol_Set,
                                  Value    =>
                                    +New_Pointer_Value_Access
                                    (Ada_Node => Empty,
@@ -1070,7 +1070,7 @@ package body Gnat2Why.Expr is
                          2 => New_Assignment
                            (Ada_Node => N,
                             Name     => Binder.Address,
-                            Labels   => Symbol_Sets.Empty_Set,
+                            Labels   => Empty_Symbol_Set,
                             Value    => +New_Pointer_Address_Access
                               (E    => Etype (Lvalue),
                                Name => +Tmp_Var),
@@ -1078,7 +1078,7 @@ package body Gnat2Why.Expr is
                          3 => New_Assignment
                            (Ada_Node => N,
                             Name     => Binder.Is_Null,
-                            Labels   => Symbol_Sets.Empty_Set,
+                            Labels   => Empty_Symbol_Set,
                             Value    => +New_Pointer_Is_Null_Access
                               (E    => Etype (Lvalue),
                                Name => +Tmp_Var),
@@ -1135,7 +1135,7 @@ package body Gnat2Why.Expr is
                         New_Assignment
                           (Ada_Node => N,
                            Name     => L_Id,
-                           Labels   => Symbol_Sets.Empty_Set,
+                           Labels   => Empty_Symbol_Set,
                            Value    =>
                              (if Has_Record_Type (Etype (Lvalue))
                               or else Full_View_Not_In_SPARK (Etype (Lvalue))
@@ -1240,7 +1240,7 @@ package body Gnat2Why.Expr is
                  New_Assignment
                    (Ada_Node => N,
                     Name     => Binder.Init.Id,
-                    Labels   => Symbol_Sets.Empty_Set,
+                    Labels   => Empty_Symbol_Set,
                     Value    =>
                       (if Default_Initialization
                          (Constrained_Ty, Get_Flow_Scope (Constrained_Ty))
@@ -1987,7 +1987,7 @@ package body Gnat2Why.Expr is
             Tmp_Def : constant W_Prog_Id :=
               New_Any_Expr (Ada_Node    => N,
                             Post        => Tmp_Post,
-                            Labels      => Symbol_Sets.Empty_Set,
+                            Labels      => Empty_Symbol_Set,
                             Return_Type => Type_Of_Node (Ty));
 
          begin
@@ -2057,7 +2057,7 @@ package body Gnat2Why.Expr is
       Tmp_Def   : constant W_Prog_Id :=
         New_Any_Expr (Ada_Node    => N,
                       Post        => Tmp_Post,
-                      Labels      => Symbol_Sets.Empty_Set,
+                      Labels      => Empty_Symbol_Set,
                       Return_Type => Type_Of_Node (Ty));
 
       Inv_RTE   : W_Prog_Id;
@@ -3356,7 +3356,7 @@ package body Gnat2Why.Expr is
                            Name    => Binder.Main.B_Name,
                            Def     =>
                              New_Any_Expr
-                               (Labels      => Symbol_Sets.Empty_Set,
+                               (Labels      => Empty_Symbol_Set,
                                 Post        => True_Pred,
                                 Return_Type => Get_Typ (Binder.Main.B_Name)),
                            Context =>
@@ -3658,7 +3658,7 @@ package body Gnat2Why.Expr is
                      Name     => Tmp_Exp,
                      Def      =>
                        New_Any_Expr (Ada_Node    => Ty_Ext,
-                                     Labels      => Symbol_Sets.Empty_Set,
+                                     Labels      => Empty_Symbol_Set,
                                      Post        => Post,
                                      Return_Type => EW_Abstract (Ty_Ext)),
                      Context  => +Checks);
@@ -3711,7 +3711,7 @@ package body Gnat2Why.Expr is
 
             Default_Init_Prog : constant W_Prog_Id :=
               New_Any_Expr (Ada_Node    => Ty_Ext,
-                            Labels      => Symbol_Sets.Empty_Set,
+                            Labels      => Empty_Symbol_Set,
                             Post        => Default_Init_Pred,
                             Return_Type => EW_Abstract (Ty_Ext));
 
@@ -5455,7 +5455,7 @@ package body Gnat2Why.Expr is
           (Name    => Borrowed_Id,
            Def     => New_Any_Expr
              (Return_Type => Type_Of_Node (Borrowed),
-              Labels      => Symbol_Sets.Empty_Set),
+              Labels      => Empty_Symbol_Set),
            Context =>
              New_Binding
                (Domain  => EW_Prog,
@@ -5686,7 +5686,7 @@ package body Gnat2Why.Expr is
                               Name     => Actual_Binder.Init.Id,
                               Value    => True_Prog,
                               Typ      => EW_Bool_Type,
-                              Labels   => Symbol_Sets.Empty_Set));
+                              Labels   => Empty_Symbol_Set));
 
                      --  For in out parameters, check that the flag is true on
                      --  entry.
@@ -6976,7 +6976,7 @@ package body Gnat2Why.Expr is
               New_Assignment
                 (Ada_Node => Ada_Node,
                  Name     => Prot_Obj,
-                 Labels   => Symbol_Sets.Empty_Set,
+                 Labels   => Empty_Symbol_Set,
                  Value    =>
                    +One_Level_Update
                      (Left_Side,
@@ -6999,7 +6999,7 @@ package body Gnat2Why.Expr is
                  New_Assignment
                    (Ada_Node => Ada_Node,
                     Name     => Binder.Init.Id,
-                    Labels   => Symbol_Sets.Empty_Set,
+                    Labels   => Empty_Symbol_Set,
                     Value    => True_Prog,
                     Typ      => EW_Bool_Type);
             end if;
@@ -7011,7 +7011,7 @@ package body Gnat2Why.Expr is
                   New_Assignment
                     (Ada_Node => Ada_Node,
                      Name     => Binder.Main.B_Name,
-                     Labels   => Symbol_Sets.Empty_Set,
+                     Labels   => Empty_Symbol_Set,
                      Value    => +Right_Side,
                      Typ      => Get_Typ (Binder.Main.B_Name)));
 
@@ -7021,7 +7021,7 @@ package body Gnat2Why.Expr is
                   New_Assignment
                     (Ada_Node => Ada_Node,
                      Name     => Binder.Content.B_Name,
-                     Labels   => Symbol_Sets.Empty_Set,
+                     Labels   => Empty_Symbol_Set,
                      Value    => +Right_Side,
                      Typ      => Get_Typ (Binder.Content.B_Name)));
 
@@ -7041,7 +7041,7 @@ package body Gnat2Why.Expr is
                        (Result, New_Assignment
                           (Ada_Node => Ada_Node,
                            Name     => Binder.Fields.Binder.B_Name,
-                           Labels   => Symbol_Sets.Empty_Set,
+                           Labels   => Empty_Symbol_Set,
                            Value    => +New_Fields_Access
                              (Domain   => EW_Prog,
                               Name     => Tmp,
@@ -7059,7 +7059,7 @@ package body Gnat2Why.Expr is
                           (Result, New_Assignment
                              (Ada_Node => Ada_Node,
                               Name     => Binder.Discrs.Binder.B_Name,
-                              Labels   => Symbol_Sets.Empty_Set,
+                              Labels   => Empty_Symbol_Set,
                               Value    => +New_Discriminants_Access
                                 (Domain => EW_Prog,
                                  Name   => Tmp,
@@ -7103,7 +7103,7 @@ package body Gnat2Why.Expr is
                     (Result, New_Assignment
                        (Ada_Node => Ada_Node,
                         Name     => Binder.Value.B_Name,
-                        Labels   => Symbol_Sets.Empty_Set,
+                        Labels   => Empty_Symbol_Set,
                         Value    => +New_Pointer_Value_Access
                           (Ada_Node => Empty,
                            Domain   => EW_Pterm,
@@ -7120,7 +7120,7 @@ package body Gnat2Why.Expr is
                          2 => New_Assignment
                           (Ada_Node => Ada_Node,
                            Name     => Binder.Address,
-                           Labels   => Symbol_Sets.Empty_Set,
+                           Labels   => Empty_Symbol_Set,
                            Value    => +New_Pointer_Address_Access
                              (Name => Tmp,
                               E    => Binder_Typ),
@@ -7128,7 +7128,7 @@ package body Gnat2Why.Expr is
                          3 => New_Assignment
                           (Ada_Node => Ada_Node,
                            Name     => Binder.Is_Null,
-                           Labels   => Symbol_Sets.Empty_Set,
+                           Labels   => Empty_Symbol_Set,
                            Value    => +New_Pointer_Is_Null_Access
                              (Name => Tmp,
                               E    => Binder_Typ),
@@ -8101,7 +8101,7 @@ package body Gnat2Why.Expr is
                  New_Universal_Quantif
                    (Variables => Binders,
                     Var_Type  => Binders_Type,
-                    Labels    => Symbol_Sets.Empty_Set,
+                    Labels    => Empty_Symbol_Set,
                     Pred      => Def);
 
                --  If the prefix is not in split form, then its bounds are
@@ -8850,7 +8850,7 @@ package body Gnat2Why.Expr is
                   B_Name   => Ident,
                   B_Ent    => Null_Entity_Name,
                   Mutable  => False,
-                  Labels   => <>);
+                  Labels   => Empty_Symbol_Set);
                Dyn_Prop : constant W_Pred_Id :=
                  Compute_Dynamic_Invariant
                    (Expr   => +Ident,
@@ -9019,7 +9019,7 @@ package body Gnat2Why.Expr is
          Emit (Decl_File,
                New_Function_Decl (Domain      => EW_Pterm,
                                   Name        => To_Local (Func),
-                                  Labels      => Symbol_Sets.Empty_Set,
+                                  Labels      => Empty_Symbol_Set,
                                   Location    => No_Location,
                                   Binders     => Call_Params & Bnd_Params,
                                   Return_Type => Ret_Type));
@@ -14376,7 +14376,7 @@ package body Gnat2Why.Expr is
                      Value_Expr : W_Expr_Id :=
                        New_Any_Expr
                          (Post        => Pred,
-                          Labels      => Symbol_Sets.Empty_Set,
+                          Labels      => Empty_Symbol_Set,
                           Return_Type => Get_Typ (Res_Id));
                   begin
                      pragma Assert
@@ -14506,13 +14506,13 @@ package body Gnat2Why.Expr is
 
       if Pretty_Label /= No_Symbol then
          declare
-            Label_Set : Symbol_Set := Symbol_Sets.To_Set (Pretty_Label);
+            Label_Set : Symbol_Sets.Set := Symbol_Sets.To_Set (Pretty_Label);
          begin
             if Params.Gen_Marker = GM_All then
                Label_Set.Include (New_Located_Label (Expr, Left_Most => True));
             end if;
             T :=
-              New_Label (Labels => Label_Set,
+              New_Label (Labels => To_Symbol_Set (Label_Set),
                          Def => T,
                          Domain => Domain,
                          Typ    => Get_Type (T));
@@ -15295,7 +15295,7 @@ package body Gnat2Why.Expr is
          T := New_Label
            (Ada_Node => Ent,
             Domain   => Domain,
-            Labels   => Symbol_Sets.Empty_Set,
+            Labels   => Empty_Symbol_Set,
             Def      => T,
             Typ      => EW_Init_Wrapper (Etype (Ent), EW_Split));
       end if;
@@ -16086,13 +16086,13 @@ package body Gnat2Why.Expr is
                  (Name    => Brower_Id,
                   Def     => New_Any_Expr
                     (Return_Type => Get_Typ (Brower_Id),
-                     Labels      => Symbol_Sets.Empty_Set),
+                     Labels      => Empty_Symbol_Set),
                   Context => New_Binding
                     (Domain  => EW_Prog,
                      Name    => Borrowed_Id,
                      Def     => New_Any_Expr
                        (Return_Type => Get_Typ (Borrowed_Id),
-                        Labels      => Symbol_Sets.Empty_Set),
+                        Labels      => Empty_Symbol_Set),
                      Context => +Checks,
                      Typ     => EW_Bool_Type),
                   Typ     => EW_Bool_Type);
@@ -16105,7 +16105,7 @@ package body Gnat2Why.Expr is
                           Right  => +Res,
                           Domain => EW_Pred),
                      Return_Type => EW_Bool_Type,
-                     Labels      => Symbol_Sets.Empty_Set));
+                     Labels      => Empty_Symbol_Set));
             end;
          end if;
 
@@ -17423,7 +17423,7 @@ package body Gnat2Why.Expr is
                   New_Existential_Quantif
                      (Ada_Node  => Expr,
                       Variables => (1 => W_Index_Var),
-                      Labels    => Symbol_Sets.Empty_Set,
+                      Labels    => Empty_Symbol_Set,
                       Var_Type  => W_Index_Type,
                       Pred      => Quant_Body);
             end if;
@@ -17972,7 +17972,7 @@ package body Gnat2Why.Expr is
                        New_Assignment
                          (Ada_Node => Stmt_Or_Decl,
                           Name     => Result_Name,
-                          Labels   => Symbol_Sets.Empty_Set,
+                          Labels   => Empty_Symbol_Set,
                           Value    =>
                             +Transform_Expr (Expression (Stmt_Or_Decl),
                                              Return_Type,
@@ -18023,7 +18023,7 @@ package body Gnat2Why.Expr is
                     New_Assignment
                       (Name     => Result_Name,
                        Value    => Obj_Deref,
-                       Labels   => Symbol_Sets.Empty_Set,
+                       Labels   => Empty_Symbol_Set,
                        Typ      => Ret_Type));
                return Sequence (Expr, Raise_Stmt);
             end;
@@ -18204,7 +18204,7 @@ package body Gnat2Why.Expr is
                         Else_Stmt :=
                           New_Label
                             (Labels =>
-                               Symbol_Sets.To_Set (New_Located_Label (Cur)),
+                               To_Symbol_Set (New_Located_Label (Cur)),
                              Def    =>
                              +New_Simpl_Conditional
                                (Condition =>
@@ -18331,7 +18331,7 @@ package body Gnat2Why.Expr is
             Assert_And_Cut      => Cut_Assertion));
    begin
       Sequence_Append (Seq,
-                       New_Label (Labels => Symbol_Sets.To_Set
+                       New_Label (Labels => To_Symbol_Set
                                   (New_Located_Label (Stmt_Or_Decl)),
                                   Def    => +Prog));
       if Cut_Assertion /= Why_Empty then
@@ -18459,7 +18459,7 @@ package body Gnat2Why.Expr is
            (Domain      => EW_Pterm,
             Name        => Id,
             Location    => No_Location,
-            Labels      => Symbol_Sets.Empty_Set,
+            Labels      => Empty_Symbol_Set,
             Binders     => Binders,
             Return_Type => Why_Type));
 

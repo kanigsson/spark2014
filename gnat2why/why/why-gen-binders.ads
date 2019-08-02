@@ -52,7 +52,7 @@ package Why.Gen.Binders is
       B_Name   : W_Identifier_Id;
       B_Ent    : Any_Entity_Name;
       Mutable  : Boolean := False;
-      Labels   : Symbol_Set_Id;
+      Labels   : Symbol_Set_Id := Empty_Symbol_Set;
    end record;
    --  This record represents a variable binding B_Name. In some cases, extra
    --  information is stored concerning the Ada entity that is represented by
