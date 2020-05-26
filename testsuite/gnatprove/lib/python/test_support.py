@@ -575,7 +575,7 @@ def check_marks(strlist):
 
     # check that marks in source code have a matching actual result
     for f in files:
-        with open(f, 'r') as ff:
+        with open(f, 'r', encoding='iso-8859-1') as ff:
             for line, linestr in enumerate(ff):
                 line = line + 1  # first line in file is 1, not 0
                 for mark in re.finditer(is_mark, linestr):

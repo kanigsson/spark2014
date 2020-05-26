@@ -7,13 +7,17 @@ import os
 
 testsuite_root = os.getcwd()
 
+class SPARKDriver(AdaCoreLegacyTestDriver):
+
+    default_encoding = "binary"
+
 class SPARKTestsuite(Testsuite):
     """Testsuite for SPARK."""
     @property
     def test_finders(self):
         # This will create a testcase for all directories whose name matches a
         # TN, using the MyDriver test driver.
-        return [AdaCoreLegacyTestFinder(AdaCoreLegacyTestDriver)]
+        return [AdaCoreLegacyTestFinder(SPARKDriver)]
 
     def compute_environ(self):
         python_lib = os.path.join(testsuite_root,"lib","python")

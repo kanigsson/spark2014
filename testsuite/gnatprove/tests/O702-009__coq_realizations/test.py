@@ -1,7 +1,7 @@
 from test_support import *
 import os.path
 import shutil
-from gnatpython.ex import Run
+from e3.os.process import Run
 
 # This test recreates the Coq realizations of the SPARK Why3 definitions and
 # checks them using Coq
@@ -90,11 +90,11 @@ def compile_coq_files():
     for fn in files_to_be_compiled:
         process = Run(['coqc', '-R', '.', 'Why3', fn])
         if process.status != 0:
-            print "FAILED ! Compilation of stdlib failed"
+            print("FAILED ! Compilation of stdlib failed")
         lines = process.out.splitlines()
         lines = grep(".*Grammar extension", lines, invert=True)
         for line in lines:
-            print line
+            print(line)
     print ('Coq stdlib compiled')
     os.chdir(cwd)
 
@@ -107,7 +107,7 @@ def realize_theories():
                        '_gnatprove_standard.' + real, '-o', realize_subdir,
                        '-D', os.path.join(driver_dir, 'coq-realize.drv')])
         if process.status != 0:
-            print "FAILED ! Generation of realization coq files failed"
+            print("FAILED ! Generation of realization coq files failed")
         print process.out
     for real in am_realized:
         print ('Generate realization for ' + real)
@@ -115,8 +115,8 @@ def realize_theories():
                        'ada__model.' + real, '-o', realize_subdir, '-D',
                        os.path.join(driver_dir, 'coq-realize.drv')])
         if process.status != 0:
-            print "FAILED ! Generation of realization coq files failed"
-        print process.out
+            print("FAILED ! Generation of realization coq files failed")
+        print(process.out)
 
 def check_realizations():
     print ('Check realizations')
@@ -125,11 +125,11 @@ def check_realizations():
         print ('Run Coqc on realization file: ' + real)
         process = Run(['coqc', '-R', os.path.join('..', 'coq'), 'Why3', real + '.v'])
         if process.status != 0:
-            print "FAILED ! The Coq compilation of the library filed"
+            print("FAILED ! The Coq compilation of the library filed")
         lines = process.out.splitlines()
         lines = grep(".*Grammar extension", lines, invert=True)
         for line in lines:
-            print line
+            print(line)
     print ('The realizations checks were run')
 
 copy_spark_why_files()
