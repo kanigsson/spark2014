@@ -7,17 +7,19 @@ import os
 
 testsuite_root = os.getcwd()
 
-class SPARKDriver(AdaCoreLegacyTestDriver):
-
-    default_encoding = "binary"
-
 class SPARKTestsuite(Testsuite):
     """Testsuite for SPARK."""
     @property
     def test_finders(self):
-        # This will create a testcase for all directories whose name matches a
-        # TN, using the MyDriver test driver.
-        return [AdaCoreLegacyTestFinder(SPARKDriver)]
+        return [AdaCoreLegacyTestFinder(AdaCoreLegacyTestDriver)]
+
+    # Add a command-line flag to the testsuite script to allow users to
+    # trigger baseline rewriting.
+    def add_options(self, parser):
+        parser.add_argument(
+            "--rewrite", action="store_true",
+            help="Rewrite test baselines according to current outputs"
+        )
 
     def compute_environ(self):
         python_lib = os.path.join(testsuite_root,"lib","python")
@@ -32,6 +34,7 @@ class SPARKTestsuite(Testsuite):
         super(SPARKTestsuite, self).set_up()
         self.env.discs = self.env.discriminants
         self.env.test_environ = self.compute_environ()
+        self.env.rewrite_baselines = self.main.args.rewrite
 
 
 if __name__ == "__main__":
